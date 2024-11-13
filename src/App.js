@@ -1,13 +1,19 @@
 import React from 'react';
 import { ApolloProvider } from '@apollo/client';
 import client from './services/api';
-import DashboardPage from './pages/DashboardPage';
+import Dashboard from './components/Dashboard';
+import ExamplePage from './pages/ExamplePage';
+
+import './App.css';
 
 function App() {
   return (
     <ApolloProvider client={client}>
       <div className="App">
-        <DashboardPage />
+        <Dashboard />
+      </div>
+      <div className="App">
+        <ExamplePage />
       </div>
     </ApolloProvider>
   );

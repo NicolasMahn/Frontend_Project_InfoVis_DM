@@ -1,38 +1,45 @@
-.App {
+
+/* Color Palate */
+:root {
+  --primary-color: #00A9CF;
+  --secondary-color: #cf00a9;
+  --tertiary-color: #00cf8e;
+  --quaternary-color: #cf2600;
+  --quinary-color: #a9cf00;
+  --senary-color: #0042cf;
+
+  --background-color: #eeeeee;
+}
+
+.dashboard {
+  display: grid;
+  grid-template-columns: 2fr 1fr; /* 2/3 and 1/3 column layout */
+  grid-template-areas:
+    "graph filter"
+    "graph cluster"
+    "explanation cluster"
+    "explanation suspicious";
+  grid-gap: 20px;
+  padding: 20px;
+}
+
+.graph-box { grid-area: graph; }
+.explanation-box { grid-area: explanation; }
+.filter-box { grid-area: filter; }
+.cluster-map-box { grid-area: cluster; }
+.suspicious-activity-box { grid-area: suspicious; }
+
+/* Basic styling for each component */
+.graph-box, .selection-box, .explanation-box, .filter-box, .save-box, .cluster-map-box, .suspicious-activity-box {
+  border: 1px solid var(--tertiary-color);
+  padding: 10px;
+  background-color: var(--background-color);
+}
+
+.header {
+  color: var(--primary-color);
+}
+
+#dashboard-header {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
