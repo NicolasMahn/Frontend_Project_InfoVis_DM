@@ -1,4 +1,3 @@
-// src/components/TimeFilter.js
 import React from 'react';
 
 const TimeFilter = () => {

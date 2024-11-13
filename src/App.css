@@ -9,6 +9,7 @@
   --senary-color: #0042cf;
 
   --background-color: #eeeeee;
+  --border-color: #cccccc;
 }
 
 .dashboard {
@@ -31,7 +32,7 @@
 
 /* Basic styling for each component */
 .graph-box, .selection-box, .explanation-box, .filter-box, .save-box, .cluster-map-box, .suspicious-activity-box {
-  border: 1px solid var(--tertiary-color);
+  border: 1px solid var(--border-color);
   padding: 10px;
   background-color: var(--background-color);
 }

@@ -1,13 +1,10 @@
-// src/components/GraphBox.js
 import React from 'react';
-import ExampleGraph from '../Graphs/ExampleGraph';
-import TimeFilter from '../Filters/TimeFilter';
 
-const GraphBox = () => {
+
+const GraphBox = ({ GraphComponent }) => {
   return (
     <div className="graph-box">
-      <ExampleGraph>  </ExampleGraph>
-      <TimeFilter />
+      <GraphComponent />
     </div>
   );
 };

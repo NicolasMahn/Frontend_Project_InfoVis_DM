@@ -1,4 +1,3 @@
-// src/components/SuspiciousActivityBox.js
 import React from 'react';
 
 const SuspiciousActivityBox = () => {

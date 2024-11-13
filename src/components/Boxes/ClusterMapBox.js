@@ -1,4 +1,3 @@
-// src/components/ClusterMapBox.js
 import React from 'react';
 
 const ClusterMapBox = () => {
