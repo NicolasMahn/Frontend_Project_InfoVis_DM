@@ -11,6 +11,10 @@ RUN npm install
 # Copy the rest of the application files
 COPY . .
 
+# Inject environment variables (REACT_APP_ prefix is required for React)
+ARG REACT_APP_AWS_DNS
+ARG REACT_APP_GRAPHQL_SERVER_PORT
+
 # Build the app
 RUN npm run build
 
