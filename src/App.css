@@ -10,6 +10,9 @@
 
   --background-color: #eeeeee;
   --border-color: #cccccc;
+
+  --text-color: #333333;
+  --header-color: #444444;
 }
 
 .dashboard {
@@ -38,9 +41,7 @@
 }
 
 .header {
-  color: var(--primary-color);
-}
-
-#dashboard-header {
+  color: var(--header-color);
   text-align: center;
 }
+

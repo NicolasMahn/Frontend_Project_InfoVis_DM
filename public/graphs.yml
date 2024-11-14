@@ -1,0 +1,6 @@
+NumbPurchasesPerLocation:
+  graph_name: NumbPurchasesPerLocation
+  filters: [Category, Location]
+ExampleGraph:
+  graph_name: ExampleGraph
+  filters: [Category, Location, Employee, Time]
