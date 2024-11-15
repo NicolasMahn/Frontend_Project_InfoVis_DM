@@ -28,9 +28,19 @@ const filterComponents = {
   Location: LocationFilter,
 };
 
+
+
 const Dashboard = () => {
-  const [selectedGraph, setSelectedGraph] = useState('ExampleGraph');
+  const [selectedGraph, setSelectedGraph] = useState('NumbPurchasesPerLocation');
   const [graphConfig, setGraphConfig] = useState({});
+  const [filterSettings, setFilterSettings] = useState({ locations: [], categories: [], employees: [], time: { start: null, end: null } });
+
+  const handleFilterChange = (newSettings) => {
+    setFilterSettings(prevSettings => ({
+      ...prevSettings,
+      ...newSettings,
+    }));
+  };
 
   useEffect(() => {
     fetch('/graphs.yml')
@@ -41,6 +51,7 @@ const Dashboard = () => {
       })
       .catch(error => console.error('Error fetching the YAML file:', error));
   }, []);
+  
   const GraphComponent = graphComponents[selectedGraph];
   const filters = graphConfig[selectedGraph]?.filters.map(filter => filterComponents[filter]) || [];
 
@@ -48,9 +59,9 @@ const Dashboard = () => {
     <div className="dashboard-with-Heading">
       <h1 className="header" id="dashboard-header">GASTech Employee Investigation Dashboard</h1>
       <div className="dashboard">
-        <GraphBox GraphComponent={GraphComponent} />
+        <GraphBox GraphComponent={GraphComponent} filterSettings={filterSettings} />
         <ExplanationBox />
-        <FilterBox filters={filters} />
+        <FilterBox filters={filters} onFilterChange={handleFilterChange} />
         <ClusterMapBox />
         <SuspiciousActivityBox setSelectedGraph={setSelectedGraph} />
       </div>

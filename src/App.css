@@ -13,6 +13,10 @@
 
   --text-color: #333333;
   --header-color: #444444;
+
+  --tooltip-background-color: #eeeeee;
+  --tooltip-text-color: #000;
+  --tooltip-border-color: #333333;
 }
 
 .dashboard {

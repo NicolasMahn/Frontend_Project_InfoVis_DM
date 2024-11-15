@@ -12,9 +12,6 @@ function App() {
       <div className="App">
         <Dashboard />
       </div>
-      <div className="App">
-        <ExamplePage />
-      </div>
     </ApolloProvider>
   );
 }

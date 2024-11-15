@@ -1,6 +1,6 @@
 import React from 'react';
 
-const EmployeeFilter = () => {
+const EmployeeFilter = ({ onFilterChange }) => {
     return (
         <div>
             <label>Employees:</label>

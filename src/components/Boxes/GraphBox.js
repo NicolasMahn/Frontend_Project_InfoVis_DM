@@ -1,10 +1,10 @@
 import React from 'react';
 
 
-const GraphBox = ({ GraphComponent }) => {
+const GraphBox = ({ GraphComponent, filterSettings }) => {
   return (
     <div className="graph-box">
-      <GraphComponent />
+      <GraphComponent filterSettings={filterSettings}/>
     </div>
   );
 };

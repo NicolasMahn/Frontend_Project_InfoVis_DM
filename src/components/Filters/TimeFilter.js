@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TimeFilter = () => {
+const TimeFilter = ({ onFilterChange }) => {
   return (
     <div className="time-filter">
       <p>Select Time Period:</p>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CategoryFilter = ({ dataTypes, selectedType, onSelectType }) => {
+const CategoryFilter = ({ onFilterChange }) => {
     return (
         <div>
             <label><input type="checkbox" /> Creditcard</label>
