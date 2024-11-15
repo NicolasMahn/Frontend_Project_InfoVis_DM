@@ -13,7 +13,7 @@ const NUMB_PURCHASES_PER_LOCATION_QUERY = gql`
   }
 `
 
-const NumbPurchasesPerLocation = ({filterSettings}) => {
+const NumbPurchasesPerLocation = ({filterSettings, onFilterChange}) => {
   const { loading, error, data } = useQuery(NUMB_PURCHASES_PER_LOCATION_QUERY, {
     fetchPolicy: 'cache-and-network', // Use cache first, then network
   });
@@ -22,24 +22,51 @@ const NumbPurchasesPerLocation = ({filterSettings}) => {
 
   useEffect(() => {
     if (data) {
-      const filtered = data.numbPurchasesPerLocation.filter(locationData =>
-        filterSettings.locations.includes(locationData.location)
-      );
+      const filtered = data.numbPurchasesPerLocation
+      .filter(data => filterSettings.locations.includes(data.location))
+      .map(data => {
+        const newData = { ...data };
+        if (!filterSettings.categories.creditcard) {
+          delete newData.numbPurchasesCc;
+        }
+        if (!filterSettings.categories.loyaltycard) { 
+          delete newData.numbPurchasesLoyalty;
+        }
+        return newData;
+      });
       setFilteredData(filtered);
     }
-  }, [data, filterSettings.locations]);
+  }, [data, filterSettings]);
 
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
   // Sort the data by the number of credit card purchases
-  const sortedData = [...filteredData].sort((a, b) => b.numbPurchasesCc - a.numbPurchasesCc);
+  let sortedData = filteredData;
+  if (filteredData.length > 0 && 'numbPurchasesCc' in filteredData[0] && filterSettings.sortCategory === 'creditcard') {
+    sortedData = [...filteredData].sort((a, b) => b.numbPurchasesCc - a.numbPurchasesCc);
+  } else if (filteredData.length > 0 && 'numbPurchasesLoyalty' in filteredData[0] && filterSettings.sortCategory === 'loyaltycard') {
+    sortedData = [...filteredData].sort((a, b) => b.numbPurchasesLoyalty - a.numbPurchasesLoyalty);
+  }
 
   // Prepare data for the BarChart component
+  let y = [];
+  let legend = [];
+  if (filteredData.length > 0 && 'numbPurchasesCc' in filteredData[0]) {
+    y.push(sortedData.map(d => d.numbPurchasesCc));
+    legend.push("Credit Card Data");
+  }
+  if (filteredData.length > 0 && 'numbPurchasesLoyalty' in filteredData[0]) {
+    y.push(sortedData.map(d => d.numbPurchasesLoyalty));
+    legend.push("Loyalty Card Data");
+  }
+  if (y.length === 1) {
+    y = y[0];
+  }
   const chartData = {
     x: sortedData.map(d => d.location),
-    y: [sortedData.map(d => d.numbPurchasesCc), sortedData.map(d => d.numbPurchasesLoyalty)]
+    y: y
   };
     
   const handleBarClick = (d) => {
@@ -48,8 +75,10 @@ const NumbPurchasesPerLocation = ({filterSettings}) => {
 
   const handleBarRightClick = (d) => {
     console.log("Bar right-clicked:", d);
-
     
+    let locations  = filterSettings.locations
+    delete locations[locations.indexOf(d.category)]
+    onFilterChange({ locations: locations });
   };
 
   const handleBarDoubleClick = (d) => {
@@ -59,7 +88,7 @@ const NumbPurchasesPerLocation = ({filterSettings}) => {
   return (
     <div>
       <h2 className="header">Number of Purchases per Location</h2>
-      <BarChart data={chartData} onBarClick={handleBarClick} onBarRightClick={handleBarRightClick} onBarDoubleClick={handleBarDoubleClick}/>
+      <BarChart data={chartData} legend={legend} onBarClick={handleBarClick} onBarRightClick={handleBarRightClick} onBarDoubleClick={handleBarDoubleClick}/>
     </div>
   );
 }

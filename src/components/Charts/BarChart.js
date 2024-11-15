@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import * as d3 from 'd3';
 
-const BarChart = ({ data, onBarClick, onBarRightClick, onBarDoubleClick }) => {
+const BarChart = ({ data, legend, onBarClick, onBarRightClick, onBarDoubleClick }) => {
   const svgRef = useRef();
   const tooltipRef = useRef();
   
@@ -88,7 +88,10 @@ const BarChart = ({ data, onBarClick, onBarRightClick, onBarDoubleClick }) => {
 
     const handleMouseOver = (event, d) => {
       tooltip.style('opacity', 1);
-      tooltip.html(`Value: ${d}`)
+      let i = d.index;
+      tooltip.html(`
+        <b>${data.x[i]}</b><br>
+        ${Array.isArray(data.y[0]) ? data.y.map((yList, j) => `${legend[j]}: ${yList[i]}`).join('<br>') : `${legend[0]}: ${data.y[i]}`}`)
         .style('left', `${event.pageX - 10}px`)
         .style('top', `${event.pageY - 190}px`);
     };
@@ -111,11 +114,15 @@ const BarChart = ({ data, onBarClick, onBarRightClick, onBarDoubleClick }) => {
           .join('g')
           .attr('transform', d => `translate(${x(d)},0)`)
           .selectAll('rect')
-          .data((d, i) => data.y.map(yList => yList[i]))
+          .data((_, i) => data.y.map((yList) => ({
+            value: yList[i], 
+            index: i,
+            category: data.x[i]
+          })))
           .join('rect')
           .attr('x', (d, i) => xSubgroup(i))
-          .attr('y', d => y(d))
-          .attr('height', d => y(0) - y(d))
+          .attr('y', d => y(d.value))
+          .attr('height', d => y(0) - y(d.value))
           .attr('width', xSubgroup.bandwidth())
           .attr('fill', (d, i) => colors[i % colors.length])
           .on('mouseover', handleMouseOver)
@@ -144,6 +151,11 @@ const BarChart = ({ data, onBarClick, onBarRightClick, onBarDoubleClick }) => {
           .attr('height', d => y(0) - y(d))
           .attr('width', x.bandwidth())
           .attr('fill', colors[0])
+          .data((_, i) => data.x.map((x) => ({
+            value: x, 
+            index: i,
+            category: data.x[i]
+          })))
           .on('mouseover', handleMouseOver)
           .on('mouseout', handleMouseOut)
           .on('mousemove', handleMouseOver)
@@ -160,7 +172,28 @@ const BarChart = ({ data, onBarClick, onBarRightClick, onBarDoubleClick }) => {
             if (onBarDoubleClick) onBarDoubleClick(d);
           });
       }
-    }, [data, onBarClick, onBarRightClick, onBarDoubleClick]);
+          // Add legend
+      if (legend && legend.length) {
+        const legendGroup = svg.append('g')
+        .attr('transform', `translate(${width - margin.right -200}, ${margin.top})`);
+
+        legend.forEach((legendItem, index) => {
+          const legendRow = legendGroup.append('g')
+            .attr('transform', `translate(0, ${index * 20})`);
+
+          legendRow.append('rect')
+            .attr('width', 18)
+            .attr('height', 18)
+            .attr('fill', colors[index % colors.length]);
+
+          legendRow.append('text')
+            .attr('x', 24)
+            .attr('y', 9)
+            .attr('dy', '0.35em')
+            .text(legendItem);
+        });
+      }
+    }, [data, legend, onBarClick, onBarRightClick, onBarDoubleClick]);
     return (
       <div style={{ position: 'relative' }}>
         <svg ref={svgRef}></svg>
@@ -172,7 +205,7 @@ const BarChart = ({ data, onBarClick, onBarRightClick, onBarDoubleClick }) => {
           padding: '5px',
           font: '14px sans-serif',
           background: getComputedStyle(document.documentElement).getPropertyValue('--tooltip-background-color').trim(),
-          border: '1px solid black', //+ getComputedStyle(document.documentElement).getPropertyValue('--tooltip-background-color').trim(),
+          border: '1px solid ' + getComputedStyle(document.documentElement).getPropertyValue('--tooltip-border-color').trim(),
           color: getComputedStyle(document.documentElement).getPropertyValue('--tooltip-text-color').trim(),
           //borderRadius: '8px',
           pointerEvents: 'none',

@@ -15,6 +15,7 @@ import TimeFilter from './Filters/TimeFilter';
 import CategoryFilter from './Filters/CategoryFilter';
 import EmployeeFilter from './Filters/EmployeeFilter';
 import LocationFilter from './Filters/LocationFilter';
+import SortCategoriesAfter from './Filters/SortCategoriesAfter';
 
 const graphComponents = {
   ExampleGraph,
@@ -24,6 +25,7 @@ const graphComponents = {
 const filterComponents = {
   Time: TimeFilter,
   Category: CategoryFilter,
+  SortCategoriesAfter: SortCategoriesAfter,
   Employee: EmployeeFilter,
   Location: LocationFilter,
 };
@@ -33,7 +35,7 @@ const filterComponents = {
 const Dashboard = () => {
   const [selectedGraph, setSelectedGraph] = useState('NumbPurchasesPerLocation');
   const [graphConfig, setGraphConfig] = useState({});
-  const [filterSettings, setFilterSettings] = useState({ locations: [], categories: [], employees: [], time: { start: null, end: null } });
+  const [filterSettings, setFilterSettings] = useState({ locations: [], categories: {}, sortCategory: 'creditcard' });
 
   const handleFilterChange = (newSettings) => {
     setFilterSettings(prevSettings => ({
@@ -59,9 +61,9 @@ const Dashboard = () => {
     <div className="dashboard-with-Heading">
       <h1 className="header" id="dashboard-header">GASTech Employee Investigation Dashboard</h1>
       <div className="dashboard">
-        <GraphBox GraphComponent={GraphComponent} filterSettings={filterSettings} />
+        <GraphBox GraphComponent={GraphComponent} onFilterChange={handleFilterChange} filterSettings={filterSettings} />
         <ExplanationBox />
-        <FilterBox filters={filters} onFilterChange={handleFilterChange} />
+        <FilterBox filters={filters} onFilterChange={handleFilterChange} filterSettings={filterSettings} />
         <ClusterMapBox />
         <SuspiciousActivityBox setSelectedGraph={setSelectedGraph} />
       </div>

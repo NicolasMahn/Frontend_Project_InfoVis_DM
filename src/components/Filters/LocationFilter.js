@@ -10,12 +10,14 @@ const NUMB_PURCHASES_PER_LOCATION_QUERY = gql`
   }
 `
 
-const LocationFilter = ({ onFilterChange }) => {
+const LocationFilter = ({ onFilterChange, filterSettings }) => {
   const [hasRunOnce, setHasRunOnce] = useState(false);
+  const [selectedOptions, setSelectedOptions] = useState([]);
   const { loading, error, data } = useQuery(NUMB_PURCHASES_PER_LOCATION_QUERY);  
 
   const handleChange = (selectedOptions) => {
     const selectedValues = selectedOptions.map(option => option.value);
+    setSelectedOptions(selectedOptions);
     onFilterChange({ locations: selectedValues });
   };
 
@@ -30,6 +32,16 @@ const LocationFilter = ({ onFilterChange }) => {
     }
   }, [hasRunOnce, data]);
 
+  useEffect(() => {
+    if (filterSettings.locations) {
+      const options = filterSettings.locations.map(location => ({
+        value: location,
+        label: location
+      }));
+      setSelectedOptions(options);
+    }
+  }, [filterSettings]);
+
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
@@ -43,10 +55,8 @@ const LocationFilter = ({ onFilterChange }) => {
       <label>Locations:</label>
       <Select
         isMulti
-        defaultValue={options}
+        value={selectedOptions}
         options={options}
-        className="basic-multi-select"
-        classNamePrefix="select"
         onChange={handleChange}
       />
     </div>
