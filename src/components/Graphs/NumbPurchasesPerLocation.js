@@ -20,6 +20,16 @@ const NumbPurchasesPerLocation = ({filterSettings, onFilterChange}) => {
 
   const [filteredData, setFilteredData] = useState([]);
 
+  // Access CSS variables
+  const possipbleColors = [
+    getComputedStyle(document.documentElement).getPropertyValue('--primary-color').trim(),
+    getComputedStyle(document.documentElement).getPropertyValue('--secondary-color').trim(),
+    getComputedStyle(document.documentElement).getPropertyValue('--tertiary-color').trim(),
+    getComputedStyle(document.documentElement).getPropertyValue('--quaternary-color').trim(),
+    getComputedStyle(document.documentElement).getPropertyValue('--quinary-color').trim(),
+    getComputedStyle(document.documentElement).getPropertyValue('--senary-color').trim()
+  ];
+
   useEffect(() => {
     if (data) {
       const filtered = data.numbPurchasesPerLocation
@@ -53,13 +63,16 @@ const NumbPurchasesPerLocation = ({filterSettings, onFilterChange}) => {
   // Prepare data for the BarChart component
   let y = [];
   let legend = [];
+  let colors = [];
   if (filteredData.length > 0 && 'numbPurchasesCc' in filteredData[0]) {
     y.push(sortedData.map(d => d.numbPurchasesCc));
     legend.push("Credit Card Data");
+    colors.push(possipbleColors[0]);
   }
   if (filteredData.length > 0 && 'numbPurchasesLoyalty' in filteredData[0]) {
     y.push(sortedData.map(d => d.numbPurchasesLoyalty));
     legend.push("Loyalty Card Data");
+    colors.push(possipbleColors[1]);
   }
   if (y.length === 1) {
     y = y[0];
@@ -88,7 +101,7 @@ const NumbPurchasesPerLocation = ({filterSettings, onFilterChange}) => {
   return (
     <div>
       <h2 className="header">Number of Purchases per Location</h2>
-      <BarChart data={chartData} legend={legend} onBarClick={handleBarClick} onBarRightClick={handleBarRightClick} onBarDoubleClick={handleBarDoubleClick}/>
+      <BarChart data={chartData} legend={legend} colors={colors} onBarClick={handleBarClick} onBarRightClick={handleBarRightClick} onBarDoubleClick={handleBarDoubleClick}/>
     </div>
   );
 }

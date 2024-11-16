@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import * as d3 from 'd3';
 
-const BarChart = ({ data, legend, onBarClick, onBarRightClick, onBarDoubleClick }) => {
+const BarChart = ({ data, legend, colors, onBarClick, onBarRightClick, onBarDoubleClick }) => {
   const svgRef = useRef();
   const tooltipRef = useRef();
   
@@ -75,16 +75,6 @@ const BarChart = ({ data, legend, onBarClick, onBarRightClick, onBarDoubleClick 
 
     svg.append('g').call(xAxis);
     svg.append('g').call(yAxis);
-
-    // Access CSS variables
-    const colors = [
-      getComputedStyle(document.documentElement).getPropertyValue('--primary-color').trim(),
-      getComputedStyle(document.documentElement).getPropertyValue('--secondary-color').trim(),
-      getComputedStyle(document.documentElement).getPropertyValue('--tertiary-color').trim(),
-      getComputedStyle(document.documentElement).getPropertyValue('--quaternary-color').trim(),
-      getComputedStyle(document.documentElement).getPropertyValue('--quinary-color').trim(),
-      getComputedStyle(document.documentElement).getPropertyValue('--senary-color').trim()
-    ];
 
     const handleMouseOver = (event, d) => {
       tooltip.style('opacity', 1);
@@ -193,7 +183,7 @@ const BarChart = ({ data, legend, onBarClick, onBarRightClick, onBarDoubleClick 
             .text(legendItem);
         });
       }
-    }, [data, legend, onBarClick, onBarRightClick, onBarDoubleClick]);
+    }, [data, legend, colors, onBarClick, onBarRightClick, onBarDoubleClick]);
     return (
       <div style={{ position: 'relative' }}>
         <svg ref={svgRef}></svg>
