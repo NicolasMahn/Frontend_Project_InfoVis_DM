@@ -9,6 +9,7 @@ import yaml from 'yaml';
 // Import all Graphs
 import ExampleGraph from './Graphs/ExampleGraph';
 import NumbPurchasesPerLocation from './Graphs/NumbPurchasesPerLocation';
+import ComparingPurchasesOfPairs from './Graphs/ComparingPurchasesOfPairs';
 
 // Importing the filters
 import TimeFilter from './Filters/TimeFilter';
@@ -16,10 +17,12 @@ import CategoryFilter from './Filters/CategoryFilter';
 import EmployeeFilter from './Filters/EmployeeFilter';
 import LocationFilter from './Filters/LocationFilter';
 import SortCategoriesAfter from './Filters/SortCategoriesAfter';
+import TypeFilter from './Filters/TypeFilter.js';
 
 const graphComponents = {
   ExampleGraph,
   NumbPurchasesPerLocation,
+  ComparingPurchasesOfPairs
 };
 
 const filterComponents = {
@@ -28,6 +31,7 @@ const filterComponents = {
   SortCategoriesAfter: SortCategoriesAfter,
   Employee: EmployeeFilter,
   Location: LocationFilter,
+  Type: TypeFilter
 };
 
 
@@ -56,6 +60,7 @@ const Dashboard = () => {
   
   const GraphComponent = graphComponents[selectedGraph];
   const filters = graphConfig[selectedGraph]?.filters.map(filter => filterComponents[filter]) || [];
+  const config = graphConfig[selectedGraph] || {};
 
   return (
     <div className="dashboard-with-Heading">
@@ -63,7 +68,7 @@ const Dashboard = () => {
       <div className="dashboard">
         <GraphBox GraphComponent={GraphComponent} onFilterChange={handleFilterChange} filterSettings={filterSettings} />
         <ExplanationBox />
-        <FilterBox filters={filters} onFilterChange={handleFilterChange} filterSettings={filterSettings} />
+        <FilterBox filters={filters} onFilterChange={handleFilterChange} filterSettings={filterSettings} config={config}/>
         <ClusterMapBox />
         <SuspiciousActivityBox setSelectedGraph={setSelectedGraph} />
       </div>

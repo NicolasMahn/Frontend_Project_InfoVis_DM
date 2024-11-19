@@ -1,19 +1,24 @@
 import React, { useState, useEffect } from 'react';
 
-const CategoryFilter = ({ onFilterChange }) => {
+const CategoryFilter = ({ onFilterChange,  config}) => {
     const [hasRunOnce, setHasRunOnce] = useState(false);
-    const [categories, setCheckboxes] = useState({
-      creditcard: true,
-      loyaltycard: true,
-      carsInArea: true,
-    });
+    const [categories, setCheckboxes] = useState({ });
 
     useEffect(() => {
         if (!hasRunOnce) {
-            onFilterChange({categories: categories});
-            setHasRunOnce(true);
+            let cs = config.categories;
+            let newCategories = {};
+            for (let c in cs)  newCategories[cs[c]] = true;
+            setCheckboxes(newCategories);
+            onFilterChange({categories: newCategories});
+            if (categories) setHasRunOnce(true);
+        } else {
+            let categoryKeys = Object.keys(categories);
+            if (categoryKeys.length != config.categories.length || categoryKeys.some((c) => !config.categories.includes(c))) {
+                setHasRunOnce(false);
+            }
         }
-    }, [hasRunOnce, categories, onFilterChange]);
+    }, [hasRunOnce, categories, config, onFilterChange]);
 
     const handleCheckboxChange = (event) => {
         const { name, checked } = event.target;
@@ -28,31 +33,17 @@ const CategoryFilter = ({ onFilterChange }) => {
 
 
     return (
-<div>
-      <label>
-        <input
-          type="checkbox"
-          name="creditcard"
-          checked={categories.creditcard}
-          onChange={handleCheckboxChange}
-        /> Creditcard
-      </label>
-      <label>
-        <input
-          type="checkbox"
-          name="loyaltycard"
-          checked={categories.loyaltycard}
-          onChange={handleCheckboxChange}
-        /> Loyaltycard
-      </label>
-      <label>
-        <input
-          type="checkbox"
-          name="carsInArea"
-          checked={categories.carsInArea}
-          onChange={handleCheckboxChange}
-        /> Cars in area
-      </label>
+    <div>
+        {Object.keys(categories).map((category) => (
+          <label key={category}>
+            <input
+              type="checkbox"
+              name={category}
+              checked={categories[category]}
+              onChange={handleCheckboxChange}
+            /> {category}
+          </label>
+        ))}
     </div>
     );
 };

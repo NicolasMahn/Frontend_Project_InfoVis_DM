@@ -1,6 +1,14 @@
 NumbPurchasesPerLocation:
   graph_name: NumbPurchasesPerLocation
   filters: [Location, Category, SortCategoriesAfter]
+  categories: [Credit Card,  Loyalty Card]
+ComparingPurchasesOfPairs:
+  graph_name: ComparingPurchasesOfPairs
+  filters: [Type, Location, Category, SortCategoriesAfter]
+  types: [Percentage, Absolute, Avg Expense]
+  categories: [Card Pair, Car Card Pair, No Car Card Pair, No Pair]
 ExampleGraph:
   graph_name: ExampleGraph
-  filters: [Location, Employee, Time, Category, SortCategoriesAfter]
+  filters: [Type, Location, Employee, Time, Category, SortCategoriesAfter]
+  categories: [Card Pair, Car Card Pair, No Car Card Pair, No Pair]
+  types: [Percentage, Absolute, Avg Expense]

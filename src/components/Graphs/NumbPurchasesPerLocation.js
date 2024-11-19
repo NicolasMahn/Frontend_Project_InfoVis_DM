@@ -36,10 +36,10 @@ const NumbPurchasesPerLocation = ({filterSettings, onFilterChange}) => {
       .filter(data => filterSettings.locations.includes(data.location))
       .map(data => {
         const newData = { ...data };
-        if (!filterSettings.categories.creditcard) {
+        if (!filterSettings.categories["Credit Card"]) {
           delete newData.numbPurchasesCc;
         }
-        if (!filterSettings.categories.loyaltycard) { 
+        if (!filterSettings.categories["Loyalty Card"]) { 
           delete newData.numbPurchasesLoyalty;
         }
         return newData;
@@ -54,9 +54,9 @@ const NumbPurchasesPerLocation = ({filterSettings, onFilterChange}) => {
 
   // Sort the data by the number of credit card purchases
   let sortedData = filteredData;
-  if (filteredData.length > 0 && 'numbPurchasesCc' in filteredData[0] && filterSettings.sortCategory === 'creditcard') {
+  if (filteredData.length > 0 && 'numbPurchasesCc' in filteredData[0] && filterSettings.sortCategory === 'Credit Card') {
     sortedData = [...filteredData].sort((a, b) => b.numbPurchasesCc - a.numbPurchasesCc);
-  } else if (filteredData.length > 0 && 'numbPurchasesLoyalty' in filteredData[0] && filterSettings.sortCategory === 'loyaltycard') {
+  } else if (filteredData.length > 0 && 'numbPurchasesLoyalty' in filteredData[0] && filterSettings.sortCategory === 'Loyalty Card') {
     sortedData = [...filteredData].sort((a, b) => b.numbPurchasesLoyalty - a.numbPurchasesLoyalty);
   }
 

@@ -81,7 +81,7 @@ const BarChart = ({ data, legend, colors, onBarClick, onBarRightClick, onBarDoub
       let i = d.index;
       tooltip.html(`
         <b>${data.x[i]}</b><br>
-        ${Array.isArray(data.y[0]) ? data.y.map((yList, j) => `${legend[j]}: ${yList[i]}`).join('<br>') : `${legend[0]}: ${data.y[i]}`}`)
+        ${Array.isArray(data.y[0]) ? data.y.map((yList, j) => `${legend[j]}: ${parseFloat(yList[i].toFixed(2))}`).join('<br>') : `${legend[0]}: ${parseFloat(data.y[i].toFixed(2))}`}`)
         .style('left', `${event.pageX - 10}px`)
         .style('top', `${event.pageY - 190}px`);
     };

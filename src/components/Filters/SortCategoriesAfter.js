@@ -34,12 +34,6 @@ const SortCategoriesAfter = ({ filterSettings, onFilterChange }) => {
     return null;
   }
 
-  const possibleCategoryLabels = {
-    creditcard: 'Credit Card', 
-    loyaltycard: 'Loyalty Card',
-    carsInArea: 'Cars in the Area'};
-
-
   return (
     <div>
       <b>Sort Categories After: </b>
@@ -52,7 +46,7 @@ const SortCategoriesAfter = ({ filterSettings, onFilterChange }) => {
             checked={selectedSortOption === category}
             onChange={handleRadioChange}
           />
-          {possibleCategoryLabels[category]} &nbsp;
+          {category} &nbsp;
         </label> 
       ))}
     </div>
