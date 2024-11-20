@@ -171,7 +171,7 @@ const ComparingPurchasesOfPairs = ({filterSettings, onFilterChange, handleGraphA
   const handleBarDoubleClick = (d) => {
     console.log("Bar double-clicked:", d);
 
-    handleGraphAndFilterChange('PurchasesOverTime', handleGraphAndFilterChange, title);
+    handleGraphAndFilterChange('PurchasesOverTime', {locations: [d.category]}, title);
   };
 
   if (chartData.length < 1 || legend.length < 1 || colors.length < 1) {
