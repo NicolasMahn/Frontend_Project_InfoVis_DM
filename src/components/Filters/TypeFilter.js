@@ -6,16 +6,18 @@ const TypeFilter = ({ onFilterChange,  config}) => {
     const [selectedType, setSelectedType] = useState('');
 
     useEffect(() => {
-        if (!hasRunOnce) {
-            let types = config.types;
-            setTypes(types);
-            onFilterChange({type: types[0]});
-            setSelectedType(types[0]);
-            if (types) setHasRunOnce(true);
-        } else {
-            let typeKeys = Object.keys(types);
-            if (typeKeys.length != config.types.length && typeKeys.some((c) => !config.type.includes(c))) {
-                setHasRunOnce(false);
+        if (config) {
+            if (!hasRunOnce) {
+                let types = config.types;
+                setTypes(types);
+                onFilterChange({type: types[0]});
+                setSelectedType(types[0]);
+                if (types) setHasRunOnce(true);
+            } else {
+                let typeKeys = Object.keys(types);
+                if (typeKeys.length !== config.types.length && typeKeys.some((c) => !config.type?.includes(c))) {
+                    setHasRunOnce(false);
+                }
             }
         }
     }, [hasRunOnce, types, config, onFilterChange]);
@@ -29,6 +31,7 @@ const TypeFilter = ({ onFilterChange,  config}) => {
 
     return (
         <div>
+            <b> Select the Data Type:</b>< br />
             {types.map((type) => (
                 <label key={type}>
                     <input
@@ -36,9 +39,10 @@ const TypeFilter = ({ onFilterChange,  config}) => {
                         name={type}
                         checked={type == selectedType}
                         onChange={handleCheckboxChange}
-                    /> {type}
+                    /> {type} <br />
                 </label>
             ))}
+            <br />
         </div>
     );
 };

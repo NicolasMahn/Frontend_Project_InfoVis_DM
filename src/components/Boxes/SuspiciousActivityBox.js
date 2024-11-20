@@ -6,7 +6,7 @@ const SuspiciousActivityBox = ({ setSelectedGraph }) => {
       <button onClick={() => setSelectedGraph('ExampleGraph')}>Show Example Graph</button>
       <button onClick={() => setSelectedGraph('NumbPurchasesPerLocation')}>Show Number of Purchases Per Location</button>
       <button onClick={() => setSelectedGraph('ComparingPurchasesOfPairs')}>Show Number of Purchases Paired</button>
-      <button>See more about the suspicious activities here</button>
+      <button onClick={() => setSelectedGraph('PurchasesOverTime')}>Show Purchases Over Time</button>
     </div>
   );
 };

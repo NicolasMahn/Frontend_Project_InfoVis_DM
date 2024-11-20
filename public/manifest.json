@@ -1,6 +1,14 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "manifest_version": 2,
+  "short_name": "Dashboard",
+  "name": "GASTech Employee Investigation Dashboard",
+  "version": "1.0",
+  "description": "Your extension description.",
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "storage"
+  ],
   "icons": [
     {
       "src": "favicon.ico",
@@ -21,5 +29,8 @@
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "background_color": "#ffffff",
+  "web_accessible_resources": [
+    "graphs.yml"
+  ]
 }

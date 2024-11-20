@@ -18,11 +18,13 @@ import EmployeeFilter from './Filters/EmployeeFilter';
 import LocationFilter from './Filters/LocationFilter';
 import SortCategoriesAfter from './Filters/SortCategoriesAfter';
 import TypeFilter from './Filters/TypeFilter.js';
+import PurchasesOverTime from './Graphs/PurchasesOverTime.js';
 
 const graphComponents = {
   ExampleGraph,
   NumbPurchasesPerLocation,
-  ComparingPurchasesOfPairs
+  ComparingPurchasesOfPairs,
+  PurchasesOverTime
 };
 
 const filterComponents = {
@@ -37,11 +39,41 @@ const filterComponents = {
 
 
 const Dashboard = () => {
-  const [selectedGraph, setSelectedGraph] = useState('NumbPurchasesPerLocation');
+  const [selectedGraph, setSelectedGraph] = useState('ComparingPurchasesOfPairs');
   const [graphConfig, setGraphConfig] = useState({});
-  const [filterSettings, setFilterSettings] = useState({ locations: [], categories: {}, sortCategory: 'creditcard' });
+  const [filterSettings, setFilterSettings] = useState(
+    { 
+      locations: [], 
+      categories: {"Credit Card": true, "Loyalty Card": true, "Cars In Area": false, "Card Pair": false, "No Pair": false}, 
+      sortCategory: '' 
+    });
 
-  const handleFilterChange = (newSettings) => {
+  const handleFilterChange = (newSettings, title=null) => {
+    if (!title) {
+      title = document.title;
+    }
+    window.history.pushState({ filterSettings: { filterSettings} }, title);
+    setFilterSettings(prevSettings => ({
+      ...prevSettings,
+      ...newSettings,
+    }));
+
+  };
+
+  const handleGraphChange = (newGraph, title=null) => {
+    if (!title) {
+      title = document.title;
+    }
+    window.history.pushState({ selectedGraph }, title);
+    setSelectedGraph(newGraph);
+  };
+
+  const handleGraphAndFilterChange = (newGraph, newSettings, title=null) => {
+    if (!title) {
+      title = document.title;
+    }
+    window.history.pushState({ selectedGraph, filterSettings },title);
+    setSelectedGraph(newGraph);
     setFilterSettings(prevSettings => ({
       ...prevSettings,
       ...newSettings,
@@ -57,6 +89,32 @@ const Dashboard = () => {
       })
       .catch(error => console.error('Error fetching the YAML file:', error));
   }, []);
+
+  useEffect(() => {
+    const handleBackButton = (event) => {
+      event.preventDefault();
+      // Handle the back button press here
+      console.log('Back button pressed');
+      
+      if (event.state) {
+        console.log(event.state);
+        if (event.state.filterSettings) {
+          console.log(event.state.filterSettings.filterSettings);
+          setFilterSettings(event.state.filterSettings.filterSettings);
+        }
+        if (event.state.selectedGraph) {
+          console.log(event.state.selectedGraph);
+          setSelectedGraph(event.state.selectedGraph);
+        }
+      }
+    };
+
+    window.addEventListener('popstate', handleBackButton);
+
+    return () => {
+      window.removeEventListener('popstate', handleBackButton);
+    };
+  }, []);
   
   const GraphComponent = graphComponents[selectedGraph];
   const filters = graphConfig[selectedGraph]?.filters.map(filter => filterComponents[filter]) || [];
@@ -66,11 +124,11 @@ const Dashboard = () => {
     <div className="dashboard-with-Heading">
       <h1 className="header" id="dashboard-header">GASTech Employee Investigation Dashboard</h1>
       <div className="dashboard">
-        <GraphBox GraphComponent={GraphComponent} onFilterChange={handleFilterChange} filterSettings={filterSettings} />
-        <ExplanationBox />
-        <FilterBox filters={filters} onFilterChange={handleFilterChange} filterSettings={filterSettings} config={config}/>
-        <ClusterMapBox />
-        <SuspiciousActivityBox setSelectedGraph={setSelectedGraph} />
+        <GraphBox GraphComponent={GraphComponent} onFilterChange={handleFilterChange} filterSettings={filterSettings} handleGraphAndFilterChange={handleGraphAndFilterChange} />
+        <ExplanationBox selectedGraph={selectedGraph} filterSettings={filterSettings} handleGraphAndFilterChange={handleGraphAndFilterChange}/>
+        <FilterBox filters={filters} onFilterChange={handleFilterChange} filterSettings={filterSettings} config={config} />
+        {//<SuspiciousActivityBox setSelectedGraph={handleGraphChange} />
+        }
       </div>
     </div>
   );

@@ -3,10 +3,11 @@
 :root {
   --primary-color: #00A9CF;
   --secondary-color: #cf00a9;
-  --tertiary-color: #00cf8e;
-  --quaternary-color: #cf2600;
-  --quinary-color: #a9cf00;
+  --tertiary-color: #cf8e00;
+  --quaternary-color: #8e00cf;
+  --quinary-color: #00cf26;
   --senary-color: #0042cf;
+  --septenary-color: #cf0042;
 
   --background-color: #eeeeee;
   --border-color: #cccccc;
@@ -24,9 +25,7 @@
   grid-template-columns: 2fr 1fr; /* 2/3 and 1/3 column layout */
   grid-template-areas:
     "graph filter"
-    "graph cluster"
-    "explanation cluster"
-    "explanation suspicious";
+    "explanation explanation";
   grid-gap: 20px;
   padding: 20px;
 }

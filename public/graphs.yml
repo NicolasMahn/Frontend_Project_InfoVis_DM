@@ -4,11 +4,18 @@ NumbPurchasesPerLocation:
   categories: [Credit Card,  Loyalty Card]
 ComparingPurchasesOfPairs:
   graph_name: ComparingPurchasesOfPairs
-  filters: [Type, Location, Category, SortCategoriesAfter]
+  filters: [Location, Type, Category, SortCategoriesAfter]
   types: [Percentage, Absolute, Avg Expense]
-  categories: [Card Pair, Car Card Pair, No Car Card Pair, No Pair]
+  categories: [Credit Card, Loyalty Card, Cars In Area, Card Pair, No Pair]
 ExampleGraph:
   graph_name: ExampleGraph
   filters: [Type, Location, Employee, Time, Category, SortCategoriesAfter]
   categories: [Card Pair, Car Card Pair, No Car Card Pair, No Pair]
   types: [Percentage, Absolute, Avg Expense]
+  times: [Average Day, Average Work Day, Average Weekend Day, Average Week, Timeline]
+PurchasesOverTime:
+  graph_name: PurchasesOverTime
+  filters: [Location, Type, Time, Category]
+  types: [Number of Purchases, Expenses over Time]
+  categories: [Credit Card, Loyalty Card, Cars In Area, Card Pair, No Pair]
+  times: [Timeline, Average Day, Average Work Day, Average Weekend Day, Average Week]

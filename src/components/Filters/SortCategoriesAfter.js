@@ -4,20 +4,24 @@ const SortCategoriesAfter = ({ filterSettings, onFilterChange }) => {
   const [selectedSortOption, setSelectedSortOption] = useState('');
 
   useEffect(() => {
-    const selectedCategories = Object.keys(filterSettings.categories).filter(
-        (category) => filterSettings.categories[category]
-      );
+    if (!filterSettings || !filterSettings.categories) {
+      return;
+    }
 
-      if (selectedCategories.length === 1) {
+    const selectedCategories = Object.keys(filterSettings.categories).filter(
+      (category) => filterSettings.categories[category]
+    );
+
+    if (selectedCategories.length === 1) {
+      setSelectedSortOption(selectedCategories[0]);
+      onFilterChange({ sortCategory: selectedCategories[0] });
+    } else if (selectedCategories.length > 1) {
+      if (!selectedCategories.includes(selectedSortOption)) {
         setSelectedSortOption(selectedCategories[0]);
         onFilterChange({ sortCategory: selectedCategories[0] });
-      } else if (selectedCategories.length > 1) {
-        if (!selectedCategories.includes(selectedSortOption)) {
-          setSelectedSortOption(selectedCategories[0]);
-          onFilterChange({ sortCategory: selectedCategories[0] });
-        }
       }
-    }, [filterSettings.categories, selectedSortOption, onFilterChange]);
+    }
+  }, [filterSettings, selectedSortOption, onFilterChange]);
 
     
   const handleRadioChange = (event) => {
@@ -25,6 +29,10 @@ const SortCategoriesAfter = ({ filterSettings, onFilterChange }) => {
     setSelectedSortOption(value);
     onFilterChange({ sortCategory: value });
   };
+
+  if (!filterSettings || !filterSettings.categories) {
+    return null;
+  }
 
   const selectedCategories = Object.keys(filterSettings.categories).filter(
     (category) => filterSettings.categories[category]
@@ -36,7 +44,7 @@ const SortCategoriesAfter = ({ filterSettings, onFilterChange }) => {
 
   return (
     <div>
-      <b>Sort Categories After: </b>
+      <b>Sort Categories After: </b><br/>
       {selectedCategories.map((category) => (
         <label key={category}>
           <input
@@ -46,9 +54,10 @@ const SortCategoriesAfter = ({ filterSettings, onFilterChange }) => {
             checked={selectedSortOption === category}
             onChange={handleRadioChange}
           />
-          {category} &nbsp;
+          {category} <br/>
         </label> 
       ))}
+      <br/>
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const CategoryFilter = ({ onFilterChange,  config}) => {
+const CategoryFilter = ({ onFilterChange,  config, filterSettings}) => {
     const [hasRunOnce, setHasRunOnce] = useState(false);
     const [categories, setCheckboxes] = useState({ });
 
@@ -8,7 +8,13 @@ const CategoryFilter = ({ onFilterChange,  config}) => {
         if (!hasRunOnce) {
             let cs = config.categories;
             let newCategories = {};
-            for (let c in cs)  newCategories[cs[c]] = true;
+            for (let c in cs)  {
+                if (Object.keys(filterSettings.categories).includes(cs[c])) {
+                    newCategories[cs[c]] = filterSettings.categories[cs[c]];
+                } else {
+                    newCategories[cs[c]] = true;
+                }
+            }
             setCheckboxes(newCategories);
             onFilterChange({categories: newCategories});
             if (categories) setHasRunOnce(true);
@@ -34,6 +40,7 @@ const CategoryFilter = ({ onFilterChange,  config}) => {
 
     return (
     <div>
+        <span><b>Categories:</b></span><br/>
         {Object.keys(categories).map((category) => (
           <label key={category}>
             <input
@@ -41,9 +48,10 @@ const CategoryFilter = ({ onFilterChange,  config}) => {
               name={category}
               checked={categories[category]}
               onChange={handleCheckboxChange}
-            /> {category}
+            /> {category}<br/>
           </label>
         ))}
+        <br/>
     </div>
     );
 };

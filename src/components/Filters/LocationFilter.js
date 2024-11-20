@@ -52,13 +52,14 @@ const LocationFilter = ({ onFilterChange, filterSettings }) => {
 
   return (
     <div className="location-filter">
-      <label>Locations:</label>
+      <label><b>Locations:</b></label>
       <Select
         isMulti
         value={selectedOptions}
         options={options}
         onChange={handleChange}
       />
+      <br />
     </div>
   );
 

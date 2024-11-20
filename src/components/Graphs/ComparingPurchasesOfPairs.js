@@ -7,14 +7,23 @@ const COMPARING_PURCHASES_OF_PAIRS = gql`
 query ComparingPurchasesOfPairs {
   comparingPurchasesOfPairs{
     location
+    absolutCc
+    absolutLoyalty
+    absolutCarsInArea
     absolutCardPair
     absolutCarCardPair
     absolutNoCarCardPair
     absolutNoPair
+    percentCc
+    percentLoyalty
+    percentCarsInArea
     percentCardPair
     percentCarCardPair
     percentNoCarCardPair
     percentNoPair
+    avgAmountCc
+    avgAmountLoyalty
+    avgAmountCarsInArea
     avgAmountCardPair
     avgAmountCarCardPair
     avgAmountNoCarCardPair
@@ -23,7 +32,7 @@ query ComparingPurchasesOfPairs {
 }
 `
 
-const ComparingPurchasesOfPairs = ({filterSettings, onFilterChange}) => {
+const ComparingPurchasesOfPairs = ({filterSettings, onFilterChange, handleGraphAndFilterChange}) => {
   const { loading, error, data } = useQuery(COMPARING_PURCHASES_OF_PAIRS, {
     fetchPolicy: 'cache-and-network', // Use cache first, then network
   });
@@ -40,8 +49,11 @@ const ComparingPurchasesOfPairs = ({filterSettings, onFilterChange}) => {
     getComputedStyle(document.documentElement).getPropertyValue('--tertiary-color').trim(),
     getComputedStyle(document.documentElement).getPropertyValue('--quaternary-color').trim(),
     getComputedStyle(document.documentElement).getPropertyValue('--quinary-color').trim(),
-    getComputedStyle(document.documentElement).getPropertyValue('--senary-color').trim()
+    getComputedStyle(document.documentElement).getPropertyValue('--senary-color').trim(),
+    getComputedStyle(document.documentElement).getPropertyValue('--septenary-color').trim()
   ];
+
+  const possibleSpecialLocations = ["Katerin", "Magic Bean", "Frydo"];
 
   useEffect(() => {
     if (data) {
@@ -57,16 +69,44 @@ const ComparingPurchasesOfPairs = ({filterSettings, onFilterChange}) => {
         setTitle('Average Expense per Category for every Location')
         type = 'avgAmount'
       }
+      let cc_type = type + 'Cc'
+      let loyalty_type = type + 'Loyalty'
+      let carsInArea_type = type + 'CarsInArea'
       let cp_type = type + 'CardPair'
       let ccp_type = type + 'CarCardPair'
       let nccp_type = type + 'NoCarCardPair'
       let np_type = type + 'NoPair'
-      let types = [cp_type, ccp_type, nccp_type, np_type]
-      let type_labels = ['Card Pair', 'Car Card Pair', 'No Car Card Pair', 'No Pair']
+      let types = [cc_type, loyalty_type, carsInArea_type, cp_type, ccp_type, nccp_type, np_type]
+      let type_labels = ['Credit Card', 'Loyalty Card', 'Cars In Area', 'Card Pair', 'Car Card Pair', 'No Car Card Pair', 'No Pair']
 
+      let locations = []
+      let special_locations = []
+      for (let l in filterSettings.locations) {
+        for (let s in possibleSpecialLocations) {
+          if (filterSettings.locations[l].includes(possibleSpecialLocations[s])) {
+            special_locations.push(possibleSpecialLocations[s]);
+          }
+        }
+      }
+
+      for (let d in data.comparingPurchasesOfPairs) {
+        if (!locations.includes(data.comparingPurchasesOfPairs[d].location)) {
+          if (filterSettings.locations.includes(data.comparingPurchasesOfPairs[d].location)) {
+            locations.push(data.comparingPurchasesOfPairs[d].location)
+          } else {
+            let b = false
+            for (let s in special_locations) {
+              if (data.comparingPurchasesOfPairs[d].location.includes(special_locations[s])) {
+                locations.push(data.comparingPurchasesOfPairs[d].location)
+                b = true
+              }
+            }
+          }
+        }
+      }   
 
       const filtered = data.comparingPurchasesOfPairs
-      .filter(data => filterSettings.locations.includes(data.location));
+      .filter(data => locations.includes(data.location));
       
 
       // Sort the data by the number of credit card purchases
@@ -130,9 +170,11 @@ const ComparingPurchasesOfPairs = ({filterSettings, onFilterChange}) => {
 
   const handleBarDoubleClick = (d) => {
     console.log("Bar double-clicked:", d);
+
+    handleGraphAndFilterChange('PurchasesOverTime', handleGraphAndFilterChange, title);
   };
 
-  if (chartData.length < 0) {
+  if (chartData.length < 1 || legend.length < 1 || colors.length < 1) {
     return <p>No data to display</p>
   }
 

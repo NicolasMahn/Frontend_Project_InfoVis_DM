@@ -1,11 +1,10 @@
 import React, { useRef, useEffect } from 'react';
 import * as d3 from 'd3';
 
-const BarChart = ({ data, legend, colors, onBarClick, onBarRightClick, onBarDoubleClick }) => {
+const LineChart = ({ data, legend, colors, onLineClick, onLineRightClick, onLineDoubleClick }) => {
   const svgRef = useRef();
   const tooltipRef = useRef();
   
-
   useEffect(() => {
     const svg = d3.select(svgRef.current);
     const tooltip = d3.select(tooltipRef.current);
@@ -14,6 +13,7 @@ const BarChart = ({ data, legend, colors, onBarClick, onBarRightClick, onBarDoub
     const margin = { top: 20, right: 30, bottom: 70, left: 60 };
 
     const maxLabelLineLength = 10;
+    const maxTicks = 10;
 
     svg.attr('width', width).attr('height', height);
 
@@ -29,9 +29,10 @@ const BarChart = ({ data, legend, colors, onBarClick, onBarRightClick, onBarDoub
         .domain([0, yMax]).nice()
         .range([height - margin.bottom, margin.top]);
 
-    const xAxis = g => g
-      .attr('transform', `translate(0,${height - margin.bottom})`)
-      .call(d3.axisBottom(x).tickSizeOuter(0))
+    const xAxis = g => {
+      const interval = Math.ceil(data.x.length / maxTicks);
+      g.attr('transform', `translate(0,${height - margin.bottom})`)
+      .call(d3.axisBottom(x).tickValues(data.x.filter((_, i) => i % interval === 0)).tickSizeOuter(0))
       .selectAll("text")
       .attr("transform", "rotate(-45)")
       .style("text-anchor", "end")
@@ -66,6 +67,7 @@ const BarChart = ({ data, legend, colors, onBarClick, onBarRightClick, onBarDoub
           }
         }
       });
+    }
 
     const yAxis = g => g
       .attr('transform', `translate(${margin.left},0)`)
@@ -76,92 +78,51 @@ const BarChart = ({ data, legend, colors, onBarClick, onBarRightClick, onBarDoub
     svg.append('g').call(xAxis);
     svg.append('g').call(yAxis);
 
-    const handleMouseOver = (event, d) => {
-      tooltip.style('opacity', 1);
-      let i = d.index;
-      tooltip.html(`
-        <b>${data.x[i]}</b><br>
-        ${Array.isArray(data.y[0]) ? data.y.map((yList, j) => `${legend[j]}: ${parseFloat(yList[i].toFixed(2))}`).join('<br>') : `${legend[0]}: ${parseFloat(data.y[i].toFixed(2))}`}`)
-        .style('left', `${event.pageX - 10}px`)
-        .style('top', `${event.pageY - 190}px`);
-    };
-
-    const handleMouseOut = () => {
-      tooltip.style('opacity', 0);
-    };
+    const line = d3.line()
+    .x((d, i) => x(data.x[i]) + x.bandwidth() / 2)
+    .y(d => y(d));
 
     if (Array.isArray(data.y[0])) {
-        // Multiple lists for y-axis (grouped bar chart)
-        const subgroups = d3.range(data.y.length);
-        const xSubgroup = d3.scaleBand()
-          .domain(subgroups)
-          .range([0, x.bandwidth()])
-          .padding(0.05);
-  
-        svg.append('g')
-          .selectAll('g')
-          .data(data.x)
-          .join('g')
-          .attr('transform', d => `translate(${x(d)},0)`)
-          .selectAll('rect')
-          .data((_, i) => data.y.map((yList) => ({
-            value: yList[i], 
-            index: i,
-            category: data.x[i]
-          })))
-          .join('rect')
-          .attr('x', (d, i) => xSubgroup(i))
-          .attr('y', d => y(d.value))
-          .attr('height', d => y(0) - y(d.value))
-          .attr('width', xSubgroup.bandwidth())
-          .attr('fill', (d, i) => colors[i % colors.length])
-          .on('mouseover', handleMouseOver)
-          .on('mouseout', handleMouseOut)
-          .on('mousemove', handleMouseOver)
+      data.y.forEach((yList, i) => {
+        svg.append('path')
+          .datum(yList)
+          .attr('fill', 'none')
+          .attr('stroke', colors[i % colors.length])
+          .attr('stroke-width', 4)
+          .attr('d', line)
           .on('click', function(event, d) {
             event.preventDefault();
-            if (onBarClick) onBarClick(d);
+            if (onLineClick) onLineClick(d);
           })
           .on('contextmenu', function(event, d) {
             event.preventDefault();
-            if (onBarRightClick) onBarRightClick(d);
+            if (onLineRightClick) onLineRightClick(d);
           })
           .on('dblclick', function(event, d) {
             event.preventDefault();
-            if (onBarDoubleClick) onBarDoubleClick(d);
+            if (onLineDoubleClick) onLineDoubleClick(d);
           });
-      } else {
-        // Single list for y-axis (simple bar chart)
-        svg.append('g')
-          .selectAll('rect')
-          .data(data.y)
-          .join('rect')
-          .attr('x', (d, i) => x(data.x[i]))
-          .attr('y', d => y(d))
-          .attr('height', d => y(0) - y(d))
-          .attr('width', x.bandwidth())
-          .attr('fill', colors[0])
-          .data((_, i) => data.x.map((x) => ({
-            value: x, 
-            index: i,
-            category: data.x[i]
-          })))
-          .on('mouseover', handleMouseOver)
-          .on('mouseout', handleMouseOut)
-          .on('mousemove', handleMouseOver)
-          .on('click', function(event, d) {
-            event.preventDefault();
-            if (onBarClick) onBarClick(d);
-          })
-          .on('contextmenu', function(event, d) {
-            event.preventDefault();
-            if (onBarRightClick) onBarRightClick(d);
-          })
-          .on('dblclick', function(event, d) {
-            event.preventDefault();
-            if (onBarDoubleClick) onBarDoubleClick(d);
-          });
-      }
+      });
+    } else {
+      svg.append('path')
+        .datum(data.y)
+        .attr('fill', 'none')
+        .attr('stroke', colors[0])
+        .attr('stroke-width', 4)
+        .attr('d', line)
+        .on('click', function(event, d) {
+          event.preventDefault();
+          if (onLineClick) onLineClick(d);
+        })
+        .on('contextmenu', function(event, d) {
+          event.preventDefault();
+          if (onLineRightClick) onLineRightClick(d);
+        })
+        .on('dblclick', function(event, d) {
+          event.preventDefault();
+          if (onLineDoubleClick) onLineDoubleClick(d);
+        });
+    }
           // Add legend
       if (legend && legend.length) {
         const legendGroup = svg.append('g')
@@ -183,7 +144,7 @@ const BarChart = ({ data, legend, colors, onBarClick, onBarRightClick, onBarDoub
             .text(legendItem);
         });
       }
-    }, [data, legend, colors, onBarClick, onBarRightClick, onBarDoubleClick]);
+    }, [data, legend, colors, onLineClick, onLineRightClick, onLineDoubleClick]);
     return (
       <div style={{ position: 'relative' }}>
         <svg ref={svgRef}></svg>
@@ -205,4 +166,4 @@ const BarChart = ({ data, legend, colors, onBarClick, onBarRightClick, onBarDoub
     );
 };
 
-export default BarChart;
+export default LineChart;
