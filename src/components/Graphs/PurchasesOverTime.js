@@ -5,8 +5,8 @@ import LineChart from '../Charts/LineChart';
 import { filter, max, min, utcHour } from 'd3';
 
 const PURCHASES_OVER_TIME_QUERY = gql`
-  query PurchasesOverTime {
-    purchasesOverTime { 
+  query PurchasesOverTime($locations: [String], $types: [String]) {
+    purchasesOverTime(locations: $locations, types: $types) { 
         starttime 
         endtime 
         type 
@@ -21,15 +21,18 @@ const PURCHASES_OVER_TIME_QUERY = gql`
 `
 
 const PurchasesOverTime = ({filterSettings, onFilterChange}) => {
-    const { loading, error, data } = useQuery(PURCHASES_OVER_TIME_QUERY, {
-        fetchPolicy: 'cache-and-network', // Use cache first, then network
-    });
-    
     const [chartData, setChartData] = useState([]);
     const [legend, setLegend] = useState([]);
     const [colors, setColors] = useState([]);
     const [title, setTitle] = useState('Number of Purchases per Location');
 
+    const [locationsForType, setLocationsForTypes] = useState({});
+    const [savedData, setData] = useState(null);
+    const [fetchError, setError] = useState(null);
+
+    const { loading, error, data, refetch } = useQuery(PURCHASES_OVER_TIME_QUERY, {
+        skip: true // Skip the initial automatic query execution
+    });
 
     // Access CSS variables
     const possipbleColors = [
@@ -45,7 +48,54 @@ const PurchasesOverTime = ({filterSettings, onFilterChange}) => {
     const possibleSpecialLocations = ["Katerina", "Magic Bean", "Frydo"];
     
     useEffect(() => {
-        if (data) {
+        let currentLocations = filterSettings.locations;
+        let currentCategories = [];
+        for (let cCategory of Object.keys(filterSettings.categories).filter(key => filterSettings.categories[key] === true)) {
+            if (cCategory === "Credit Card") {
+                currentCategories.push("creditcard");
+            } else if (cCategory === "Loyalty Card") {
+                currentCategories.push("loyalty");
+            } else if (cCategory === "Cars In Area") {
+                currentCategories.push("cars_in_area");
+            } else if (cCategory === "Card Pair") {
+                currentCategories.push("pairs");
+            } else if (cCategory === "No Pair") {
+                currentCategories.push("no_pairs");
+            }
+        }
+
+        let newLocations = [];
+
+        for (let currentCategory of currentCategories) {
+            if (!locationsForType.hasOwnProperty(currentCategory) ||
+                currentLocations.some(location => !locationsForType[currentCategory].includes(location))) {
+                newLocations = [...locationsForType[currentCategory] || [], ...currentLocations];
+
+                setLocationsForTypes(prevLocationsForTypes => ({
+                    ...prevLocationsForTypes,
+                    [currentCategory]: [
+                        ...(prevLocationsForTypes[currentCategory] || []),
+                        ...newLocations
+                    ]
+                }));
+            }
+        }
+        if (currentCategories.some(category => !locationsForType.hasOwnProperty(category) ||
+        currentLocations.some(location => !locationsForType[category].includes(location)))) {
+            // Manually execute the query after state updates
+            refetch({ locations: newLocations, types: currentCategories }).then(({ data }) => {
+                setData(prevData => ({
+                    ...prevData,
+                    purchasesOverTime: [
+                        ...(prevData ? prevData.purchasesOverTime : []),
+                        ...data.purchasesOverTime
+                    ]
+                }));
+            }).catch(error => {
+                setError(error);
+            });
+        }
+        if (savedData) {
             const timeFilter = filterSettings.time;
             const type = filterSettings.type;
 
@@ -60,7 +110,8 @@ const PurchasesOverTime = ({filterSettings, onFilterChange}) => {
                         categories.push("creditcard");
                         categoryNames.push("Credit Card");
                         colors.push(possipbleColors[0]);
-                    } else if (c === "Loyalty Card" && timeFilter !== "Average Work Day" && timeFilter !== "Average Weekend Day" && timeFilter !== "Average Day") {
+                    } else if (c === "Loyalty Card" && timeFilter !== "Average Work Day" &&
+                         timeFilter !== "Average Weekend Day" && timeFilter !== "Average Day") {
                         categories.push("loyalty");
                         categoryNames.push("Loyalty");
                         colors.push(possipbleColors[1]);
@@ -91,14 +142,14 @@ const PurchasesOverTime = ({filterSettings, onFilterChange}) => {
                     }
                 }
 
-                for (let d in data.purchasesOverTime) {
-                    if (!locations.includes(data.purchasesOverTime[d].location)) {
-                        if (filterSettings.locations.includes(data.purchasesOverTime[d].location)) {
-                            locations.push(data.purchasesOverTime[d].location)
+                for (let d in savedData.purchasesOverTime) {
+                    if (!locations.includes(savedData.purchasesOverTime[d].location)) {
+                        if (filterSettings.locations.includes(savedData.purchasesOverTime[d].location)) {
+                            locations.push(savedData.purchasesOverTime[d].location)
                         } else {
                             for (let s in special_locations) {
-                                if (data.purchasesOverTime[d].location.includes(special_locations[s])) {
-                                    locations.push(data.purchasesOverTime[d].location)
+                                if (savedData.purchasesOverTime[d].location.includes(special_locations[s])) {
+                                    locations.push(savedData.purchasesOverTime[d].location)
                                 }
                             }
                         }
@@ -106,7 +157,7 @@ const PurchasesOverTime = ({filterSettings, onFilterChange}) => {
                         
                     }
                 }   
-                const filteredData = data.purchasesOverTime
+                const filteredData = savedData.purchasesOverTime
                 .filter(data => locations.includes(data.location));
 
                 let minTime = new Date(Math.min(...filteredData.map(d => d.starttime))* 1000);
@@ -238,10 +289,10 @@ const PurchasesOverTime = ({filterSettings, onFilterChange}) => {
                 setColors([]);
             }
         }
-    }, [data, filterSettings]);
+    }, [data, filterSettings, savedData]);
     
     if (loading) return <p>Loading...</p>;
-    if (error) return <p>Error: {error.message}</p>;
+    if (error || fetchError) return <p>Error: {error.message}</p>;
 
 
     const handleBarClick = (d) => {

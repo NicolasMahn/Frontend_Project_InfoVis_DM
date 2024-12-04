@@ -68,7 +68,7 @@ const ExplanationBox = ({filterSettings, selectedGraph, handleGraphAndFilterChan
     // Ensure defaultCookie is an array
     if (Array.isArray(defaultCookie)) {
       // Set the cookie if it doesn't exist
-      Cookies.set('savesCookie', JSON.stringify(defaultCookie), { expires: 7 });
+      Cookies.set('savesCookie', JSON.stringify(defaultCookie), { expires: 30 });
       setSavedGraphs(defaultCookie);
       console.log('Default cookie has been set.');
     } else {

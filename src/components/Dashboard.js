@@ -50,7 +50,7 @@ const Dashboard = () => {
 
   const handleFilterChange = (newSettings, title=null) => {
     if (!title) {
-      title = document.title;
+      title = "filterSettings";
     }
     window.history.pushState({ filterSettings: { filterSettings} }, title);
     setFilterSettings(prevSettings => ({
@@ -62,17 +62,18 @@ const Dashboard = () => {
 
   const handleGraphChange = (newGraph, title=null) => {
     if (!title) {
-      title = document.title;
+      title = selectedGraph;
     }
-    window.history.pushState({ selectedGraph }, title);
+    window.history.pushState({ selectedGraph, filterSettings }, title)
     setSelectedGraph(newGraph);
   };
 
   const handleGraphAndFilterChange = (newGraph, newSettings, title=null) => {
     if (!title) {
-      title = document.title;
+      title = selectedGraph + ' - ' + "filterSettings";
     }
-    window.history.pushState({ selectedGraph, filterSettings },title);
+    console.log(title)
+    window.history.pushState({ selectedGraph, filterSettings }, title);
     setSelectedGraph(newGraph);
     setFilterSettings(prevSettings => ({
       ...prevSettings,
