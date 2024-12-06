@@ -19,3 +19,11 @@ PurchasesOverTime:
   types: [Number of Purchases, Expenses over Time]
   categories: [Credit Card, Loyalty Card, Cars In Area, Card Pair, No Pair]
   times: [Timeline, Average Day, Average Work Day, Average Weekend Day, Average Week]
+CardMatrixGraph:
+  graph_name: CardMatrixGraph
+  filters: [Type, CreditCard, LoyaltyCard]
+  types: [Absolute, Relative to Credit Card, Relative to Loyalty Card]
+CarMatrixGraph:
+  graph_name: CarMatrixGraph
+  filters: [Type, CreditCard, CarID]
+  types: [Absolute, Relative to Credit Card, Relative to Car ID]

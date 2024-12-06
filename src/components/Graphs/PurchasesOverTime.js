@@ -31,7 +31,8 @@ const PurchasesOverTime = ({filterSettings, onFilterChange}) => {
     const [fetchError, setError] = useState(null);
 
     const { loading, error, data, refetch } = useQuery(PURCHASES_OVER_TIME_QUERY, {
-        skip: true // Skip the initial automatic query execution
+        skip: true, // Skip the initial automatic query execution
+        fetchPolicy: 'cache-and-network', // Use cache first, then network
     });
 
     // Access CSS variables

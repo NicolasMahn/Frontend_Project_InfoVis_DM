@@ -10,6 +10,9 @@ import yaml from 'yaml';
 import ExampleGraph from './Graphs/ExampleGraph';
 import NumbPurchasesPerLocation from './Graphs/NumbPurchasesPerLocation';
 import ComparingPurchasesOfPairs from './Graphs/ComparingPurchasesOfPairs';
+import PurchasesOverTime from './Graphs/PurchasesOverTime.js';
+import CardMatrixGraph from './Graphs/CardMatrixGraph.js';
+import CarMatrixGraph from './Graphs/CarMatrixGraph.js';
 
 // Importing the filters
 import TimeFilter from './Filters/TimeFilter';
@@ -18,13 +21,18 @@ import EmployeeFilter from './Filters/EmployeeFilter';
 import LocationFilter from './Filters/LocationFilter';
 import SortCategoriesAfter from './Filters/SortCategoriesAfter';
 import TypeFilter from './Filters/TypeFilter.js';
-import PurchasesOverTime from './Graphs/PurchasesOverTime.js';
+import CreditCardFilter from './Filters/CreditCardFilter.js';
+import LoyaltyCardFilter from './Filters/LoyaltyCardFilter.js';
+import CarIDFilter from './Filters/CarFilter.js';
+
 
 const graphComponents = {
   ExampleGraph,
   NumbPurchasesPerLocation,
   ComparingPurchasesOfPairs,
-  PurchasesOverTime
+  PurchasesOverTime,
+  CardMatrixGraph,
+  CarMatrixGraph
 };
 
 const filterComponents = {
@@ -33,7 +41,10 @@ const filterComponents = {
   SortCategoriesAfter: SortCategoriesAfter,
   Employee: EmployeeFilter,
   Location: LocationFilter,
-  Type: TypeFilter
+  Type: TypeFilter,
+  CreditCard: CreditCardFilter,
+  LoyaltyCard: LoyaltyCardFilter,
+  CarID: CarIDFilter
 };
 
 

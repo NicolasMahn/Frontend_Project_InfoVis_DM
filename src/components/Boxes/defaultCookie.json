@@ -93,5 +93,19 @@
         "Guy's Gyros"
       ]
     }
+  },
+  {
+    "id": 3,
+    "title": "Matching Credit and Loyalty Cards",
+    "description": "Uses of Loyalty and Credit Cards with the same Metadata",
+    "graph": "CardMatrixGraph",
+    "filterSettings": {"type": "Absolute"}
+  },
+  {
+    "id": 4,
+    "title": "Matching Cars and Credit Cards",
+    "description": "Cars and Credit Cards with the same Metadata",
+    "graph": "CarMatrixGraph",
+    "filterSettings": {"type": "Absolute"}
   }
 ]
