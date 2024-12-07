@@ -84,22 +84,22 @@ const CarMatrixGraph = ({filterSettings, onFilterChange}) => {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
     
-  const handleBarClick = (d) => {
-    console.log("Bar clicked:", d);
+  const handleCellClick = (d) => {
+    console.log("Cell clicked:", d);
   };
 
-  const handleBarRightClick = (d) => {
-    console.log("Bar right-clicked:", d);
+  const handleCellRightClick = (d) => {
+    console.log("Cell right-clicked:", d);
   };
 
-  const handleBarDoubleClick = (d) => {
-    console.log("Bar double-clicked:", d);
+  const handleCellDoubleClick = (d) => {
+    console.log("Cell double-clicked:", d);
   };
 
   return (
     <div>
       <h2 className="header">{title}</h2>
-      <MatrixChart matrix={matrix} xAxis={xAxis} yAxis={yAxis} yAxisName={"Credit Cards"} xAxisName={"Car IDs"} unit={unit} onBarClick={handleBarClick} onBarRightClick={handleBarRightClick} onBarDoubleClick={handleBarDoubleClick}/>
+      <MatrixChart matrix={matrix} xAxis={xAxis} yAxis={yAxis} xAxisName={"Credit Cards"} yAxisName={"Car IDs"} unit={unit} onCellClick={handleCellClick} onCellRightClick={handleCellRightClick} onCellDoubleClick={handleCellDoubleClick}/>
     </div>
   );
 }

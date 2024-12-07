@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import yaml from 'yaml';
+
 import GraphBox from './Boxes/GraphBox';
 import ExplanationBox from './Boxes/ExplanationBox';
 import FilterBox from './Boxes/FilterBox';
-import ClusterMapBox from './Boxes/ClusterMapBox';
-import SuspiciousActivityBox from './Boxes/SuspiciousActivityBox';
-import yaml from 'yaml';
+import NavigationBox from './Boxes/NavigationBox';
+
 
 // Import all Graphs
 import ExampleGraph from './Graphs/ExampleGraph';
@@ -58,6 +59,9 @@ const Dashboard = () => {
       categories: {"Credit Card": true, "Loyalty Card": true, "Cars In Area": false, "Card Pair": false, "No Pair": false}, 
       sortCategory: '' 
     });
+
+  const [savedGraphs, setSavedGraphs] = useState([]);
+  const [title, setTitle] = useState('');
 
   const handleFilterChange = (newSettings, title=null) => {
     if (!title) {
@@ -136,9 +140,10 @@ const Dashboard = () => {
     <div className="dashboard-with-Heading">
       <h1 className="header" id="dashboard-header">GASTech Employee Investigation Dashboard</h1>
       <div className="dashboard">
+        <NavigationBox selectedGraph={selectedGraph} filterSettings={filterSettings} handleGraphAndFilterChange={handleGraphAndFilterChange} savedGraphs={savedGraphs} setSavedGraphs={setSavedGraphs} title={title} setTitle={setTitle}/>
         <GraphBox GraphComponent={GraphComponent} onFilterChange={handleFilterChange} filterSettings={filterSettings} handleGraphAndFilterChange={handleGraphAndFilterChange} />
-        <ExplanationBox selectedGraph={selectedGraph} filterSettings={filterSettings} handleGraphAndFilterChange={handleGraphAndFilterChange}/>
-        <FilterBox filters={filters} onFilterChange={handleFilterChange} filterSettings={filterSettings} config={config} />
+        <FilterBox filters={filters} onFilterChange={handleFilterChange} filterSettings={filterSettings} config={config}/>
+        <ExplanationBox selectedGraph={selectedGraph} filterSettings={filterSettings} handleGraphAndFilterChange={handleGraphAndFilterChange} savedGraphs={savedGraphs} setSavedGraphs={setSavedGraphs} title={title} setTitle={setTitle}/>
         {//<SuspiciousActivityBox setSelectedGraph={handleGraphChange} />
         }
       </div>

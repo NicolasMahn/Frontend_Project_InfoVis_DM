@@ -1,7 +1,7 @@
 import * as d3 from 'd3';
 import { useRef, useEffect } from 'react';
 
-const MatrixChart = ({ matrix, xAxis, yAxis, xAxisName, yAxisName, unit, onBarClick, onBarRightClick, onBarDoubleClick }) => {
+const MatrixChart = ({ matrix, xAxis, yAxis, xAxisName, yAxisName, unit, onCellClick, onCellRightClick, onCellDoubleClick }) => {
   const svgRef = useRef();
   const tooltipRef = useRef();
 
@@ -48,6 +48,18 @@ const MatrixChart = ({ matrix, xAxis, yAxis, xAxisName, yAxisName, unit, onBarCl
       })
       .on('mouseout', () => {
       tooltip.transition().duration(500).style('opacity', 0);
+      })          
+      .on('click', function(event, d) {
+        event.preventDefault();
+        if (onCellClick) onCellClick(d);
+      })
+      .on('contextmenu', function(event, d) {
+        event.preventDefault();
+        if (onCellRightClick) onCellRightClick(d);
+      })
+      .on('dblclick', function(event, d) {
+        event.preventDefault();
+        if (onCellDoubleClick) onCellDoubleClick(d);
       });
     
     // Add tooltip styling
@@ -82,7 +94,7 @@ const MatrixChart = ({ matrix, xAxis, yAxis, xAxisName, yAxisName, unit, onBarCl
       .attr('text-anchor', 'middle')
       .style('font-size', '14px')
       .style('font-weight', 'bold')
-      .text(yAxisName);
+      .text(xAxisName);
 
     svg.append('text')
       .attr('x', -height / 2)
@@ -91,7 +103,7 @@ const MatrixChart = ({ matrix, xAxis, yAxis, xAxisName, yAxisName, unit, onBarCl
       .attr('transform', 'rotate(-90)')
       .style('font-size', '14px')
       .style('font-weight', 'bold')
-      .text(xAxisName);
+      .text(yAxisName);
 
     const colorBar = svg.append('g')
       .attr('transform', `translate(${width - margin.right / 2}, ${margin.top})`);

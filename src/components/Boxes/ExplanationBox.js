@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
 
 import defaultCookieJson from './defaultCookie.json';
+import { type } from '@testing-library/user-event/dist/type';
 
-const ExplanationBox = ({filterSettings, selectedGraph, handleGraphAndFilterChange}) => {
-  const [savedGraphs, setSavedGraphs] = useState([]);
-  const [title, setTitle] = useState('');
+const ExplanationBox = ({savedGraphs, setSavedGraphs, title, setTitle, filterSettings, selectedGraph, handleGraphAndFilterChange}) => {
 
   useEffect(() => {
     // Check if the cookie exists
@@ -42,12 +41,17 @@ const ExplanationBox = ({filterSettings, selectedGraph, handleGraphAndFilterChan
   const saveCurrentGraph = () => {
     const newGraph = {
       id: savedGraphs.length + 1,
+      type: "custom",
+      parent: savedGraphs.find(graph => graph.graph === selectedGraph && graph.type === "defaul_generic")?.id,
+      selected: true,
       title: title,
       graph: selectedGraph,
       filterSettings: filterSettings,
       description: 'This is a description',
     };
-    const updatedGraphs = [...savedGraphs, newGraph];
+
+    const updatedSavedGraphs = savedGraphs.map(graph => ({ ...graph, selected: false }));
+    const updatedGraphs = [...updatedSavedGraphs, newGraph];
     setSavedGraphs(updatedGraphs);
     Cookies.set('savesCookie', JSON.stringify(updatedGraphs), { expires: 7 });
   };
@@ -80,13 +84,6 @@ const ExplanationBox = ({filterSettings, selectedGraph, handleGraphAndFilterChan
     <div className="explanation-box" style={{ textAlign: 'center' }}>
       <h3 className="header">Explanation to shown Graphs and Project</h3>
 
-      <div>
-        {savedGraphs.map((graph) => (
-          <button key={graph.id} onClick={() => loadGraph(graph)}>
-            {graph.title}
-          </button>
-        ))}
-      </div>
       <input
         type="text"
         placeholder="Enter a title"
