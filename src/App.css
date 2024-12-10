@@ -1,13 +1,13 @@
 
 /* Color Palate */
 :root {
-  --primary-color: #00A9CF;
-  --secondary-color: #cf00a9;
-  --tertiary-color: #cf8e00;
-  --quaternary-color: #8e00cf;
-  --quinary-color: #00cf26;
-  --senary-color: #0042cf;
-  --septenary-color: #cf0042;
+  --primary-color: #2166ac;
+  --secondary-color: #67a9cf;
+  --tertiary-color: #d1e5f0;
+  --quaternary-color: #f7f7f7;
+  --quinary-color: #fddbc7;
+  --senary-color: #ef8a62;
+  --septenary-color: #b2182b;
 
   --background-color: #eeeeee;
   --border-color: #cccccc;
