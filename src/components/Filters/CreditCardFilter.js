@@ -49,7 +49,29 @@ const CreditCardFilter = ({ onFilterChange, filterSettings }) => {
     value: card,
     label: card
   }));
-
+ // Define custom styles for the Select component
+ const customStyles = {
+  container: (provided) => ({
+    ...provided,
+    width: '100%', // Ensure the container takes the full width of the parent
+    maxHeight: '200px' // Set the maximum height here
+  }),
+  menu: (provided) => ({
+    ...provided,
+    maxHeight: '150px', // Set the maximum height for the dropdown menu
+    overflowY: 'auto' // Add scroll if the content exceeds the max height
+  }),
+  control: (provided) => ({
+    ...provided,
+    maxHeight: '150px', // Set the maximum height for the control
+    //overflowY: 'auto' // Add scroll if the content exceeds the max height
+  }),
+  valueContainer: (provided) => ({
+    ...provided,
+    maxHeight: '150px', // Set the maximum height for the value container
+    overflowY: 'auto' // Add scroll if the content exceeds the max height
+  })
+};
   return (
     <div className="credit-card-filter">
       <label><b>Credit Cards:</b></label>
@@ -58,6 +80,7 @@ const CreditCardFilter = ({ onFilterChange, filterSettings }) => {
         value={selectedOptions}
         options={options}
         onChange={handleChange}
+        styles={customStyles}
       />
       <br />
     </div>
