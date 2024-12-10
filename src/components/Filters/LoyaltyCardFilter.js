@@ -54,7 +54,7 @@ const LoyaltyCardFilter = ({ onFilterChange, filterSettings }) => {
   const customStyles = {
     container: (provided) => ({
       ...provided,
-      maxWidth: '300px' // Set the maximum width here
+      maxHeight: '300px' // Set the maximum width here
     }),
     menu: (provided) => ({
       ...provided,
@@ -63,12 +63,12 @@ const LoyaltyCardFilter = ({ onFilterChange, filterSettings }) => {
     }),
     control: (provided) => ({
       ...provided,
-      maxHeight: '40px', // Set the maximum height for the control
+      maxHeight: '150px', // Set the maximum height for the control
       overflowY: 'auto' // Add scroll if the content exceeds the max height
     }),
     valueContainer: (provided) => ({
       ...provided,
-      maxHeight: '100px', // Set the maximum height for the value container
+      maxHeight: '150px', // Set the maximum height for the value container
       overflowY: 'auto' // Add scroll if the content exceeds the max height
     })
   };
