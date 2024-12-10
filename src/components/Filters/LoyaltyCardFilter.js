@@ -50,19 +50,40 @@ const LoyaltyCardFilter = ({ onFilterChange, filterSettings }) => {
     label: card
   }));
 
+  // Define custom styles for the Select component
+  const customStyles = {
+    container: (provided) => ({
+      ...provided,
+      maxWidth: '300px' // Set the maximum width here
+    }),
+    menu: (provided) => ({
+      ...provided,
+      maxHeight: '150px', // Set the maximum height for the dropdown menu
+      overflowY: 'auto' // Add scroll if the content exceeds the max height
+    }),
+    control: (provided) => ({
+      ...provided,
+      maxHeight: '40px', // Set the maximum height for the control
+      overflowY: 'auto' // Add scroll if the content exceeds the max height
+    }),
+    valueContainer: (provided) => ({
+      ...provided,
+      maxHeight: '100px', // Set the maximum height for the value container
+      overflowY: 'auto' // Add scroll if the content exceeds the max height
+    })
+  };
+
   return (
-    <div className="loyalty-card-filter">
-      <label><b>Loyalty Cards:</b></label>
+    <div style={{ maxWidth: '300px' }}>
       <Select
-        isMulti
         value={selectedOptions}
-        options={options}
         onChange={handleChange}
+        options={options}
+        styles={customStyles} // Apply custom styles here
+        isMulti
       />
-      <br />
     </div>
   );
-
 };
 
 export default LoyaltyCardFilter;
