@@ -6,15 +6,15 @@
   --button-secondary: #a6cee3; /*hover*/
   --button-tertiary: #33a02c; /*selected*/
   --button-quaternary: #b2df8a; /*child*/
-  
+
   /*Bar & Line Chart*/
-  --primary-color: #4575b4;
-  --secondary-color: #d73027 ;
-  --tertiary-color: #91bfdb;
-  --quaternary-color: #fc8d59;
-  --quinary-color: #fee090;
-  --senary-color: #e0f3f8;
-  --septenary-color: #ffffbf;
+  --primary-color: #56B4E9;
+  --secondary-color: #d01c8b ;
+  --tertiary-color: #F0E442;
+  --quaternary-color: #009E73;
+  --quinary-color:#E69F00 ;
+  --senary-color: #7b3294 ;
+  --septenary-color: #009E73;
 
   --background-color: #eeeeee;
   --border-color: #cccccc;
