@@ -22,17 +22,6 @@ const LocationFilter = ({ onFilterChange, filterSettings }) => {
   };
 
   useEffect(() => {
-    if (data && !hasRunOnce) {
-      const options = data.numbPurchasesPerLocation.map((location) => ({
-        value: location.location,
-        label: location.location
-      }));
-      onFilterChange({ locations: options.map(option => option.value) });
-      setHasRunOnce(true);
-    }
-  }, [hasRunOnce, data]);
-
-  useEffect(() => {
     if (filterSettings.locations) {
       const options = filterSettings.locations.map(location => ({
         value: location,

@@ -22,17 +22,6 @@ const CreditCardFilter = ({ onFilterChange, filterSettings }) => {
   };
 
   useEffect(() => {
-    if (data && !hasRunOnce) {
-      const options = data.matrices.xAxis.map((card) => ({
-        value: card,
-        label: card
-      }));
-      onFilterChange({ creditCards: options.map(option => option.value) });
-      setHasRunOnce(true);
-    }
-  }, [hasRunOnce, data]);
-
-  useEffect(() => {
     if (filterSettings.creditCards) {
       const options = filterSettings.creditCards.map(card => ({
         value: card,

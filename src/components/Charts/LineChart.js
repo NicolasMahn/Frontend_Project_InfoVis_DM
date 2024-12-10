@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import * as d3 from 'd3';
 
-const LineChart = ({ data, legend, colors, onLineClick, onLineRightClick, onLineDoubleClick }) => {
+const LineChart = ({ data, tooltipData, legend, colors, onLineClick, onLineRightClick, onLineDoubleClick }) => {
   const svgRef = useRef();
   const tooltipRef = useRef();
   
@@ -101,6 +101,17 @@ const LineChart = ({ data, legend, colors, onLineClick, onLineRightClick, onLine
           .on('dblclick', function(event, d) {
             event.preventDefault();
             if (onLineDoubleClick) onLineDoubleClick(d);
+          })
+          .on('mouseover', (event, d) => {
+            tooltip.style('display', 'block')
+              .html(`<strong>${legend[i]}</strong><br>${tooltipData}`);
+          })
+          .on('mousemove', (event) => {
+            tooltip.style('left', (event.pageX + 10) + 'px')
+              .style('top', (event.pageY - 28) + 'px');
+          })
+          .on('mouseout', () => {
+            tooltip.style('display', 'none');
           });
       });
     } else {
@@ -144,7 +155,7 @@ const LineChart = ({ data, legend, colors, onLineClick, onLineRightClick, onLine
             .text(legendItem);
         });
       }
-    }, [data, legend, colors, onLineClick, onLineRightClick, onLineDoubleClick]);
+    }, [data, tooltipData, legend, colors, onLineClick, onLineRightClick, onLineDoubleClick]);
     return (
       <div style={{ position: 'relative' }}>
         <svg ref={svgRef}></svg>

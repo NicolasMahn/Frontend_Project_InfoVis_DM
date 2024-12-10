@@ -1,9 +1,48 @@
 [
   {
-    "id": 1,
-    "title": "Comparing Credit and Loyalty Card Data",
+    "id": "cpdl",
+    "type": "default_generic",
+    "parent": null,
+    "selected": true,
+    "title": "Purchases per Location",
     "description": "This graph compares the data from credit and loyalty cards",
-    "graph": "ComparingPurchasesOfPairs",
+    "graph": "ComparingPurchases"
+  },
+  {
+    "id": "pt",
+    "type": "default_generic",
+    "parent": null,
+    "selected": false,
+    "title": "Purchases over Time",
+    "description": "This graph compares the purchases over time",
+    "graph": "PurchasesOverTime"
+  },
+  {
+    "id": "mclc",
+    "type": "default_generic",
+    "parent": null,
+    "selected": false,
+    "title": "Matching Credit and Loyalty Cards",
+    "description": "Uses of Loyalty and Credit Cards with the same Metadata",
+    "graph": "CardMatrixGraph"
+  },
+  {
+    "id": "mccc",
+    "type": "default_generic",
+    "parent": null,
+    "selected": false,
+    "title": "Matching Cars and Credit Cards",
+    "description": "Cars and Credit Cards with the same Metadata",
+    "graph": "CarMatrixGraph"
+  },
+  {
+    "id": "cclc",
+    "type": "default",
+    "parent": "cpdl",
+    "selected": false,
+    "title": "Comparing Credit and Loyalty Cards",
+    "description": "This graph compares the data from credit and loyalty cards",
+    "graph": "ComparingPurchases",
     "filterSettings": {
       "locations": [
         "Gelatogalore",
@@ -25,7 +64,7 @@
         "U-Pump",
         "Nationwide Refinery",
         "Maximum Iron and Steel",
-        "Katerina’s Café",
+        "Katerina's Cafe",
         "Frank's Fuel",
         "Kronos Pipe and Irrigation",
         "Abila Zacharo",
@@ -51,9 +90,12 @@
     }
   },
   {
-    "id": 2,
-    "title": "Purchases Over Time",
-    "description": "This graph compares the purchases over time",
+    "id": "cclct",
+    "type": "default",
+    "parent": "pt",
+    "selected": false,
+    "title": "Comparing Credit and Loyalty Cards over Timeline",
+    "description": "This graph compares the data from credit and loyalty cards over time",
     "graph": "PurchasesOverTime",
     "filterSettings": {
       "locations": [
@@ -76,7 +118,7 @@
         "U-Pump",
         "Nationwide Refinery",
         "Maximum Iron and Steel",
-        "Katerina’s Café",
+        "Katerina's Cafe",
         "Frank's Fuel",
         "Kronos Pipe and Irrigation",
         "Abila Zacharo",
@@ -91,21 +133,14 @@
         "Hippokampos",
         "Kronos Mart",
         "Guy's Gyros"
-      ]
+      ],
+      "categories": {
+        "Credit Card": true,
+        "Loyalty Card": true,
+        "Cars In Area": false,
+        "Card Pair": false,
+        "No Pair": false
+      }
     }
-  },
-  {
-    "id": 3,
-    "title": "Matching Credit and Loyalty Cards",
-    "description": "Uses of Loyalty and Credit Cards with the same Metadata",
-    "graph": "CardMatrixGraph",
-    "filterSettings": {"type": "Absolute"}
-  },
-  {
-    "id": 4,
-    "title": "Matching Cars and Credit Cards",
-    "description": "Cars and Credit Cards with the same Metadata",
-    "graph": "CarMatrixGraph",
-    "filterSettings": {"type": "Absolute"}
   }
 ]

@@ -22,17 +22,6 @@ const LoyaltyCardFilter = ({ onFilterChange, filterSettings }) => {
   };
 
   useEffect(() => {
-    if (data && !hasRunOnce) {
-      const options = data.matrices.yAxis.map((card) => ({
-        value: card,
-        label: card
-      }));
-      onFilterChange({ loyaltyCards: options.map(option => option.value) });
-      setHasRunOnce(true);
-    }
-  }, [hasRunOnce, data]);
-
-  useEffect(() => {
     if (filterSettings.loyaltyCards) {
       const options = filterSettings.loyaltyCards.map(card => ({
         value: card,

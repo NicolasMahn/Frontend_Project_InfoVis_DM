@@ -315,7 +315,7 @@ const PurchasesOverTime = ({filterSettings, onFilterChange}) => {
     return (
     <div>
         <h2 className="header">{title}</h2>
-        <LineChart data={chartData} legend={legend} colors={colors} onBarClick={handleBarClick} onBarRightClick={handleBarRightClick} onBarDoubleClick={handleBarDoubleClick}/>
+        <LineChart data={chartData} legend={legend} colors={colors} tooltipData={"test"} onBarClick={handleBarClick} onBarRightClick={handleBarRightClick} onBarDoubleClick={handleBarDoubleClick}/>
     </div>
     );
     }

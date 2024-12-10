@@ -3,7 +3,7 @@ import { useQuery, gql } from '@apollo/client';
 
 import BarChart from '../Charts/BarChart';
 
-const COMPARING_PURCHASES_OF_PAIRS = gql`
+const COMPARING_PURCHASES = gql`
 query ComparingPurchasesOfPairs {
   comparingPurchasesOfPairs{
     location
@@ -32,8 +32,8 @@ query ComparingPurchasesOfPairs {
 }
 `
 
-const ComparingPurchasesOfPairs = ({filterSettings, onFilterChange, handleGraphAndFilterChange}) => {
-  const { loading, error, data } = useQuery(COMPARING_PURCHASES_OF_PAIRS, {
+const ComparingPurchases = ({filterSettings, onFilterChange, handleGraphAndFilterChange}) => {
+  const { loading, error, data } = useQuery(COMPARING_PURCHASES, {
     fetchPolicy: 'cache-and-network', // Use cache first, then network
   });
 
@@ -41,6 +41,8 @@ const ComparingPurchasesOfPairs = ({filterSettings, onFilterChange, handleGraphA
   const [legend, setLegend] = useState([]);
   const [colors, setColors] = useState([]);
   const [title, setTitle] = useState('Number of Purchases per Location');
+  const [yAxisLabel, setYAxisLabel] = useState('Number of Purchases');
+  const [valueType, setValueType] = useState('%');
 
   // Access CSS variables
   const possipbleColors = [
@@ -59,14 +61,20 @@ const ComparingPurchasesOfPairs = ({filterSettings, onFilterChange, handleGraphA
     if (data) {
 
       let type = filterSettings.type
-      if (type === 'Absolute') {
+      if (type === 'Number of Purchases') {
+        setYAxisLabel('Number of Purchases')
         setTitle('Absolute Number of Purchases per Location')
+        setValueType('')
         type = 'absolut'
-      } else if (type === 'Percentage') {
+      } else if (type === 'Percentage of Purchases per Category') {
+        setYAxisLabel('Percent of Purchases per Category')
         setTitle('Percent of Purchases per Category for every Location')
+        setValueType('%')
         type = 'percent'
-      } else if (type === 'Avg Expense') {
+      } else if (type === 'Average Expense') {
+        setYAxisLabel('Average Expense')
         setTitle('Average Expense per Category for every Location')
+        setValueType('€')
         type = 'avgAmount'
       }
       let cc_type = type + 'Cc'
@@ -182,9 +190,9 @@ const ComparingPurchasesOfPairs = ({filterSettings, onFilterChange, handleGraphA
     <div>
       <h2 className="header">{title}</h2>
 
-      <BarChart data={chartData} legend={legend} colors={colors} onBarClick={handleBarClick} onBarRightClick={handleBarRightClick} onBarDoubleClick={handleBarDoubleClick}/>
+      <BarChart data={chartData} legend={legend} colors={colors} yAxisLabel={yAxisLabel} valueType={valueType} onBarClick={handleBarClick} onBarRightClick={handleBarRightClick} onBarDoubleClick={handleBarDoubleClick}/>
     </div>
   );
 }
 
-export default ComparingPurchasesOfPairs;
+export default ComparingPurchases;
