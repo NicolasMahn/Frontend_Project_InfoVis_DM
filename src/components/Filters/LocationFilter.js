@@ -49,7 +49,19 @@ const LocationFilter = ({ onFilterChange, filterSettings }) => {
     value: location.location,
     label: location.location
   }));
-
+  
+  // Define custom styles for the Select component
+  const customStyles = {
+    container: (provided) => ({
+      ...provided,
+      maxHeight: '600px'
+    }),
+    menu: (provided) => ({
+      ...provided,
+      maxHeight: '200px', // Set the maximum height for the dropdown menu
+      overflowY: 'auto' // Add scroll if the content exceeds the max height
+    })
+  };
   return (
     <div className="location-filter">
       <label><b>Locations:</b></label>
