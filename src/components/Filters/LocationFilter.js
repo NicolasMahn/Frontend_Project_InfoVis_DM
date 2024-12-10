@@ -54,7 +54,7 @@ const LocationFilter = ({ onFilterChange, filterSettings }) => {
   const customStyles = {
     container: (provided) => ({
       ...provided,
-      maxHeight: '600px' // Set the maximum width here
+      maxHeight: '200px' // Set the maximum width here
     }),
     menu: (provided) => ({
       ...provided,
