@@ -27,7 +27,7 @@ const MatrixChart = ({ matrix, xAxis, yAxis, xAxisName, yAxisName, unit, onCellC
       .range([margin.top, height - margin.bottom])
       .padding(0.1);
   
-    const customInterpolator = t => t === 1 ? zeroWhite : d3.interpolateOranges(t);
+    const customInterpolator = t => t === 1 ? zeroWhite : d3.interpolateGnBu(t);
 
     const colorScale = d3.scaleSequential(customInterpolator)
       .domain([d3.max(matrix.flat()), 0]);
