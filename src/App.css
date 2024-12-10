@@ -44,12 +44,19 @@
 .filter-box { grid-area: filter; }
 
 /* Basic styling for each component */
-.graph-box, .selection-box, .explanation-box, .filter-box, .navigation-box {
+.graph-box, .selection-box, .explanation-box,  .navigation-box {
   border: 1px solid var(--border-color);
   padding: 10px;
   background-color: var(--background-color);
 }
-
+.filter-box {
+  grid-area: filter;
+  max-height: 600px; /* Set the maximum height */
+  overflow-y: auto; /* Add scroll if the content exceeds the max height */
+  border: 1px solid var(--border-color);
+  padding: 10px;
+  background-color: var(--background-color);
+}
 
 .header {
   color: var(--header-color);

@@ -49,12 +49,12 @@ const LocationFilter = ({ onFilterChange, filterSettings }) => {
     value: location.location,
     label: location.location
   }));
-  
+
   // Define custom styles for the Select component
   const customStyles = {
     container: (provided) => ({
       ...provided,
-      maxHeight: '600px'
+      maxHeight: '600px' // Set the maximum width here
     }),
     menu: (provided) => ({
       ...provided,
@@ -62,19 +62,16 @@ const LocationFilter = ({ onFilterChange, filterSettings }) => {
       overflowY: 'auto' // Add scroll if the content exceeds the max height
     })
   };
-  return (
-    <div className="location-filter">
-      <label><b>Locations:</b></label>
-      <Select
-        isMulti
-        value={selectedOptions}
-        options={options}
-        onChange={handleChange}
-      />
-      <br />
-    </div>
-  );
 
+  return (
+    <Select
+      value={selectedOptions}
+      onChange={handleChange}
+      options={options}
+      styles={customStyles} // Apply custom styles here
+      isMulti
+    />
+  );
 };
 
 export default LocationFilter;
