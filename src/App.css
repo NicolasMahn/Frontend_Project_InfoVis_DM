@@ -1,13 +1,20 @@
 
 /* Color Palate */
 :root {
-  --primary-color: #2166ac;
-  --secondary-color: #67a9cf;
-  --tertiary-color: #d1e5f0;
-  --quaternary-color: #f7f7f7;
-  --quinary-color: #fddbc7;
-  --senary-color: #ef8a62;
-  --septenary-color: #b2182b;
+  /* Buttones */
+  --button-primary: #1f78b4;
+  --button-secondary: #a6cee3; /*hover*/
+  --button-tertiary: #33a02c; /*selected*/
+  --button-quaternary: #b2df8a; /*child*/
+  
+  /*Bar & Line Chart*/
+  --primary-color: #4575b4;
+  --secondary-color: #91bfdb;
+  --tertiary-color: #d73027;
+  --quaternary-color: #fc8d59;
+  --quinary-color: #fee090;
+  --senary-color: #e0f3f8;
+  --septenary-color: #ffffbf;
 
   --background-color: #eeeeee;
   --border-color: #cccccc;
@@ -54,7 +61,7 @@
 }
 
 .graph-button {
-  background-color: var(--primary-color);
+  background-color: var(--button-primary);
   color: white;
   border: none;
   padding: 10px 20px;
@@ -66,16 +73,16 @@
 }
 
 .graph-button:hover {
-  background-color: var(--secondary-color);
+  background-color: var(--button-secondary);
 }
 
 .graph-button.selected {
-  background-color: var(--tertiary-color);
+  background-color: var(--button-tertiary);
 }
 
 .child-button {
   display: block;
-  background-color: var(--quaternary-color);
+  background-color: var(--button-quaternary);
   margin: 0;
   padding: 10px 20px;
   width: 100%;
