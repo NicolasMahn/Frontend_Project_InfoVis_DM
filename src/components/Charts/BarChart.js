@@ -92,7 +92,7 @@ const BarChart = ({ data, legend, colors, yAxisLabel, valueType, onBarClick, onB
         <b>${data.x[i]}</b><br>
         ${Array.isArray(data.y[0]) ? data.y.map((yList, j) => `${legend[j]}: ${parseFloat(yList[i].toFixed(2))}${valueType}`).join('<br>') : `${legend[0]}: ${parseFloat(data.y[i].toFixed(2))}${valueType}`}`)
         .style('left', `${event.pageX - 10}px`)
-        .style('top', `${event.pageY - 190}px`);
+        .style('top', `${event.pageY - 270}px`);
     };
 
     const handleMouseOut = () => {

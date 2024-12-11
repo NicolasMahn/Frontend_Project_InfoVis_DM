@@ -28,6 +28,7 @@ import LoyaltyCardFilter from './Filters/LoyaltyCardFilter.js';
 import CarIDFilter from './Filters/CarFilter.js';
 
 import defaultCookieJson from './defaultCookie.json';
+import { filter } from 'd3';
 
 const graphComponents = {
   ExampleGraph,
@@ -58,37 +59,21 @@ const Dashboard = () => {
       locations: [
         "Gelatogalore",
         "Brew've Been Served",
-        "Ahaggo Museum",
         "Ouzeri Elian",
-        "Roberts and Sons",
         "Albert's Fine Clothing",
         "Abila Airport",
-        "Stewart and Sons Fabrication",
         "Kalami Kafenion",
         "Jack's Magical Beans",
         "Bean There Done That",
-        "Octavio's Office Supplies",
-        "Abila Scrapyard",
         "Hallowed Grounds",
-        "Chostus Hotel",
-        "Daily Dealz",
-        "U-Pump",
         "Nationwide Refinery",
-        "Maximum Iron and Steel",
-        "Katerina’s Café",
-        "Frank's Fuel",
-        "Kronos Pipe and Irrigation",
+        "Katerina's Cafe",
         "Abila Zacharo",
-        "Shoppers' Delight",
         "Brewed Awakenings",
         "Desafio Golf Course",
-        "General Grocer",
-        "Carlyle Chemical Inc.",
-        "Coffee Shack",
         "Coffee Cameleon",
         "Frydos Autosupply n' More",
         "Hippokampos",
-        "Kronos Mart",
         "Guy's Gyros"
       ], 
       categories: {"Credit Card": true, "Loyalty Card": true, "Cars In Area": false, "Card Pair": false, "No Pair": false}, 
@@ -98,72 +83,87 @@ const Dashboard = () => {
   const [cookieData, setCookieData] = useState([]);
   const [title, setTitle] = useState('');
 
-  const cookieName = 'cookieV0.1';
+  const cookieName = 'cookieV0.2';
   
   const getCookie = () => {
-    let cookieData = Cookies.get(cookieName);
-    if (cookieData.includes("Katerina's Cafe")) {
-      console.log('Replacing "Katerina\'s Cafe" with "Katerina’s Café" in the cookie data.');
-      cookieData = cookieData.replace("Katerina's Cafe", "Katerina’s Café");
+    let cookieData = [];
+    for (let index = 0; ; index++) {
+      let cookieString = Cookies.get(`${cookieName}_${index}`);
+      if (!cookieString) {
+        break;
+      }
+      if (cookieString.includes("Katerina's Cafe")) {
+        cookieString = cookieString.replace("Katerina's Cafe", "Katerina’s Café");
+      }
+      cookieData.push(JSON.parse(cookieString));
     }
     return cookieData;
   }
 
   const saveCookie = (cookieData) => {
     try {
-      console.log('Saving cookie:', JSON.stringify(cookieData));
-      const cookieString = JSON.stringify(cookieData).toString();
-      console.log('Saving cookie:', cookieString);
-
-      console.log('Cookie size:', cookieString.length, 'bytes');
-      if (cookieString.length > 4096) {
-        console.error('Cookie data is too large to be saved.');
-        return;
-      }
-      const specialCharMatch = cookieString.match(/[^ -~]/);
-      if (specialCharMatch) {
-        const index = specialCharMatch.index;
-        const context = cookieString.substring(Math.max(0, index - 10), Math.min(cookieString.length, index + 10));
-        console.error(`Cookie data contains special characters that may cause issues. Context: "${context}"`);
-        return;
-      }
-      Cookies.set(cookieName, cookieString, { expires: 7 });
+      cookieData.forEach((value, index) => {
+        let cookieString = JSON.stringify(value);
+        cookieString = cookieString.replace(/’/g, "'").replace(/é/g, "e");
+  
+        console.log(`Cookie length for index ${index}:`, cookieString.length);
+        if (cookieString.length > 4096) {
+          console.error(`Cookie data for index ${index} is too large to be saved.`);
+          return;
+        }
+  
+        const specialCharMatch = cookieString.match(/[^ -~]/);
+        if (specialCharMatch) {
+          const idx = specialCharMatch.index;
+          const context = cookieString.substring(Math.max(0, idx - 10), Math.min(cookieString.length, idx + 10));
+          console.error(`Cookie data for index ${index} contains special characters that may cause issues. Context: "${context}"`);
+          return;
+        }
+  
+        Cookies.set(`${cookieName}_${index}`, cookieString, { expires: 7 });
+        console.log(`Cookie saved for index ${index}:`, Cookies.get(`${cookieName}_${index}`));
+      });
     } catch (error) {
       console.error('Error serializing cookie data:', error);
     }
   }
 
   const deleteCookie = () => {
-    Cookies.remove(cookieName);
+    for (let index = 0; ; index++) {
+      let cookieString = Cookies.get(`${cookieName}_${index}`);
+      if (!cookieString) {
+        break;
+      }
+      Cookies.remove(`${cookieName}_${index}`);
+    }
     setCookieData([]);
-    console.log('Cookie has been deleted.');
-
-    // Ensure defaultCookie is an array
+    console.log('Cookies have been deleted.');
+  
     if (Array.isArray(defaultCookieJson)) {
-      // Set the cookie if it doesn't exist
-      const defaultCookie = defaultCookieJson
-      saveCookie(defaultCookie)
+      console.log('Default cookie JSON:', defaultCookieJson);
+      const defaultCookie = defaultCookieJson;
+      saveCookie(defaultCookie);
+      console.log('After saveCookie call');
       setCookieData(defaultCookie);
-      console.log('Default cookie has been set.');
+      console.log('Default cookies have been set.');
     } else {
       console.error('Default cookie is not an array:', defaultCookieJson);
     }
-  };
+  }
 
   useEffect(() => {
     // Check if the cookie exists
+
     const cookieValue = getCookie()
     let existingGraphs = [];
-    console.log(cookieValue);
 
     if (cookieValue) {
       try {
-        const parsedCookie = JSON.parse(cookieValue);
-        if (Array.isArray(parsedCookie)) {
-          console.log('Cookie has been parsed:', parsedCookie);
-          existingGraphs = parsedCookie;
+        if (Array.isArray(cookieValue)) {
+          console.log('Cookie has been parsed:', cookieValue);
+          existingGraphs = cookieValue;
         } else {
-          console.error('Cookie is not an array:', parsedCookie);
+          console.error('Cookie is not an array:', cookieValue);
         }
       } catch (error) {
         console.error('Failed to parse cookie:', error);
@@ -192,14 +192,35 @@ const Dashboard = () => {
         console.error('Default cookie is not an array:', defaultCookieJson);
       }
     }
+    let cookieData = getCookie();
+    console.log('Cookie data:', cookieData);
+    if (!cookieData) {
+      return;
+    }
+    console.log('Cookie data:', cookieData);
+    console.log('Cookie data filtered:', cookieData.filter(g=> g.selected === true)[0]);
+    const selectedG = cookieData.filter(g=> g.selected === true)[0];
 
-    console.log("TEST", getCookie());
+    if (selectedG && selectedG.filterSettings) {
+      setFilterSettings(selectedG.filterSettings);
+    } else {
+      console.log(cookieData.filter(g => g.parent === selectedG.id)[0])
+      setFilterSettings(cookieData.filter(g => g.parent === selectedG.id)[0].filterSettings);
+    }
+    handleGraphAndFilterChange(selectedG);
   }, [cookieName]);
+
+
+  useEffect(() => {
+
+  }, []);
+
 
   const handleFilterChange = (newSettings, title=null) => {
     if (!title) {
       title = "filterSettings";
     }
+    console.log('New filter settings:', newSettings);
     window.history.pushState({ filterSettings: { filterSettings} }, title);
     setFilterSettings(prevSettings => ({
       ...prevSettings,
@@ -212,9 +233,10 @@ const Dashboard = () => {
     if (!title) {
       title = selectedGraph.id + ' - ' + "filterSettings";
     }
-    console.log(title)
     window.history.pushState({ selectedGraph, filterSettings }, title);
+    let cookieData = getCookie();
     const newCookieData = cookieData.map(g => ({ ...g, selected: g.id === newGraph.id || g.id === newGraph.parent ? true : false }));
+    console.log('New cookie data:', newCookieData);
     setCookieData(newCookieData);
     saveCookie(newCookieData);
     setSelectedGraph(newGraph.graph);
@@ -240,13 +262,13 @@ const Dashboard = () => {
       console.log('Back button pressed');
       
       if (event.state) {
-        console.log(event.state);
+        // console.log(event.state);
         if (event.state.filterSettings) {
-          console.log(event.state.filterSettings.filterSettings);
+          // console.log(event.state.filterSettings.filterSettings);
           setFilterSettings(event.state.filterSettings.filterSettings);
         }
         if (event.state.selectedGraph) {
-          console.log(event.state.selectedGraph);
+          // console.log(event.state.selectedGraph);
           setSelectedGraph(event.state.selectedGraph);
         }
       }
@@ -271,10 +293,10 @@ const Dashboard = () => {
         <GraphBox GraphComponent={GraphComponent} selectedGraph={selectedGraph} 
                   onFilterChange={handleFilterChange} filterSettings={filterSettings} handleGraphAndFilterChange={handleGraphAndFilterChange} />
         <FilterBox filters={filters} onFilterChange={handleFilterChange} filterSettings={filterSettings} config={config}/>
-        <ExplanationBox selectedGraph={selectedGraph} filterSettings={filterSettings} handleGraphAndFilterChange={handleGraphAndFilterChange} 
+        {/*<ExplanationBox selectedGraph={selectedGraph} filterSettings={filterSettings} handleGraphAndFilterChange={handleGraphAndFilterChange} 
                         cookieData={cookieData} deleteCookie={deleteCookie} saveCookie={saveCookie}
                         setCookieData={setCookieData} 
-                        title={title} setTitle={setTitle}/>
+                        title={title} setTitle={setTitle}/>*/}
       </div>
     </div>
   );

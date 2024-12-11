@@ -22,7 +22,7 @@
     "type": "default_generic",
     "parent": null,
     "selected": false,
-    "title": "Matching Credit and Loyalty Cards",
+    "title": "Credit and Loyalty Card Matrix",
     "description": "Uses of Loyalty and Credit Cards with the same Metadata",
     "graph": "CardMatrixGraph"
   },
@@ -31,7 +31,7 @@
     "type": "default_generic",
     "parent": null,
     "selected": false,
-    "title": "Matching Cars and Credit Cards",
+    "title": "Cars and Credit Card Matrix",
     "description": "Cars and Credit Cards with the same Metadata",
     "graph": "CarMatrixGraph"
   },
@@ -47,37 +47,21 @@
       "locations": [
         "Gelatogalore",
         "Brew've Been Served",
-        "Ahaggo Museum",
         "Ouzeri Elian",
-        "Roberts and Sons",
         "Albert's Fine Clothing",
         "Abila Airport",
-        "Stewart and Sons Fabrication",
         "Kalami Kafenion",
         "Jack's Magical Beans",
         "Bean There Done That",
-        "Octavio's Office Supplies",
-        "Abila Scrapyard",
         "Hallowed Grounds",
-        "Chostus Hotel",
-        "Daily Dealz",
-        "U-Pump",
         "Nationwide Refinery",
-        "Maximum Iron and Steel",
         "Katerina's Cafe",
-        "Frank's Fuel",
-        "Kronos Pipe and Irrigation",
         "Abila Zacharo",
-        "Shoppers' Delight",
         "Brewed Awakenings",
         "Desafio Golf Course",
-        "General Grocer",
-        "Carlyle Chemical Inc.",
-        "Coffee Shack",
         "Coffee Cameleon",
         "Frydos Autosupply n' More",
         "Hippokampos",
-        "Kronos Mart",
         "Guy's Gyros"
       ],
       "categories": {
@@ -86,7 +70,48 @@
         "Cars In Area": false,
         "Card Pair": false,
         "No Pair": false
-      }
+      },
+      "type": "Number of Purchases"
+    }
+  },
+  {
+    "id": "ispccp",
+    "type": "default",
+    "parent": "cpdl",
+    "selected": false,
+    "title": "Identifiying Suspiciously high Purchases of Cards that can't be paired up",
+    "description": "Identifiying suspiciously hgih purchases at stores of cards that can't be paired up.",
+    "graph": "ComparingPurchases",
+    "filterSettings": {
+      "locations": [
+        "Gelatogalore",
+        "Brew've Been Served",
+        "Ouzeri Elian",
+        "Albert's Fine Clothing",
+        "Abila Airport",
+        "Kalami Kafenion",
+        "Jack's Magical Beans",
+        "Bean There Done That",
+        "Hallowed Grounds",
+        "Nationwide Refinery",
+        "Katerina's Cafe",
+        "Abila Zacharo",
+        "Brewed Awakenings",
+        "Desafio Golf Course",
+        "Coffee Cameleon",
+        "Frydos Autosupply n' More",
+        "Hippokampos",
+        "Guy's Gyros"
+      ],
+      "categories": {
+        "Credit Card": true,
+        "Loyalty Card": true,
+        "Cars In Area": true,
+        "Card Pair": true,
+        "No Pair": true
+      },
+      "type": "Percentage of Purchases per Category",
+      "sortCategory": "No Pair"
     }
   },
   {
@@ -141,6 +166,98 @@
         "Card Pair": false,
         "No Pair": false
       }
+    }
+  },
+  {
+    "id": "vadcs",
+    "type": "default",
+    "parent": "pt",
+    "selected": false,
+    "title": "Visualizing the Average Day of Coffe Shops",
+    "description": "Visualizing the Average Day of Coffe Shops",
+    "graph": "PurchasesOverTime",
+    "filterSettings": {
+      "locations": [
+        "Brew've Been Served",
+        "Kalami Kafenion",
+        "Jack's Magical Beans",
+        "Bean There Done That",
+        "Katerina's Cafe",
+        "Brewed Awakenings",
+        "Coffee Shack",
+        "Coffee Cameleon"
+      ],
+      "categories": {
+        "Credit Card": true,
+        "Loyalty Card": false,
+        "Cars In Area": true,
+        "Card Pair": false,
+        "No Pair": false
+      },
+      "time": "Average Day"
+    }
+  },
+  {
+    "id": "smclc",
+    "type": "default",
+    "parent": "mclc",
+    "selected": false,
+    "title": "Matching Credit and Loyalty Cards",
+    "description": "Uses of Loyalty and Credit Cards with the same Metadata",
+    "graph": "CardMatrixGraph",
+    "filterSettings": {
+      "creditCards": ["2418", "3484", "1310", "7688", "2463", "7792", "6691", "8332", "8156", "9635", "3853", "7384", "4948", "7889", "9617", "4795", "7253", "8129", "2142", "1321", "5921", "6816", "4434", "2540", "1415", "7819", "1286", "2681", "3492", "7117", "1874", "6895", "6901", "8411", "7354", "5407", "8202", "9405", "5368", "6899", "9241"],
+      "loyaltyCards": ["L9018","L2490","L8012","L4164","L6886","L5756","L3288","L2070","L5224","L3191","L1485","L3800","L9406","L2247","L5553","L8566","L1682","L8328","L9637","L4149","L3295","L8148","L2169","L5947","L7783","L5259","L3572","L1107","L7814","L6417","L4424","L3366","L9363","L6110","L9254","L4034","L2343","L3259","L6119","L6267"]
+    }
+  },
+  {
+    "id": "uccc",
+    "type": "default",
+    "parent": "mccc",
+    "selected": false,
+    "title": "Uncertain Cars and Credit Cards",
+    "description": "Cars and Credit Cards with the same Metadata",
+    "graph": "CarMatrixGraph",
+    "filterSettings": {
+      "cars": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        105,
+        106,
+        107
+      ]
     }
   }
 ]

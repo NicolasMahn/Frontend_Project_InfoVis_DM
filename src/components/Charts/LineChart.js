@@ -78,6 +78,19 @@ const LineChart = ({ data, tooltipData, legend, colors, onLineClick, onLineRight
     svg.append('g').call(xAxis);
     svg.append('g').call(yAxis);
 
+    const handleMouseOver = (event, i) => {
+      tooltip.style('opacity', 1);
+      tooltip.style('display', 'block')
+      .style('opacity', 1)
+      .style('left', (event.pageX - 10) + 'px')
+      .style('top', (event.pageY - 270) + 'px')
+      .html(`<strong>${legend[i]}</strong><br>${tooltipData[i]}`);
+    };
+
+    const handleMouseOut = () => {
+      tooltip.style('opacity', 0);
+    };
+
     const line = d3.line()
     .x((d, i) => x(data.x[i]) + x.bandwidth() / 2)
     .y(d => y(d));
@@ -102,16 +115,12 @@ const LineChart = ({ data, tooltipData, legend, colors, onLineClick, onLineRight
             event.preventDefault();
             if (onLineDoubleClick) onLineDoubleClick(d);
           })
-          .on('mouseover', (event, d) => {
-            tooltip.style('display', 'block')
-              .html(`<strong>${legend[i]}</strong><br>${tooltipData}`);
+          .on('mouseover', function(event, d) {
+            handleMouseOver(event, i);
           })
-          .on('mousemove', (event) => {
-            tooltip.style('left', (event.pageX + 10) + 'px')
-              .style('top', (event.pageY - 28) + 'px');
-          })
-          .on('mouseout', () => {
-            tooltip.style('display', 'none');
+          .on('mouseout', handleMouseOut)
+            .on('mousemove', function(event, d) {
+            handleMouseOver(event, i);
           });
       });
     } else {
@@ -132,6 +141,17 @@ const LineChart = ({ data, tooltipData, legend, colors, onLineClick, onLineRight
         .on('dblclick', function(event, d) {
           event.preventDefault();
           if (onLineDoubleClick) onLineDoubleClick(d);
+        })
+        .on('dblclick', function(event, d) {
+          event.preventDefault();
+          if (onLineDoubleClick) onLineDoubleClick(d);
+        })
+        .on('mouseover', function(event, d) {
+          handleMouseOver(event, 0);
+        })
+        .on('mouseout', handleMouseOut)
+          .on('mousemove', function(event, d) {
+          handleMouseOver(event, 0);
         });
     }
           // Add legend
