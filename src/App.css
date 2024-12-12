@@ -105,3 +105,7 @@
 .graph-button-container:hover .dropdown {
   display: block;
 }
+
+.location-filter {
+  margin-bottom: 20px;
+}

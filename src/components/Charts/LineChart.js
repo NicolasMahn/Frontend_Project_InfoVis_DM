@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import * as d3 from 'd3';
 
-const LineChart = ({ data, legend, colors, onLineClick, onLineRightClick, onLineDoubleClick }) => {
+const LineChart = ({ data, tooltipData, legend, colors, onLineClick, onLineRightClick, onLineDoubleClick }) => {
   const svgRef = useRef();
   const tooltipRef = useRef();
   
@@ -78,6 +78,19 @@ const LineChart = ({ data, legend, colors, onLineClick, onLineRightClick, onLine
     svg.append('g').call(xAxis);
     svg.append('g').call(yAxis);
 
+    const handleMouseOver = (event, i) => {
+      tooltip.style('opacity', 1);
+      tooltip.style('display', 'block')
+      .style('opacity', 1)
+      .style('left', (event.pageX - 10) + 'px')
+      .style('top', (event.pageY - 270) + 'px')
+      .html(`<strong>${legend[i]}</strong><br>${tooltipData[i]}`);
+    };
+
+    const handleMouseOut = () => {
+      tooltip.style('opacity', 0);
+    };
+
     const line = d3.line()
     .x((d, i) => x(data.x[i]) + x.bandwidth() / 2)
     .y(d => y(d));
@@ -101,6 +114,13 @@ const LineChart = ({ data, legend, colors, onLineClick, onLineRightClick, onLine
           .on('dblclick', function(event, d) {
             event.preventDefault();
             if (onLineDoubleClick) onLineDoubleClick(d);
+          })
+          .on('mouseover', function(event, d) {
+            handleMouseOver(event, i);
+          })
+          .on('mouseout', handleMouseOut)
+            .on('mousemove', function(event, d) {
+            handleMouseOver(event, i);
           });
       });
     } else {
@@ -121,6 +141,17 @@ const LineChart = ({ data, legend, colors, onLineClick, onLineRightClick, onLine
         .on('dblclick', function(event, d) {
           event.preventDefault();
           if (onLineDoubleClick) onLineDoubleClick(d);
+        })
+        .on('dblclick', function(event, d) {
+          event.preventDefault();
+          if (onLineDoubleClick) onLineDoubleClick(d);
+        })
+        .on('mouseover', function(event, d) {
+          handleMouseOver(event, 0);
+        })
+        .on('mouseout', handleMouseOut)
+          .on('mousemove', function(event, d) {
+          handleMouseOver(event, 0);
         });
     }
           // Add legend
@@ -144,7 +175,7 @@ const LineChart = ({ data, legend, colors, onLineClick, onLineRightClick, onLine
             .text(legendItem);
         });
       }
-    }, [data, legend, colors, onLineClick, onLineRightClick, onLineDoubleClick]);
+    }, [data, tooltipData, legend, colors, onLineClick, onLineRightClick, onLineDoubleClick]);
     return (
       <div style={{ position: 'relative' }}>
         <svg ref={svgRef}></svg>

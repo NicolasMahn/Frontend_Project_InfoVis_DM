@@ -23,6 +23,7 @@ const PURCHASES_OVER_TIME_QUERY = gql`
 const PurchasesOverTime = ({filterSettings, onFilterChange}) => {
     const [chartData, setChartData] = useState([]);
     const [legend, setLegend] = useState([]);
+    const [tooltipData, setTooltipData] = useState([]);
     const [colors, setColors] = useState([]);
     const [title, setTitle] = useState('Number of Purchases per Location');
 
@@ -104,29 +105,36 @@ const PurchasesOverTime = ({filterSettings, onFilterChange}) => {
             let categories = []
             let categoryNames = []
             let colors = [];
+            let legend = [];
+            let tooltipData = [];
 
             for (let c in fsCategories) {
                 if (fsCategories[c]) {
                     if (c === "Credit Card") {
                         categories.push("creditcard");
                         categoryNames.push("Credit Card");
+                        legend.push("Credit Card");
                         colors.push(possipbleColors[0]);
                     } else if (c === "Loyalty Card" && timeFilter !== "Average Work Day" &&
                          timeFilter !== "Average Weekend Day" && timeFilter !== "Average Day") {
                         categories.push("loyalty");
                         categoryNames.push("Loyalty");
+                        legend.push("Loyalty Card");
                         colors.push(possipbleColors[1]);
                     } else if (c === "Cars In Area" && type === "Number of Purchases") {
                         categories.push("cars_in_area");
                         categoryNames.push("Cars In Area");
+                        legend.push("Cars In Area");
                         colors.push(possipbleColors[2]);
                     } else if (c === "Card Pair") {
                         categories.push("pairs");
                         categoryNames.push("Card Pair");
+                        legend.push("Card Pair");
                         colors.push(possipbleColors[3]);
                     } else if (c === "No Pair") {
                         categories.push("no_pairs");
                         categoryNames.push("No Pair");
+                        legend.push("No Pair");
                         colors.push(possipbleColors[6]);
                     }
                 }
@@ -159,7 +167,11 @@ const PurchasesOverTime = ({filterSettings, onFilterChange}) => {
                     }
                 }   
                 const filteredData = savedData.purchasesOverTime
-                .filter(data => locations.includes(data.location));
+                .filter((data, index, self) => locations.includes(data.location) && 
+                    index === self.findIndex((t) => (
+                        t.starttime === data.starttime && t.endtime === data.endtime && t.location === data.location && t.type === data.type && t.price === data.price && t.creditcard === data.creditcard && t.loyalty === data.loyalty && t.carId === data.carId && t.startCoordinates === data.startCoordinates && t.endCoordinates === data.endCoordinates
+                    ))
+                );
 
                 let minTime = new Date(Math.min(...filteredData.map(d => d.starttime))* 1000);
                 minTime.setHours(0, 0, 0, 0);
@@ -169,7 +181,8 @@ const PurchasesOverTime = ({filterSettings, onFilterChange}) => {
                 maxTime.setDate(maxTime.getDate() + 1);
                 maxTime = maxTime.getTime() / 1000;
 
-                let legend = [];
+                const avg = arr => arr.reduce((a, b) => a + b, 0) / arr.length;
+                const sum = arr => arr.reduce((a, b) => a + b, 0);
 
                 let y = [];
                 let x = [];
@@ -191,6 +204,11 @@ const PurchasesOverTime = ({filterSettings, onFilterChange}) => {
                     purchasesOverTime[categories[category]] = new Array(totalIntervals).fill(0);
                     expensesOverTime[categories[category]] = new Array(totalIntervals).fill(0);
                 }
+ 
+                const deepCopy = (obj) => {
+                    return JSON.parse(JSON.stringify(obj));
+                };
+
                 let k = 0;
                 for (let i = minTime; i < maxTime; i += timeInterval) {
                     if (timeFilter === "Average Week")  {
@@ -209,14 +227,12 @@ const PurchasesOverTime = ({filterSettings, onFilterChange}) => {
                     if (timeFilter === "Average Day" || timeFilter === "Average Work Day" || timeFilter === "Average Weekend Day") {
                         k = new Date(i * 1000).getUTCHours();
                     }
+
                     for (let j in filteredData) {
                         let d = filteredData[j];
-                        if (categories.includes(d.type)) {
-                            let inTime = ((d.endtime >= i && d.endtime <= i + timeInterval) || (d.starttime <=(i + timeInterval) && d.starttime >= i));
-                            purchasesOverTime[d.type][k] += Number(inTime);
-                            if (inTime) {
-                                expensesOverTime[d.type][k] += d.price;
-                            }
+                        if (categories.includes(d.type) && ((d.endtime >= i && d.endtime <= i + timeInterval - 1) || (d.starttime <=(i + timeInterval - 1) && d.starttime >= i))) {
+                            purchasesOverTime[d.type][k] += 1;
+                            expensesOverTime[d.type][k] += d.price;
                         }
                     }
                     k += 1;
@@ -239,13 +255,18 @@ const PurchasesOverTime = ({filterSettings, onFilterChange}) => {
                         x.push(String(l));
                     }
                 }
+
+                const labelType = type === "Number of Purchases" ? "Purchases" : "Expenses";
+                const labelTimeFilter = timeFilter === "Timeline" ? "" : `on an ${timeFilter}`;
+
                 for (let category in purchasesOverTime) {
                     if (type === "Number of Purchases") {
                         y.push(purchasesOverTime[category]);
+                        tooltipData.push(`Average ${labelType} ${labelTimeFilter}: ${avg(purchasesOverTime[category]).toFixed(2)}<br> Total ${labelType} ${labelTimeFilter}: ${sum(purchasesOverTime[category])}`);
                     } else {
                         y.push(expensesOverTime[category]);
+                        tooltipData.push(`Average ${labelType} ${labelTimeFilter}: ${avg(expensesOverTime[category]).toFixed(2)}€<br> Total ${labelType} ${labelTimeFilter}: ${sum(expensesOverTime[category]).toFixed(2)}€`);
                     }
-                    legend.push(category);
                 }
 
                 if (y.length === 1) {
@@ -283,11 +304,13 @@ const PurchasesOverTime = ({filterSettings, onFilterChange}) => {
                     setChartData(chartData);
                     setLegend(legend);
                     setColors(colors);
+                    setTooltipData(tooltipData);
                 }
             } else {
                 setChartData([]);
                 setLegend([]);
                 setColors([]);
+                setTooltipData([]);
             }
         }
     }, [data, filterSettings, savedData]);
@@ -309,13 +332,13 @@ const PurchasesOverTime = ({filterSettings, onFilterChange}) => {
     };
     
     if (chartData.length < 1 || legend.length < 1 || colors.length < 1) {
-        return <p>No data to display</p>
+        return <p>No data to display | Loading...</p>
     }   
 
     return (
     <div>
         <h2 className="header">{title}</h2>
-        <LineChart data={chartData} legend={legend} colors={colors} onBarClick={handleBarClick} onBarRightClick={handleBarRightClick} onBarDoubleClick={handleBarDoubleClick}/>
+        <LineChart data={chartData} legend={legend} colors={colors} tooltipData={tooltipData} onBarClick={handleBarClick} onBarRightClick={handleBarRightClick} onBarDoubleClick={handleBarDoubleClick}/>
     </div>
     );
     }

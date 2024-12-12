@@ -4,20 +4,17 @@ const TypeFilter = ({ onFilterChange,  config}) => {
     const [hasRunOnce, setHasRunOnce] = useState(false);
     const [types, setTypes] = useState([ ]);
     const [selectedType, setSelectedType] = useState('');
-    const [prevConfig, setPrevConfig] = useState(null);
 
     useEffect(() => {
         if (config) {
-            if (!hasRunOnce || config != prevConfig) {
+            if (!hasRunOnce) {
                 let types = config.types;
                 setTypes(types);
                 onFilterChange({type: types[0]});
                 setSelectedType(types[0]);
                 if (types) setHasRunOnce(true);
-                setPrevConfig(config);
             } else {
-                let typeKeys = Object.keys(types);
-                if (typeKeys.length !== config.types.length && typeKeys.some((c) => !config.type?.includes(c))) {
+                if (types.length !== config.types.length && types.some((c) => !config.type?.includes(c))) {
                     setHasRunOnce(false);
                 }
             }
@@ -25,7 +22,7 @@ const TypeFilter = ({ onFilterChange,  config}) => {
     }, [hasRunOnce, types, config, onFilterChange]);
 
     const handleCheckboxChange = (event) => {
-        const { name, checked } = event.target;
+        const { name, _ } = event.target;
         setSelectedType(name);
         onFilterChange({ type: name });
     };
@@ -39,7 +36,7 @@ const TypeFilter = ({ onFilterChange,  config}) => {
                     <input
                         type="radio"
                         name={type}
-                        checked={type == selectedType}
+                        checked={type === selectedType}
                         onChange={handleCheckboxChange}
                     /> {type} <br />
                 </label>

@@ -22,17 +22,6 @@ const LocationFilter = ({ onFilterChange, filterSettings }) => {
   };
 
   useEffect(() => {
-    if (data && !hasRunOnce) {
-      const options = data.numbPurchasesPerLocation.map((location) => ({
-        value: location.location,
-        label: location.location
-      }));
-      onFilterChange({ locations: options.map(option => option.value) });
-      setHasRunOnce(true);
-    }
-  }, [hasRunOnce, data]);
-
-  useEffect(() => {
     if (filterSettings.locations) {
       const options = filterSettings.locations.map(location => ({
         value: location,
@@ -56,16 +45,6 @@ const LocationFilter = ({ onFilterChange, filterSettings }) => {
     ...provided,
     width: '100%', // Ensure the container takes the full width of the parent
     maxHeight: '200px' // Set the maximum height here
-  }),
-  menu: (provided) => ({
-    ...provided,
-    maxHeight: '150px', // Set the maximum height for the dropdown menu
-    overflowY: 'auto' // Add scroll if the content exceeds the max height
-  }),
-  control: (provided) => ({
-    ...provided,
-    maxHeight: '150px', // Set the maximum height for the control
-    //overflowY: 'auto' // Add scroll if the content exceeds the max height
   }),
   valueContainer: (provided) => ({
     ...provided,

@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import * as d3 from 'd3';
 
-const BarChart = ({ data, legend, colors, onBarClick, onBarRightClick, onBarDoubleClick }) => {
+const BarChart = ({ data, legend, colors, yAxisLabel, valueType, onBarClick, onBarRightClick, onBarDoubleClick }) => {
   const svgRef = useRef();
   const tooltipRef = useRef();
   
@@ -73,6 +73,15 @@ const BarChart = ({ data, legend, colors, onBarClick, onBarRightClick, onBarDoub
       .selectAll("text")
       .style("font-size", "14px"); 
 
+      svg.append('text')
+      .attr('x', -height / 2)
+      .attr('y', margin.left / 2 - 20)
+      .attr('text-anchor', 'middle')
+      .attr('transform', 'rotate(-90)')
+      .style('font-size', '14px')
+      .style('font-weight', 'bold')
+      .text(yAxisLabel);
+
     svg.append('g').call(xAxis);
     svg.append('g').call(yAxis);
 
@@ -81,9 +90,9 @@ const BarChart = ({ data, legend, colors, onBarClick, onBarRightClick, onBarDoub
       let i = d.index;
       tooltip.html(`
         <b>${data.x[i]}</b><br>
-        ${Array.isArray(data.y[0]) ? data.y.map((yList, j) => `${legend[j]}: ${parseFloat(yList[i].toFixed(2))}`).join('<br>') : `${legend[0]}: ${parseFloat(data.y[i].toFixed(2))}`}`)
+        ${Array.isArray(data.y[0]) ? data.y.map((yList, j) => `${legend[j]}: ${parseFloat(yList[i].toFixed(2))}${valueType}`).join('<br>') : `${legend[0]}: ${parseFloat(data.y[i].toFixed(2))}${valueType}`}`)
         .style('left', `${event.pageX - 10}px`)
-        .style('top', `${event.pageY - 190}px`);
+        .style('top', `${event.pageY - 270}px`);
     };
 
     const handleMouseOut = () => {
