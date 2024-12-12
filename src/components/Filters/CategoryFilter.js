@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './Filter.css';
 
 const CategoryFilter = ({ onFilterChange,  config, filterSettings}) => {
     const [hasRunOnce, setHasRunOnce] = useState(false);
@@ -39,21 +40,27 @@ const CategoryFilter = ({ onFilterChange,  config, filterSettings}) => {
 
 
     return (
-    <div title="Select categories to filter the data.">
-        <span><b>Categories:</b></span><br/>
-        {Object.keys(categories).map((category) => (
-          <label key={category}>
-            <input
-              type="checkbox"
-              name={category}
-              checked={categories[category]}
-              onChange={handleCheckboxChange}
-            /> {category}<br/>
-          </label>
-        ))}
-        <br/>
-    </div>
-    );
-};
+        <div className="category-filter">
+          <span>
+            <b>Categories:</b>
+            <span className="tooltip-icon">?
+              <span className="tooltip-text">Select categories to filter the data.</span>
+            </span>
+          </span>
+          <br />
+          {Object.keys(categories).map((category) => (
+            <label key={category}>
+              <input
+                type="checkbox"
+                name={category}
+                checked={categories[category]}
+                onChange={handleCheckboxChange}
+              />
+              {category}
+            </label>
+          ))}
+        </div>
+      );
+    };
 
 export default CategoryFilter;
