@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './Filter.css';
+import 'Filter.css';
 
 const CategoryFilter = ({ onFilterChange,  config, filterSettings}) => {
     const [hasRunOnce, setHasRunOnce] = useState(false);
