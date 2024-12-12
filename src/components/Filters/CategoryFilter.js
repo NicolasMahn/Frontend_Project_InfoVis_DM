@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 const CategoryFilter = ({ onFilterChange, config, filterSettings }) => {
     const [hasRunOnce, setHasRunOnce] = useState(false);
     const [categories, setCheckboxes] = useState({ });
-    const [showTooltip, setShowTooltip] = useState(false);
+    const [hoveredTooltip, setHoveredTooltip] = useState(null);
 
     useEffect(() => {
         if (!hasRunOnce) {
@@ -48,12 +48,12 @@ const CategoryFilter = ({ onFilterChange, config, filterSettings }) => {
                         position: 'relative', 
                         display: 'inline-block' 
                     }}
-                    onMouseEnter={() => setShowTooltip(true)}
-                    onMouseLeave={() => setShowTooltip(false)}
-                    onClick={() => setShowTooltip((prev) => !prev)}
+                    onMouseEnter={() => setHoveredTooltip('categories')}
+                    onMouseLeave={() => setHoveredTooltip(null)}
+                    onClick={() => setHoveredTooltip((prev) => prev === 'categories' ? null : 'categories')}
                 >
                     ⓘ {/* Info icon */}
-                    {showTooltip && (
+                    {hoveredTooltip === 'categories' && (
                         <div 
                             style={{ 
                                 position: 'absolute', 
@@ -67,6 +67,7 @@ const CategoryFilter = ({ onFilterChange, config, filterSettings }) => {
                                 zIndex: 1000 
                             }}
                         >
+                            Select categories to filter the data.
                         </div>
                     )}
                 </span>
