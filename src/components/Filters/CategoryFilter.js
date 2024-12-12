@@ -39,7 +39,7 @@ const CategoryFilter = ({ onFilterChange,  config, filterSettings}) => {
 
 
     return (
-    <div>
+    <div title="Select categories to filter the data.">
         <span><b>Categories:</b></span><br/>
         {Object.keys(categories).map((category) => (
           <label key={category}>
