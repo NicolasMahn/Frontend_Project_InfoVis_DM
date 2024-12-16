@@ -27,21 +27,53 @@ const TypeFilter = ({ onFilterChange,  config}) => {
         onFilterChange({ type: name });
     };
 
-
     return (
         <div>
-            <b> Select the Data Type:</b>< br />
-            {types.map((type) => (
-                <label key={type}>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+                <span><b>Data Type:</b></span>
+                <span 
+                    style={{ 
+                        marginLeft: '8px', 
+                        cursor: 'pointer', 
+                        position: 'relative', 
+                        display: 'inline-block' 
+                    }}
+                    onMouseEnter={() => setHoveredTooltip('type')}
+                    onMouseLeave={() => setHoveredTooltip(null)}
+                    onClick={() => setHoveredTooltip((prev) => prev === 'type' ? null : 'type')}
+                >
+                    ⓘ {/* Info icon */}
+                    {hoveredTooltip === 'type' && (
+                        <div 
+                            style={{ 
+                                position: 'absolute', 
+                                top: '20px', 
+                                left: '0', 
+                                backgroundColor: '#fff', 
+                                border: '1px solid #ccc', 
+                                borderRadius: '4px', 
+                                padding: '8px', 
+                                boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)', 
+                                zIndex: 1000 
+                            }}
+                        >
+                            Select Data Type as the basis for the graph.
+                        </div>
+                    )}
+                </span>
+            </div>
+        <br />
+            {Object.keys(type).map((type) => (
+                <label key={type} style={{ display: 'block', marginBottom: '1px' }}>
                     <input
-                        type="radio"
-                        name={type}
-                        checked={type === selectedType}
-                        onChange={handleCheckboxChange}
-                    /> {type} <br />
+                            type="radio"
+                            name={type}
+                            checked={type === selectedType}
+                            onChange={handleCheckboxChange}
+                    />
+                    {type} <br />
                 </label>
             ))}
-            <br />
         </div>
     );
 };

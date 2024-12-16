@@ -28,20 +28,52 @@ const TimeFilter = ({ onFilterChange, config }) => {
 
     return (
         <div>
-            <b> Select a Time Categorie:</b>< br />
-            {times.map((time) => (
-                <label key={time}>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+                <span><b>Time Category:</b></span>
+                <span 
+                    style={{ 
+                        marginLeft: '8px', 
+                        cursor: 'pointer', 
+                        position: 'relative', 
+                        display: 'inline-block' 
+                    }}
+                    onMouseEnter={() => setHoveredTooltip('time')}
+                    onMouseLeave={() => setHoveredTooltip(null)}
+                    onClick={() => setHoveredTooltip((prev) => prev === 'time' ? null : 'time')}
+                >
+                    ⓘ {/* Info icon */}
+                    {hoveredTooltip === 'time' && (
+                        <div 
+                            style={{ 
+                                position: 'absolute', 
+                                top: '20px', 
+                                left: '0', 
+                                backgroundColor: '#fff', 
+                                border: '1px solid #ccc', 
+                                borderRadius: '4px', 
+                                padding: '8px', 
+                                boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)', 
+                                zIndex: 1000 
+                            }}
+                        >
+                            Select a Time Category as the basis for the graph.
+                        </div>
+                    )}
+                </span>
+            </div>
+        <br />
+            {Object.keys(time).map((time) => (
+                <label key={time} style={{ display: 'block', marginBottom: '1px' }}>
                     <input
                         type="radio"
                         name={time}
                         checked={time === selectedTime}
                         onChange={handleCheckboxChange}
-                    /> {time} <br />
+                        /> {time} <br />
                 </label>
             ))}
-          <br />
+            <br/>
         </div>
     );
 };
-
 export default TimeFilter;

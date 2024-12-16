@@ -74,7 +74,7 @@ const CategoryFilter = ({ onFilterChange, config, filterSettings }) => {
             </div>
             <br />
             {Object.keys(categories).map((category) => (
-                <label key={category} style={{ display: 'block', marginBottom: '4px' }}>
+                <label key={category} style={{ display: 'block', marginBottom: '1px' }}>
                     <input
                         type="checkbox"
                         name={category}
