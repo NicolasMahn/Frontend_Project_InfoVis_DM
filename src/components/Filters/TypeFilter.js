@@ -30,7 +30,8 @@ const TypeFilter = ({ onFilterChange, config }) => {
     return (
         <div>
             <div style={{ display: 'flex', alignItems: 'center' }}>
-                <b>Select the Data Type:</b>
+                <b>Data Type:</b>
+                <br/>
                 <span
                     style={{ marginLeft: '8px', cursor: 'pointer' }}
                     onMouseEnter={toggleTooltip}
@@ -47,7 +48,7 @@ const TypeFilter = ({ onFilterChange, config }) => {
                             borderRadius: '4px',
                             zIndex: 1000
                         }}>
-                            Tooltip for Data Type Filter
+                            The Data type describes the basis for the calculation of the graph (x-achis for purchases & locations).
                         </div>
                     )}
                 </span>
@@ -60,7 +61,7 @@ const TypeFilter = ({ onFilterChange, config }) => {
                         checked={selectedType === type}
                         onChange={handleCheckboxChange}
                     />
-                    {type}
+                    {type}<br/>
                 </label>
             ))}
             <br/>

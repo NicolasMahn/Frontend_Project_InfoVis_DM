@@ -27,6 +27,7 @@ const CategoryFilter = ({ onFilterChange, config, filterSettings }) => {
         <div>
             <div style={{ display: 'flex', alignItems: 'center' }}>
                 <b>Categories:</b>
+                <br/>
                 <span
                     style={{ marginLeft: '8px', cursor: 'pointer' }}
                     onMouseEnter={toggleTooltip}
@@ -43,7 +44,7 @@ const CategoryFilter = ({ onFilterChange, config, filterSettings }) => {
                             borderRadius: '4px',
                             zIndex: 1000
                         }}>
-                            Tooltip for Category Filter
+                            The category describes the basis of the data (described through color in the graph).
                         </div>
                     )}
                 </span>
@@ -56,7 +57,7 @@ const CategoryFilter = ({ onFilterChange, config, filterSettings }) => {
                         checked={categories[category]}
                         onChange={handleCheckboxChange}
                     />
-                    {category}
+                    {category} <br/>
                 </label>
             ))}
             <br/>

@@ -26,7 +26,8 @@ const TimeFilter = ({ onFilterChange, config }) => {
     return (
         <div>
             <div style={{ display: 'flex', alignItems: 'center' }}>
-                <b>Select a Time Category:</b>
+                <b>Time Category:</b>
+                <br/>
                 <span
                     style={{ marginLeft: '8px', cursor: 'pointer' }}
                     onMouseEnter={toggleTooltip}
@@ -43,7 +44,12 @@ const TimeFilter = ({ onFilterChange, config }) => {
                             borderRadius: '4px',
                             zIndex: 1000
                         }}>
-                            Tooltip for Time Filter
+                            The time describes in which way the data is grouped. <br/> 
+                            Timeline: 06/01/2014 - 16/01/2014 <br/> 
+                            Average Day: Calculation of the mean average day (from the whole timeline). <br/>
+                            Average Work Day: Calculation of the mean average work day (Monday - Friday). <br/> 
+                            Average Weekend Day: Calculation of the mean average weekend day (Saturday & Sunday). <br/>
+                            Average Week: Calculation of the mean average week (Monday - Sunday). <br/>
                         </div>
                     )}
                 </span>
@@ -56,7 +62,7 @@ const TimeFilter = ({ onFilterChange, config }) => {
                         checked={selectedTime === time}
                         onChange={handleRadioChange}
                     />
-                    {time}
+                    {time}<br/>
                 </label>
             ))}
             <br/>
