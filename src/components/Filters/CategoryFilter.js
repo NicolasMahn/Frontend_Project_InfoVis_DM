@@ -1,22 +1,39 @@
 import React, { useState, useEffect } from 'react';
 
 const CategoryFilter = ({ onFilterChange, config, filterSettings }) => {
+    const [hasRunOnce, setHasRunOnce] = useState(false);
     const [categories, setCategories] = useState({});
     const [tooltipVisible, setTooltipVisible] = useState(false);
 
     useEffect(() => {
-        const categoryState = config.categories.reduce((acc, category) => {
-            acc[category] = filterSettings.categories[category] ?? true;
-            return acc;
-        }, {});
-        setCategories(categoryState);
-        onFilterChange({ categories: categoryState });
-    }, [config, filterSettings, onFilterChange]);
+        if (!hasRunOnce) {
+            let cs = config.categories;
+            let newCategories = {};
+            for (let c in cs)  {
+                if (Object.keys(filterSettings.categories).includes(cs[c])) {
+                    newCategories[cs[c]] = filterSettings.categories[cs[c]];
+                } else {
+                    newCategories[cs[c]] = true;
+                }
+            }
+            setCheckboxes(newCategories);
+            onFilterChange({categories: newCategories});
+            if (categories) setHasRunOnce(true);
+        } else {
+            let categoryKeys = Object.keys(categories);
+            if (categoryKeys.length != config.categories.length || categoryKeys.some((c) => !config.categories.includes(c))) {
+                setHasRunOnce(false);
+            }
+        }
+    }, [hasRunOnce, categories, config, onFilterChange]);
 
     const handleCheckboxChange = (event) => {
         const { name, checked } = event.target;
+            setCheckboxes((prevCheckboxes) => ({
+                ...prevCheckboxes,
+                [name]: checked,
+        }));
         const newCategories = { ...categories, [name]: checked };
-        setCategories(newCategories);
         onFilterChange({ categories: newCategories });
     };
 
