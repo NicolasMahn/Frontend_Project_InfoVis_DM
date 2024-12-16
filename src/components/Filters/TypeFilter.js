@@ -14,9 +14,14 @@ const TypeFilter = ({ onFilterChange, config }) => {
                 onFilterChange({ type: types[0] });
                 setSelectedType(types[0]);
                 setHasRunOnce(true);
+            }else {
+                if (types.length !== config.types.length && types.some((c) => !config.type?.includes(c))) {
+                    setHasRunOnce(false);
+                }
             }
         }
-    }, [hasRunOnce, config, onFilterChange]);
+    }, [hasRunOnce, types, config, onFilterChange]);
+        
 
     const handleCheckboxChange = (event) => {
         const { name } = event.target;
@@ -58,10 +63,10 @@ const TypeFilter = ({ onFilterChange, config }) => {
                     <input
                         type="radio"
                         name={type}
-                        checked={selectedType === type}
+                        checked={type === selectedType}
                         onChange={handleCheckboxChange}
                     />
-                    {type}<br/>
+                    {type} <br/>
                 </label>
             ))}
             <br/>

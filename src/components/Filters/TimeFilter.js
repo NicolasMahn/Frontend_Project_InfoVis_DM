@@ -1,18 +1,25 @@
 import React, { useState, useEffect } from 'react';
 
 const TimeFilter = ({ onFilterChange, config }) => {
+    const [hasRunOnce, setHasRunOnce] = useState(false);
     const [times, setTimes] = useState([]);
     const [selectedTime, setSelectedTime] = useState('');
     const [tooltipVisible, setTooltipVisible] = useState(false);
 
     useEffect(() => {
-        if (config) {
-            const times = config.times;
+        if (!hasRunOnce) {
+            let times = config.times;
             setTimes(times);
-            setSelectedTime(times[0]);
             onFilterChange({ time: times[0] });
+            setSelectedTime(times[0]);
+            if (times) setHasRunOnce(true);
+        } else {
+            let timeKeys = Object.keys(times);
+            if (timeKeys.length !== config.times.length && timeKeys.some((c) => !config.times.includes(c))) {
+                setHasRunOnce(false);
+            }
         }
-    }, [config, onFilterChange]);
+    }, [hasRunOnce, times, config, onFilterChange]);
 
     const handleRadioChange = (event) => {
         const { name } = event.target;
@@ -59,7 +66,7 @@ const TimeFilter = ({ onFilterChange, config }) => {
                     <input
                         type="radio"
                         name={time}
-                        checked={selectedTime === time}
+                        checked={time === selectedTime}
                         onChange={handleRadioChange}
                     />
                     {time}<br/>
