@@ -59,6 +59,7 @@ const TimeFilter = ({ onFilterChange, config }) => {
                     {time}
                 </label>
             ))}
+            <br/>
         </div>
     );
 };

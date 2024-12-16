@@ -59,6 +59,7 @@ const CategoryFilter = ({ onFilterChange, config, filterSettings }) => {
                     {category}
                 </label>
             ))}
+            <br/>
         </div>
     );
 };

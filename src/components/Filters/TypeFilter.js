@@ -63,6 +63,7 @@ const TypeFilter = ({ onFilterChange, config }) => {
                     {type}
                 </label>
             ))}
+            <br/>
         </div>
     );
 };
