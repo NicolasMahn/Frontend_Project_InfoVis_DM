@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 const CategoryFilter = ({ onFilterChange, config, filterSettings }) => {
     const [hasRunOnce, setHasRunOnce] = useState(false);
-    const [categories, setCategories] = useState({});
+    const [categories, setCheckboxes] = useState({});
     const [tooltipVisible, setTooltipVisible] = useState(false);
 
     useEffect(() => {
