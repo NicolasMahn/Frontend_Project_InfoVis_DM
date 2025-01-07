@@ -1,4 +1,13 @@
-[
+[  
+  {
+    "id": "lp",
+    "type": "default_generic",
+    "parent": null,
+    "selected": true,
+    "title": "Home",
+    "description": "Start page of Sahboard with all the relevent information",
+    "graph": "LandingPage"
+  },
   {
     "id": "cpdl",
     "type": "default_generic",

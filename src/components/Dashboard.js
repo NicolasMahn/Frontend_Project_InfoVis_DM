@@ -15,6 +15,7 @@ import ComparingPurchases from './Graphs/ComparingPurchases.js';
 import PurchasesOverTime from './Graphs/PurchasesOverTime.js';
 import CardMatrixGraph from './Graphs/CardMatrixGraph.js';
 import CarMatrixGraph from './Graphs/CarMatrixGraph.js';
+import LandingPage from './Graphs/LandingPage.js';
 
 // Importing the filters
 import TimeFilter from './Filters/TimeFilter';
@@ -36,7 +37,8 @@ const graphComponents = {
   ComparingPurchases,
   PurchasesOverTime,
   CardMatrixGraph,
-  CarMatrixGraph
+  CarMatrixGraph,
+  LandingPage
 };
 
 const filterComponents = {
