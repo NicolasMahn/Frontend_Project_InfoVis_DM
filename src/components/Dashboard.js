@@ -10,12 +10,12 @@ import NavigationBox from './Boxes/NavigationBox';
 
 // Import all Graphs
 import ExampleGraph from './Graphs/ExampleGraph';
-import LandingPage from './Graphs/LandingPage.js';
 import NumbPurchasesPerLocation from './Graphs/NumbPurchasesPerLocation';
 import ComparingPurchases from './Graphs/ComparingPurchases.js';
 import PurchasesOverTime from './Graphs/PurchasesOverTime.js';
 import CardMatrixGraph from './Graphs/CardMatrixGraph.js';
 import CarMatrixGraph from './Graphs/CarMatrixGraph.js';
+import LandingPage from './Graphs/LandingPage.js';
 
 
 // Importing the filters
@@ -34,12 +34,12 @@ import { filter } from 'd3';
 
 const graphComponents = {
   ExampleGraph,
-  LandingPage,
   NumbPurchasesPerLocation,
   ComparingPurchases,
   PurchasesOverTime,
   CardMatrixGraph,
-  CarMatrixGraph
+  CarMatrixGraph,
+  LandingPage
 };
 
 const filterComponents = {
