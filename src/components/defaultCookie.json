@@ -12,7 +12,7 @@
     "id": "cpdl",
     "type": "default_generic",
     "parent": null,
-    "selected": true,
+    "selected": false,
     "title": "Purchases per Location",
     "description": "This graph compares the data from credit and loyalty cards",
     "graph": "ComparingPurchases"
