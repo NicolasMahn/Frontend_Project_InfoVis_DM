@@ -2,10 +2,10 @@
 /* Color Palate */
 :root {
   /* Buttones */
-  --button-primary: #1f78b4;
-  --button-secondary: #a6cee3; /*hover*/
-  --button-tertiary: #33a02c; /*selected*/
-  --button-quaternary: #b2df8a; /*child*/
+  --button-primary: #3C7DA3;
+  --button-secondary: #666; /*hover*/
+  --button-tertiary: #333; /*selected*/
+  --button-quaternary: #A33C7D; /*child*/
 
   /*Bar & Line Chart*/
   --primary-color: #56B4E9;
@@ -86,7 +86,7 @@
   margin: 0;
   padding: 10px 20px;
   width: 100%;
-  text-align: left;
+  text-align: 'center';
 }
 
 .child-button.custom {

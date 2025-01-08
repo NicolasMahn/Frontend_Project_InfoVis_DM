@@ -58,7 +58,7 @@ const filterComponents = {
 };
 
 const Dashboard = () => {
-  const [selectedGraph, setSelectedGraph] = useState('ComparingPurchases');
+  const [selectedGraph, setSelectedGraph] = useState('LandingPage');
   const [graphConfig, setGraphConfig] = useState({});
   const [filterSettings, setFilterSettings] = useState(
     { 
@@ -88,11 +88,6 @@ const Dashboard = () => {
 
   const [buttonSettings, setButtonSettings] = useState(buttonSettingsJSON);
 
-  useEffect(() => {
-
-  }, []);
-
-
   const handleFilterChange = (newSettings, title=null) => {
     if (!title) {
       title = "filterSettings";
@@ -119,6 +114,7 @@ const Dashboard = () => {
     }));
   };
 
+  useEffect(() => {
   fetch('/graphs.yaml')
     .then(response => response.text())
     .then(text => {
@@ -126,7 +122,7 @@ const Dashboard = () => {
       setGraphConfig(config);
     })
     .catch(error => console.error('Error fetching the YAML file:', error));
-
+  }, []);
 
   useEffect(() => {
     const handleBackButton = (event) => {
@@ -161,10 +157,10 @@ const Dashboard = () => {
     <div className="dashboard-with-Heading">
       <h1 className="header" id="dashboard-header">GASTech Employee Investigation Dashboard</h1>
       <div className="dashboard">
-        <NavigationBox handleGraphAndFilterChange={handleGraphAndFilterChange} cookieData={buttonSettings}/>
+        <NavigationBox handleGraphAndFilterChange={handleGraphAndFilterChange} buttonSettings={buttonSettings}/>
         <GraphBox GraphComponent={GraphComponent} selectedGraph={selectedGraph} 
                   onFilterChange={handleFilterChange} filterSettings={filterSettings} handleGraphAndFilterChange={handleGraphAndFilterChange} />
-        <FilterBox filters={filters} onFilterChange={handleFilterChange} filterSettings={filterSettings} config={config}/>
+        <FilterBox filters={filters} onFilterChange={handleFilterChange} filterSettings={filterSettings} config={config} handleGraphAndFilterChange={handleGraphAndFilterChange} buttonSettings={buttonSettings}/>
       </div>
     </div>
   );
