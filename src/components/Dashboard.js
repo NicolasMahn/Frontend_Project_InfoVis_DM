@@ -30,7 +30,7 @@ import LoyaltyCardFilter from './Filters/LoyaltyCardFilter.js';
 import CarIDFilter from './Filters/CarFilter.js';
 import ImageComponent from './Filters/ImageComponent.js';
 
-import defaultCookieJson from './defaultCookie.json';
+import buttonSettingsJSON from './buttonSettings.json';
 import { filter } from 'd3';
 
 
@@ -86,146 +86,7 @@ const Dashboard = () => {
       sortCategory: '' 
     });
 
-  const [cookieData, setCookieData] = useState([]);
-  const [title, setTitle] = useState('');
-
-  const desiredVersion = 'V0.6';
-  const cookieName = 'cookie'+desiredVersion;
-
-  // Function to get all cookies
-  function getAllCookies() {
-    return document.cookie.split(';').reduce((cookies, cookie) => {
-        const [name, value] = cookie.split('=').map(c => c.trim());
-        cookies[name] = value;
-        return cookies;
-    }, {});
-  }
-  const cookies = getAllCookies();
-  
-  const getCookie = () => {
-    let cookieData = [];
-
-    // Delete cookies with the wrong version
-    Object.keys(cookies).forEach(cookieName_ => {
-      const cookieParts = cookieName_.split('_');
-      if (cookieParts[0] !== `cookie${desiredVersion}`) {
-        document.cookie = cookieName_ + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-      }
-    });
-
-    for (let index = 0; ; index++) {
-      let cookieString = Cookies.get(`${cookieName}_${index}`);
-      if (!cookieString) {
-        break;
-      }
-      if (cookieString.includes("Katerina's Cafe")) {
-        cookieString = cookieString.replace("Katerina's Cafe", "Katerina’s Café");
-      }
-      cookieData.push(JSON.parse(cookieString));
-    }
-    return cookieData;
-  }
-
-  const saveCookie = (cookieData) => {
-    try {
-      cookieData.forEach((value, index) => {
-        let cookieString = JSON.stringify(value);
-        cookieString = cookieString.replace(/’/g, "'").replace(/é/g, "e");
-  
-        //console.log(`Cookie length for index ${index}:`, cookieString.length);
-        if (cookieString.length > 4096) {
-          console.error(`Cookie data for index ${index} is too large to be saved.`);
-          return;
-        }
-  
-        const specialCharMatch = cookieString.match(/[^ -~]/);
-        if (specialCharMatch) {
-          const idx = specialCharMatch.index;
-          const context = cookieString.substring(Math.max(0, idx - 10), Math.min(cookieString.length, idx + 10));
-          //console.error(`Cookie data for index ${index} contains special characters that may cause issues. Context: "${context}"`);
-          return;
-        }
-  
-        Cookies.set(`${cookieName}_${index}`, cookieString, { expires: 7 });
-        // console.log(`Cookie saved for index ${index}:`, Cookies.get(`${cookieName}_${index}`));
-      });
-    } catch (error) {
-      console.error('Error serializing cookie data:', error);
-    }
-  }
-
-  const deleteCookie = () => {
-    for (let index = 0; ; index++) {
-      let cookieString = Cookies.get(`${cookieName}_${index}`);
-      if (!cookieString) {
-        break;
-      }
-      Cookies.remove(`${cookieName}_${index}`);
-    }
-    setCookieData([]);
-  
-    if (Array.isArray(defaultCookieJson)) {
-      const defaultCookie = defaultCookieJson;
-      saveCookie(defaultCookie);
-      setCookieData(defaultCookie);
-    } else {
-      console.error('Default cookie is not an array:', defaultCookieJson);
-    }
-  }
-
-  useEffect(() => {
-    // Check if the cookie exists
-
-    const cookieValue = getCookie()
-    let existingGraphs = [];
-
-    if (cookieValue) {
-      try {
-        if (Array.isArray(cookieValue)) {
-          existingGraphs = cookieValue;
-        } else {
-          console.error('Cookie is not an array:', cookieValue);
-        }
-      } catch (error) {
-        console.error('Failed to parse cookie:', error);
-      }
-
-      // Merge default cookie items with existing saved cookies
-      const mergedGraphs = [...existingGraphs];
-      defaultCookieJson.forEach(defaultItem => {
-        if (!mergedGraphs.some(item => item.id === defaultItem.id)) {
-          mergedGraphs.push(defaultItem);
-        }
-      });
-
-      // Update the client cookie with the merged result
-      saveCookie(mergedGraphs)
-      setCookieData(mergedGraphs);
-    } else {
-      // Ensure defaultCookie is an array
-      if (Array.isArray(defaultCookieJson)) {
-        // Set the cookie if it doesn't exist
-        const defaultCookie = defaultCookieJson;
-        saveCookie(defaultCookie)
-        setCookieData(defaultCookie);
-      } else {
-        console.error('Default cookie is not an array:', defaultCookieJson);
-      }
-    }
-    let cookieData = getCookie();
-    if (!cookieData) {
-      return;
-    }
-    const selectedG = cookieData.filter(g=> g.selected === true)[0];
-
-    if (selectedG && selectedG.filterSettings) {
-      setFilterSettings(selectedG.filterSettings);
-    } else {
-      setFilterSettings(cookieData.filter(g => g.parent === selectedG.id)[0].filterSettings);
-    }
-    handleGraphAndFilterChange(selectedG);
-  }, [cookieName]);
-
+  const [buttonSettings, setButtonSettings] = useState(buttonSettingsJSON);
 
   useEffect(() => {
 
@@ -249,10 +110,8 @@ const Dashboard = () => {
       title = selectedGraph.id + ' - ' + "filterSettings";
     }
     window.history.pushState({ selectedGraph, filterSettings }, title);
-    let cookieData = getCookie();
-    const newCookieData = cookieData.map(g => ({ ...g, selected: g.id === newGraph.id || g.id === newGraph.parent ? true : false }));
-    setCookieData(newCookieData);
-    saveCookie(newCookieData);
+    const newCookieData = buttonSettings.map(g => ({ ...g, selected: g.id === newGraph.id || g.id === newGraph.parent ? true : false }));
+    setButtonSettings(newCookieData);
     setSelectedGraph(newGraph.graph);
     setFilterSettings(prevSettings => ({
       ...prevSettings,
@@ -302,14 +161,10 @@ const Dashboard = () => {
     <div className="dashboard-with-Heading">
       <h1 className="header" id="dashboard-header">GASTech Employee Investigation Dashboard</h1>
       <div className="dashboard">
-        <NavigationBox handleGraphAndFilterChange={handleGraphAndFilterChange} cookieData={cookieData}/>
+        <NavigationBox handleGraphAndFilterChange={handleGraphAndFilterChange} cookieData={buttonSettings}/>
         <GraphBox GraphComponent={GraphComponent} selectedGraph={selectedGraph} 
                   onFilterChange={handleFilterChange} filterSettings={filterSettings} handleGraphAndFilterChange={handleGraphAndFilterChange} />
         <FilterBox filters={filters} onFilterChange={handleFilterChange} filterSettings={filterSettings} config={config}/>
-        <ExplanationBox selectedGraph={selectedGraph} filterSettings={filterSettings} handleGraphAndFilterChange={handleGraphAndFilterChange} 
-                        cookieData={cookieData} deleteCookie={deleteCookie} saveCookie={saveCookie}
-                        setCookieData={setCookieData} 
-                        title={title} setTitle={setTitle}/>
       </div>
     </div>
   );
