@@ -1,10 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import graph1 from '../../data/abila_map.png';
 import graph2 from '../../data/abila_map_location_cluster.png';
 import graph3 from '../../data/abila_map_location_employee_cluster.png';
 
-const LocationClusterMap = () => {
+const LocationClusterMap = (filterSettings) => {
   const [selectedFilter, setSelectedFilter] = useState('filter3');
+
+  useEffect(() => {
+    console.log(filterSettings);
+    if (filterSettings.filterSettings.locationClusterFilter) {
+      setSelectedFilter(filterSettings.filterSettings.locationClusterFilter);
+    }
+  }, [filterSettings]);
 
   const allGraphs = {
     filter1: [
@@ -19,7 +26,7 @@ const LocationClusterMap = () => {
   };
 
   return (
-      <div className="center-content">
+      <div>
         {allGraphs[selectedFilter].map((graph, index) => (
           <div key={index} className="center-item">
             <h2 className="title">{graph.title}</h2>

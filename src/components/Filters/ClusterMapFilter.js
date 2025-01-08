@@ -7,12 +7,13 @@ const ClusterMapFilter = ({ onFilterChange }) => {
   const handleFilterChange = (event) => {
     const newFilter = event.target.value;
     setSelectedFilter(newFilter);
-    onFilterChange(newFilter);
+    console.log(newFilter);
+    onFilterChange({locationClusterFilter: newFilter});
   };
 
   return (
     <div>
-      <h3>Maps:</h3>
+      <h3>Select a Map:</h3>
       <div>
         <label>
           <input
