@@ -7,7 +7,7 @@ const CategoryFilter = ({ onFilterChange, config, filterSettings }) => {
     const [categoryDescription, setCategoryDescription] = useState('The category describes the basis of the data (described through color in the graph).');
 
     useEffect(() => {
-        if (!hasRunOnce) {
+        if (!hasRunOnce && filterSettings.categories != undefined) {
             let cs = config.categories;
             if (config.categoryDescription != undefined) {
                 setCategoryDescription(config.categoryDescription);

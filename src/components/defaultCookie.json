@@ -16,7 +16,37 @@
     "selected": false,
     "title": "Purchases per Location",
     "description": "This graph compares the data from credit and loyalty cards",
-    "graph": "ComparingPurchases"
+    "graph": "ComparingPurchases",
+    "filterSettings": {
+      "locations": [
+        "Gelatogalore",
+        "Brew've Been Served",
+        "Ouzeri Elian",
+        "Albert's Fine Clothing",
+        "Abila Airport",
+        "Kalami Kafenion",
+        "Jack's Magical Beans",
+        "Bean There Done That",
+        "Hallowed Grounds",
+        "Nationwide Refinery",
+        "Katerina's Cafe",
+        "Abila Zacharo",
+        "Brewed Awakenings",
+        "Desafio Golf Course",
+        "Coffee Cameleon",
+        "Frydos Autosupply n' More",
+        "Hippokampos",
+        "Guy's Gyros"
+      ],
+      "categories": {
+        "Credit Card": true,
+        "Loyalty Card": true,
+        "Cars In Area": false,
+        "Card Pair": false,
+        "No Pair": false
+      },
+      "type": "Number of Purchases"
+    }
   },
   {
     "id": "pt",
@@ -25,7 +55,52 @@
     "selected": false,
     "title": "Purchases over Time",
     "description": "This graph compares the purchases over time",
-    "graph": "PurchasesOverTime"
+    "graph": "PurchasesOverTime",
+    "filterSettings": {
+      "locations": [
+        "Gelatogalore",
+        "Brew've Been Served",
+        "Ahaggo Museum",
+        "Ouzeri Elian",
+        "Roberts and Sons",
+        "Albert's Fine Clothing",
+        "Abila Airport",
+        "Stewart and Sons Fabrication",
+        "Kalami Kafenion",
+        "Jack's Magical Beans",
+        "Bean There Done That",
+        "Octavio's Office Supplies",
+        "Abila Scrapyard",
+        "Hallowed Grounds",
+        "Chostus Hotel",
+        "Daily Dealz",
+        "U-Pump",
+        "Nationwide Refinery",
+        "Maximum Iron and Steel",
+        "Katerina's Cafe",
+        "Frank's Fuel",
+        "Kronos Pipe and Irrigation",
+        "Abila Zacharo",
+        "Shoppers' Delight",
+        "Brewed Awakenings",
+        "Desafio Golf Course",
+        "General Grocer",
+        "Carlyle Chemical Inc.",
+        "Coffee Shack",
+        "Coffee Cameleon",
+        "Frydos Autosupply n' More",
+        "Hippokampos",
+        "Kronos Mart",
+        "Guy's Gyros"
+      ],
+      "categories": {
+        "Credit Card": true,
+        "Loyalty Card": true,
+        "Cars In Area": false,
+        "Card Pair": false,
+        "No Pair": false
+      }
+    }
   },
   {
     "id": "mclc",

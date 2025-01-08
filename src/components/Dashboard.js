@@ -28,9 +28,11 @@ import TypeFilter from './Filters/TypeFilter.js';
 import CreditCardFilter from './Filters/CreditCardFilter.js';
 import LoyaltyCardFilter from './Filters/LoyaltyCardFilter.js';
 import CarIDFilter from './Filters/CarFilter.js';
+import ImageComponent from './Filters/ImageComponent.js';
 
 import defaultCookieJson from './defaultCookie.json';
 import { filter } from 'd3';
+
 
 const graphComponents = {
   ExampleGraph,
@@ -51,7 +53,8 @@ const filterComponents = {
   Type: TypeFilter,
   CreditCard: CreditCardFilter,
   LoyaltyCard: LoyaltyCardFilter,
-  CarID: CarIDFilter
+  CarID: CarIDFilter,
+  ImageComponent: ImageComponent
 };
 
 const Dashboard = () => {
@@ -86,7 +89,7 @@ const Dashboard = () => {
   const [cookieData, setCookieData] = useState([]);
   const [title, setTitle] = useState('');
 
-  const desiredVersion = 'V0.4';
+  const desiredVersion = 'V0.6';
   const cookieName = 'cookie'+desiredVersion;
 
   // Function to get all cookies

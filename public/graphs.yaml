@@ -72,5 +72,5 @@ CarMatrixGraph:
                        </p>
 LandingPage:
   graph_name: LandingPage
-  filters: []
+  filters: [ImageComponent]
   categories: []

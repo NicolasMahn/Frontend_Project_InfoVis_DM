@@ -109,3 +109,13 @@
 .location-filter {
   margin-bottom: 20px;
 }
+
+.image-container {
+  display: flex;
+  justify-content: center;
+}
+
+.image-container img {
+  max-width: 100%;
+  height: auto;
+}
