@@ -183,3 +183,12 @@
   visibility: visible;
   opacity: 1;
 }
+
+.filter-container {
+  display: flex;
+  gap: 20px; /* Adjust the gap as needed */
+}
+
+.legend, .employeecluster {
+  flex: 1; /* Adjust the flex value as needed */
+}
