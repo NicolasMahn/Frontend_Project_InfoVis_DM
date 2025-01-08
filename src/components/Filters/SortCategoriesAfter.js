@@ -2,26 +2,27 @@ import React, { useState, useEffect } from 'react';
 
 const SortCategoriesAfter = ({ filterSettings, onFilterChange }) => {
   const [selectedSortOption, setSelectedSortOption] = useState('');
+  const [selectedCategories, setSelectedCategories] = useState([]);
 
   useEffect(() => {
-    if (!filterSettings || !filterSettings.categories) {
-      return;
-    }
+ 
 
     const selectedCategories = Object.keys(filterSettings.categories).filter(
       (category) => filterSettings.categories[category]
     );
 
+    setSelectedCategories(selectedCategories);
+
     if (selectedCategories.length === 1) {
       setSelectedSortOption(selectedCategories[0]);
       onFilterChange({ sortCategory: selectedCategories[0] });
-    } else if (selectedCategories.length > 1) {
-      if (!selectedCategories.includes(selectedSortOption)) {
+    } else if (!selectedCategories.includes(selectedSortOption)) {
         setSelectedSortOption(selectedCategories[0]);
         onFilterChange({ sortCategory: selectedCategories[0] });
-      }
+    } else {
+      setSelectedSortOption(filterSettings.sortCategory);
     }
-  }, [filterSettings, selectedSortOption, onFilterChange]);
+  }, [filterSettings, onFilterChange]);
 
     
   const handleRadioChange = (event) => {
@@ -30,17 +31,8 @@ const SortCategoriesAfter = ({ filterSettings, onFilterChange }) => {
     onFilterChange({ sortCategory: value });
   };
 
-  if (!filterSettings || !filterSettings.categories) {
-    return null;
-  }
+ 
 
-  const selectedCategories = Object.keys(filterSettings.categories).filter(
-    (category) => filterSettings.categories[category]
-  );
-
-  if (selectedCategories.length <= 1) {
-    return null;
-  }
 
   return (
     <div>

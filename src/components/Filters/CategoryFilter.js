@@ -33,6 +33,12 @@ const CategoryFilter = ({ onFilterChange, config, filterSettings }) => {
         }
     }, [hasRunOnce, categories, config, onFilterChange]);
 
+    useEffect(() => {
+        if (filterSettings && JSON.stringify(filterSettings.categories) !== JSON.stringify(categories)) {
+            setCheckboxes(filterSettings.categories);
+        }
+    }, [filterSettings, categories]);
+
     const handleCheckboxChange = (event) => {
         const { name, checked } = event.target;
             setCheckboxes((prevCheckboxes) => ({
