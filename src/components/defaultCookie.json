@@ -1,9 +1,18 @@
-[
+[  
+  {
+    "id": "lp",
+    "type": "default_generic",
+    "parent": null,
+    "selected": true,
+    "title": "Home",
+    "description": "Start page of Sahboard with all the relevent information",
+    "graph": "LandingPage"
+  },
   {
     "id": "cpdl",
     "type": "default_generic",
     "parent": null,
-    "selected": true,
+    "selected": false,
     "title": "Purchases per Location",
     "description": "This graph compares the data from credit and loyalty cards",
     "graph": "ComparingPurchases"

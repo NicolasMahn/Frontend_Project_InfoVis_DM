@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
-const CategoryFilter = ({ onFilterChange,  config, filterSettings}) => {
+const CategoryFilter = ({ onFilterChange, config, filterSettings }) => {
     const [hasRunOnce, setHasRunOnce] = useState(false);
-    const [categories, setCheckboxes] = useState({ });
+    const [categories, setCheckboxes] = useState({});
+    const [tooltipVisible, setTooltipVisible] = useState(false);
 
     useEffect(() => {
         if (!hasRunOnce) {
@@ -33,26 +34,51 @@ const CategoryFilter = ({ onFilterChange,  config, filterSettings}) => {
                 [name]: checked,
         }));
         const newCategories = { ...categories, [name]: checked };
-        onFilterChange({ categories: newCategories
-        });
+        onFilterChange({ categories: newCategories });
     };
 
+    const toggleTooltip = () => setTooltipVisible(!tooltipVisible);
+    const hideTooltip = () => setTooltipVisible(false);
 
     return (
-    <div>
-        <span><b>Categories:</b></span><br/>
-        {Object.keys(categories).map((category) => (
-          <label key={category}>
-            <input
-              type="checkbox"
-              name={category}
-              checked={categories[category]}
-              onChange={handleCheckboxChange}
-            /> {category}<br/>
-          </label>
-        ))}
-        <br/>
-    </div>
+        <div>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+                <b>Categories:</b>
+                <br/>
+                <span
+                    style={{ marginLeft: '8px', cursor: 'pointer' }}
+                    onMouseEnter={toggleTooltip}
+                    onMouseLeave={hideTooltip}
+                    onClick={toggleTooltip}
+                >
+                    ⓘ
+                    {tooltipVisible && (
+                        <div style={{
+                            position: 'absolute',
+                            background: '#fff',
+                            border: '1px solid #ccc',
+                            padding: '8px',
+                            borderRadius: '4px',
+                            zIndex: 1000
+                        }}>
+                            The category describes the basis of the data (described through color in the graph).
+                        </div>
+                    )}
+                </span>
+            </div>
+            {Object.keys(categories).map((category) => (
+                <label key={category}>
+                    <input
+                        type="checkbox"
+                        name={category}
+                        checked={categories[category]}
+                        onChange={handleCheckboxChange}
+                    />
+                    {category} <br/>
+                </label>
+            ))}
+            <br/>
+        </div>
     );
 };
 

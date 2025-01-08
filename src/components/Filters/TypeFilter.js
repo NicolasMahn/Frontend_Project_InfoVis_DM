@@ -1,36 +1,63 @@
 import React, { useState, useEffect } from 'react';
 
-const TypeFilter = ({ onFilterChange,  config}) => {
+const TypeFilter = ({ onFilterChange, config }) => {
     const [hasRunOnce, setHasRunOnce] = useState(false);
-    const [types, setTypes] = useState([ ]);
+    const [types, setTypes] = useState([]);
     const [selectedType, setSelectedType] = useState('');
+    const [tooltipVisible, setTooltipVisible] = useState(false);
 
     useEffect(() => {
         if (config) {
             if (!hasRunOnce) {
-                let types = config.types;
+                const types = config.types;
                 setTypes(types);
-                onFilterChange({type: types[0]});
+                onFilterChange({ type: types[0] });
                 setSelectedType(types[0]);
-                if (types) setHasRunOnce(true);
-            } else {
+                setHasRunOnce(true);
+            }else {
                 if (types.length !== config.types.length && types.some((c) => !config.type?.includes(c))) {
                     setHasRunOnce(false);
                 }
             }
         }
     }, [hasRunOnce, types, config, onFilterChange]);
+        
 
     const handleCheckboxChange = (event) => {
-        const { name, _ } = event.target;
+        const { name } = event.target;
         setSelectedType(name);
         onFilterChange({ type: name });
     };
 
+    const toggleTooltip = () => setTooltipVisible(!tooltipVisible);
+    const hideTooltip = () => setTooltipVisible(false);
 
     return (
         <div>
-            <b> Select the Data Type:</b>< br />
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+                <b>Data Type:</b>
+                <br/>
+                <span
+                    style={{ marginLeft: '8px', cursor: 'pointer' }}
+                    onMouseEnter={toggleTooltip}
+                    onMouseLeave={hideTooltip}
+                    onClick={toggleTooltip}
+                >
+                    ⓘ
+                    {tooltipVisible && (
+                        <div style={{
+                            position: 'absolute',
+                            background: '#fff',
+                            border: '1px solid #ccc',
+                            padding: '8px',
+                            borderRadius: '4px',
+                            zIndex: 1000
+                        }}>
+                            The Data type describes the basis for the calculation of the graph (x-achis for purchases & locations).
+                        </div>
+                    )}
+                </span>
+            </div>
             {types.map((type) => (
                 <label key={type}>
                     <input
@@ -38,10 +65,11 @@ const TypeFilter = ({ onFilterChange,  config}) => {
                         name={type}
                         checked={type === selectedType}
                         onChange={handleCheckboxChange}
-                    /> {type} <br />
+                    />
+                    {type} <br/>
                 </label>
             ))}
-            <br />
+            <br/>
         </div>
     );
 };
