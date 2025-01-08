@@ -58,7 +58,7 @@ const filterComponents = {
 };
 
 const Dashboard = () => {
-  const [selectedGraph, setSelectedGraph] = useState('ComparingPurchases');
+  const [selectedGraph, setSelectedGraph] = useState('LandingPage');
   const [graphConfig, setGraphConfig] = useState({});
   const [filterSettings, setFilterSettings] = useState(
     { 
@@ -87,11 +87,6 @@ const Dashboard = () => {
     });
 
   const [buttonSettings, setButtonSettings] = useState(buttonSettingsJSON);
-
-  useEffect(() => {
-
-  }, []);
-
 
   const handleFilterChange = (newSettings, title=null) => {
     if (!title) {
@@ -164,7 +159,7 @@ const Dashboard = () => {
         <NavigationBox handleGraphAndFilterChange={handleGraphAndFilterChange} buttonSettings={buttonSettings}/>
         <GraphBox GraphComponent={GraphComponent} selectedGraph={selectedGraph} 
                   onFilterChange={handleFilterChange} filterSettings={filterSettings} handleGraphAndFilterChange={handleGraphAndFilterChange} />
-        <FilterBox filters={filters} onFilterChange={handleFilterChange} filterSettings={filterSettings} config={config} buttonSettings={buttonSettings}/>
+        <FilterBox filters={filters} onFilterChange={handleFilterChange} filterSettings={filterSettings} config={config}/>
       </div>
     </div>
   );
