@@ -6,7 +6,6 @@ const ExplanationBox = ({cookieData, handleGraphAndFilterChange}) => {
 
 
   const loadGraph = (graph) => {
-    console.log('Loading graph:', graph);
     handleGraphAndFilterChange(graph);
   };
   

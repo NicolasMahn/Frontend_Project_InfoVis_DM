@@ -7,6 +7,23 @@ ComparingPurchases:
   filters: [Location, Type, Category, SortCategoriesAfter]
   types: [Percentage of Purchases per Category, Number of Purchases, Average Expense]
   categories: [Credit Card, Loyalty Card, Cars In Area, Card Pair, No Pair]
+  dataTypeDescription:  <p> 
+                          The <strong>Percentage of Purchases per Category</strong> attribute represents the proportion of purchases made by <em>Credit Cards</em> or <em>Loyalty Cards</em> Compared to all purchases made with <em>Credit Cards</em> or <em>Loyalty Cards</em> over all locations. <br>
+                          Or visits made by any <em>Car in the Area</em> compared to all visits made by all Cars. <br>
+                        </p> <p>
+                          The <strong>Number of Purchases</strong> attribute represents the total number of purchases made by <em>Credit Cards</em> or <em>Loyalty Cards</em> at a location. <br>
+                          Or the total number of visits made by any <em>Car in the Area</em>.
+                        </p> <p>
+                          The <strong>Average Expense</strong> attribute represents the average expense (€) made by a <em>Credit Card</em> or a <em>Loyalty Card</em> purchase. <br>
+                          The <em>Car in the Area</em> attribute will always show 0€ as the average expense.
+                        </p>
+  categoryDescription: <p> 
+                        The <strong>Credit Card</strong> category represents the purchases made by <em>Credit Cards</em>. <br>
+                        The <strong>Loyalty Card</strong> category represents the purchases made by <em>Loyalty Cards</em>. <br>
+                        The <strong>Cars In Area</strong> category represents the visits made by any <em>Car in the Area</em>. <br>
+                        The <strong>Card Pair</strong> category represents the purchases made by matched <em>Credit</em> and <em>Loyalty Cards</em> (see <em>Credit and Loyalty Card Matrix</em>). <br>
+                        The <strong>No Pair</strong> category represents the purchases made by <em>Credit </em> and <em>Loyalty Cards</em> that could not be matched to one another (see <em>Credit and Loyalty Card Matrix</em>).
+                       </p>
 ExampleGraph:
   graph_name: ExampleGraph
   filters: [Type, Location, Employee, Time, Category, SortCategoriesAfter]
@@ -19,11 +36,37 @@ PurchasesOverTime:
   types: [Number of Purchases, Expenses over Time]
   categories: [Credit Card, Loyalty Card, Cars In Area, Card Pair, No Pair]
   times: [Timeline, Average Day, Average Work Day, Average Weekend Day, Average Week]
+  dataTypeDescription:  <p> 
+                          The <strong>Number of Purchases</strong> attribute represents the total number of purchases made by a <em>Credit Card</em> or a <em>Loyalty Card</em> in a specific time frame.
+                        </p> <p>
+                          The <strong>Expenses over Time</strong> attribute represents the total expenses (€) made by a <em>Credit Card</em> or a <em>Loyalty Card</em> in a specific time frame.
+                        </p>
+  categoryDescription: <p> 
+                      The <strong>Credit Card</strong> category represents the purchases made by <em>Credit Cards</em>. <br>
+                      The <strong>Loyalty Card</strong> category represents the purchases made by <em>Loyalty Cards</em>. <br>
+                      The <strong>Cars In Area</strong> category represents the visits made by any <em>Car in the Area</em>. <br>
+                      The <strong>Card Pair</strong> category represents the purchases made by matched <em>Credit</em> and <em>Loyalty Cards</em> (see <em>Credit and Loyalty Card Matrix</em>). <br>
+                      The <strong>No Pair</strong> category represents the purchases made by <em>Credit </em> and <em>Loyalty Cards</em> that could not be matched to one another (see <em>Credit and Loyalty Card Matrix</em>).
+                      </p>
 CardMatrixGraph:
   graph_name: CardMatrixGraph
   filters: [Type, CreditCard, LoyaltyCard]
   types: [Absolute, Relative to Credit Card, Relative to Loyalty Card]
+  dataTypeDescription: <p> 
+                        The <strong>Absolute</strong> attribute represents the amounts of combined usage between a <em>Credit Card</em> and a <em>Loyalty Card</em>.
+                       </p> <p>
+                        The <strong>Relative to Credit Card</strong> and <strong>Relative to Loyalty Card</strong> attributes indicate the proportion of similarity relative to the <em>Credit Card</em> or the <em>Loyalty Card</em>, respectively.
+                        <br>
+                        These attributes are useful for assessing whether a <em>Credit Card</em> has primarily been used in conjunction with a specific <em>Loyalty Card</em>, and vice versa.
+                       </p>
 CarMatrixGraph:
   graph_name: CarMatrixGraph
   filters: [Type, CreditCard, CarID]
   types: [Absolute, Relative to Credit Card, Relative to Car ID]
+  dataTypeDescription: <p> 
+                        The <strong>Absolute</strong> attribute represents a similarity score calculated between a <em>Credit Card</em> and a <em>Car ID</em>.
+                       </p> <p>
+                        The <strong>Relative to Credit Card</strong> and <strong>Relative to Car ID</strong> attributes indicate the proportion of similarity relative to the <em>Credit Card</em> or the <em>Car ID</em>, respectively.
+                        <br>
+                        These attributes are useful for assessing whether a <em>Credit Card</em> has primarily been used in conjunction with a specific <em>Car ID</em>, and vice versa.
+                       </p>

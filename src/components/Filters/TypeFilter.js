@@ -5,17 +5,23 @@ const TypeFilter = ({ onFilterChange, config }) => {
     const [types, setTypes] = useState([]);
     const [selectedType, setSelectedType] = useState('');
     const [tooltipVisible, setTooltipVisible] = useState(false);
+    const [dataTypeDescription, setDataTypeDescription] = useState('The Data type describes the basis for the calculation of the graph (x-achis for purchases & locations).');
 
     useEffect(() => {
         if (config) {
             if (!hasRunOnce) {
                 const types = config.types;
+                if (config.dataTypeDescription != undefined) {
+                    setDataTypeDescription(config.dataTypeDescription);
+                } else {
+                    setDataTypeDescription('The Data type describes the basis for the calculation of the graph (x-achis for purchases & locations).');
+                }
                 setTypes(types);
                 onFilterChange({ type: types[0] });
                 setSelectedType(types[0]);
                 setHasRunOnce(true);
             }else {
-                if (types.length !== config.types.length && types.some((c) => !config.type?.includes(c))) {
+                if (JSON.stringify(types) !== JSON.stringify(config.types)) {
                     setHasRunOnce(false);
                 }
             }
@@ -53,7 +59,7 @@ const TypeFilter = ({ onFilterChange, config }) => {
                             borderRadius: '4px',
                             zIndex: 1000
                         }}>
-                            The Data type describes the basis for the calculation of the graph (x-achis for purchases & locations).
+                            <span dangerouslySetInnerHTML={{ __html: dataTypeDescription }} />
                         </div>
                     )}
                 </span>

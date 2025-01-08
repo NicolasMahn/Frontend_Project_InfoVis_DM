@@ -51,12 +51,11 @@ const TimeFilter = ({ onFilterChange, config }) => {
                             borderRadius: '4px',
                             zIndex: 1000
                         }}>
-                            The time describes in which way the data is grouped. <br/> 
-                            Timeline: 06/01/2014 - 16/01/2014 <br/> 
-                            Average Day: Calculation of the mean average day (from the whole timeline). <br/>
-                            Average Work Day: Calculation of the mean average work day (Monday - Friday). <br/> 
-                            Average Weekend Day: Calculation of the mean average weekend day (Saturday & Sunday). <br/>
-                            Average Week: Calculation of the mean average week (Monday - Sunday). <br/>
+                        <strong>Timeline:</strong> <em>06/01/2014 - 16/01/2014</em><br/>
+                        <strong>Average Day:</strong> Represents the mean average of all days within the entire timeline.<br/>
+                        <strong>Average Work Day:</strong> Represents the mean average of weekdays (<em>Monday - Friday</em>).<br/>
+                        <strong>Average Weekend Day:</strong> Represents the mean average of weekend days (<em>Saturday & Sunday</em>).<br/>
+                        <strong>Average Week:</strong> Represents the mean average of a full week (<em>Monday - Sunday</em>).<br/>
                         </div>
                     )}
                 </span>

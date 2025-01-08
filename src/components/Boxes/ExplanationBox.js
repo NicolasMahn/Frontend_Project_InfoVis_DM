@@ -21,7 +21,6 @@ const ExplanationBox = ({cookieData, deleteCookie, saveCookie, setCookieData, ti
   };
 
   const loadGraph = (graph) => {
-    console.log('Loading graph:', graph);
     handleGraphAndFilterChange(graph.graph, graph.filterSettings);
   };
 

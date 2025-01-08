@@ -86,7 +86,7 @@ const Dashboard = () => {
   const [cookieData, setCookieData] = useState([]);
   const [title, setTitle] = useState('');
 
-  const cookieName = 'cookieV0.2';
+  const cookieName = 'cookieV0.3';
   
   const getCookie = () => {
     let cookieData = [];
@@ -109,7 +109,7 @@ const Dashboard = () => {
         let cookieString = JSON.stringify(value);
         cookieString = cookieString.replace(/’/g, "'").replace(/é/g, "e");
   
-        console.log(`Cookie length for index ${index}:`, cookieString.length);
+        //console.log(`Cookie length for index ${index}:`, cookieString.length);
         if (cookieString.length > 4096) {
           console.error(`Cookie data for index ${index} is too large to be saved.`);
           return;
@@ -119,12 +119,12 @@ const Dashboard = () => {
         if (specialCharMatch) {
           const idx = specialCharMatch.index;
           const context = cookieString.substring(Math.max(0, idx - 10), Math.min(cookieString.length, idx + 10));
-          console.error(`Cookie data for index ${index} contains special characters that may cause issues. Context: "${context}"`);
+          //console.error(`Cookie data for index ${index} contains special characters that may cause issues. Context: "${context}"`);
           return;
         }
   
         Cookies.set(`${cookieName}_${index}`, cookieString, { expires: 7 });
-        console.log(`Cookie saved for index ${index}:`, Cookies.get(`${cookieName}_${index}`));
+        // console.log(`Cookie saved for index ${index}:`, Cookies.get(`${cookieName}_${index}`));
       });
     } catch (error) {
       console.error('Error serializing cookie data:', error);
@@ -140,15 +140,11 @@ const Dashboard = () => {
       Cookies.remove(`${cookieName}_${index}`);
     }
     setCookieData([]);
-    console.log('Cookies have been deleted.');
   
     if (Array.isArray(defaultCookieJson)) {
-      console.log('Default cookie JSON:', defaultCookieJson);
       const defaultCookie = defaultCookieJson;
       saveCookie(defaultCookie);
-      console.log('After saveCookie call');
       setCookieData(defaultCookie);
-      console.log('Default cookies have been set.');
     } else {
       console.error('Default cookie is not an array:', defaultCookieJson);
     }
@@ -163,7 +159,6 @@ const Dashboard = () => {
     if (cookieValue) {
       try {
         if (Array.isArray(cookieValue)) {
-          console.log('Cookie has been parsed:', cookieValue);
           existingGraphs = cookieValue;
         } else {
           console.error('Cookie is not an array:', cookieValue);
@@ -190,24 +185,19 @@ const Dashboard = () => {
         const defaultCookie = defaultCookieJson;
         saveCookie(defaultCookie)
         setCookieData(defaultCookie);
-        console.log('Default cookie has been set.');
       } else {
         console.error('Default cookie is not an array:', defaultCookieJson);
       }
     }
     let cookieData = getCookie();
-    console.log('Cookie data:', cookieData);
     if (!cookieData) {
       return;
     }
-    console.log('Cookie data:', cookieData);
-    console.log('Cookie data filtered:', cookieData.filter(g=> g.selected === true)[0]);
     const selectedG = cookieData.filter(g=> g.selected === true)[0];
 
     if (selectedG && selectedG.filterSettings) {
       setFilterSettings(selectedG.filterSettings);
     } else {
-      console.log(cookieData.filter(g => g.parent === selectedG.id)[0])
       setFilterSettings(cookieData.filter(g => g.parent === selectedG.id)[0].filterSettings);
     }
     handleGraphAndFilterChange(selectedG);
@@ -223,7 +213,6 @@ const Dashboard = () => {
     if (!title) {
       title = "filterSettings";
     }
-    console.log('New filter settings:', newSettings);
     window.history.pushState({ filterSettings: { filterSettings} }, title);
     setFilterSettings(prevSettings => ({
       ...prevSettings,
@@ -239,7 +228,6 @@ const Dashboard = () => {
     window.history.pushState({ selectedGraph, filterSettings }, title);
     let cookieData = getCookie();
     const newCookieData = cookieData.map(g => ({ ...g, selected: g.id === newGraph.id || g.id === newGraph.parent ? true : false }));
-    console.log('New cookie data:', newCookieData);
     setCookieData(newCookieData);
     saveCookie(newCookieData);
     setSelectedGraph(newGraph.graph);
@@ -262,7 +250,6 @@ const Dashboard = () => {
     const handleBackButton = (event) => {
       event.preventDefault();
       // Handle the back button press here
-      console.log('Back button pressed');
       
       if (event.state) {
         // console.log(event.state);

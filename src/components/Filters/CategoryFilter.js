@@ -4,10 +4,16 @@ const CategoryFilter = ({ onFilterChange, config, filterSettings }) => {
     const [hasRunOnce, setHasRunOnce] = useState(false);
     const [categories, setCheckboxes] = useState({});
     const [tooltipVisible, setTooltipVisible] = useState(false);
+    const [categoryDescription, setCategoryDescription] = useState('The category describes the basis of the data (described through color in the graph).');
 
     useEffect(() => {
         if (!hasRunOnce) {
             let cs = config.categories;
+            if (config.categoryDescription != undefined) {
+                setCategoryDescription(config.categoryDescription);
+            } else {
+                setCategoryDescription('The category describes the basis of the data (described through color in the graph).');
+            }
             let newCategories = {};
             for (let c in cs)  {
                 if (Object.keys(filterSettings.categories).includes(cs[c])) {
@@ -61,7 +67,7 @@ const CategoryFilter = ({ onFilterChange, config, filterSettings }) => {
                             borderRadius: '4px',
                             zIndex: 1000
                         }}>
-                            The category describes the basis of the data (described through color in the graph).
+                            <span dangerouslySetInnerHTML={{ __html: categoryDescription }} />
                         </div>
                     )}
                 </span>
