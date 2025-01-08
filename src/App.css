@@ -139,3 +139,47 @@
 .image {
   margin-bottom: 2px; /* Reduce bottom margin */
 }
+
+.legend {
+  position: relative;
+  display: inline-block;
+}
+
+.info-hover {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.info-text {
+  display: flex;
+  align-items: center;
+}
+
+.info-button {
+  position: relative;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.info-tooltip {
+  visibility: hidden;
+  width: 200px;
+  background-color: #555;
+  color: #fff;
+  text-align: left;
+  border-radius: 5px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%; /* Position the tooltip above the button */
+  left: 50%;
+  margin-left: -100px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.info-button:hover .info-tooltip {
+  visibility: visible;
+  opacity: 1;
+}
