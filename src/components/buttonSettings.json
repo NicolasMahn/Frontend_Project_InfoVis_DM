@@ -127,7 +127,7 @@
     "type": "default",
     "parent": "cpdl",
     "selected": false,
-    "title": "Locations with many Cars in the Area",
+    "title": "Locations with Cars in the Area",
     "description": "",
     "graph": "ComparingPurchases",
     "filterSettings": {
