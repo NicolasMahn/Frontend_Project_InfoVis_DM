@@ -1,6 +1,5 @@
 {
 "type": "FeatureCollection",
-"name": "test_a",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
 "features": [
 { "type": "Feature", "properties": { "Name": "S Wenna St 1040 1026", "description": null, "timestamp": null, "begin": null, "end": null, "altitudeMode": "relativeToGround", "tessellate": -1, "extrude": 0, "visibility": -1, "drawOrder": null, "icon": null, "TLID": 184619449, "FEDIRP": "S", "FENAME": "Wenna", "FETYPE": "St", "FEDIRS": null, "FRADDL": 1040, "TOADDL": 1026, "FRADDR": 1199, "TOADDR": 1025 }, "geometry": { "type": "LineString", "coordinates": [ [ 24.837642, 36.045503 ] ] } },
