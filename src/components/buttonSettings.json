@@ -220,7 +220,7 @@
     "type": "default",
     "parent": "pt",
     "selected": false,
-    "title": "Locking at the Average Week",
+    "title": "Comparing the Average Car use to Purchases per Week",
     "description": "",
     "graph": "PurchasesOverTime",
     "filterSettings": {
@@ -418,7 +418,7 @@
     "type": "default",
     "parent": "mclc",
     "selected": false,
-    "title": "Credit and Loyalty Cards That Couldn't be matched",
+    "title": "Credit and Loyalty Cards that couldn't be matched",
     "description": "",
     "graph": "CardMatrixGraph",
     "filterSettings": {
@@ -441,7 +441,7 @@
     "type": "default",
     "parent": "mccc",
     "selected": false,
-    "title": "Cars and Credit Cards that could be Matched",
+    "title": "Cars and Credit Cards that could be matched",
     "description": "Cars and Credit Cards with the same Metadata",
     "graph": "CarMatrixGraph",
     "filterSettings": {
@@ -467,7 +467,7 @@
     "parent": "mccc",
     "selected": false,
     "title": "Cars and Credit Cards that couldn't be matched",
-    "description": "Cars and Credit Cards with the same Metadata",
+    "description": "",
     "graph": "CarMatrixGraph",
     "filterSettings": {
       "cars": [
