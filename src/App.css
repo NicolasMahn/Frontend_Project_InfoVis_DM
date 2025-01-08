@@ -140,30 +140,46 @@
   margin-bottom: 2px; /* Reduce bottom margin */
 }
 
-.info-point {
-  margin-left: 8px;
-  font-size: 16px;
-  cursor: pointer;
+.legend {
   position: relative;
+  display: inline-block;
 }
 
-.info-point::after {
-  content: attr(data-tooltip);
-  position: absolute;
-  background-color: #333;
-  color: #fff;
-  padding: 8px;
-  border-radius: 4px;
-  top: 24px;
-  left: 0;
-  white-space: nowrap;
-  font-size: 12px;
+.info-hover {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.info-text {
+  display: flex;
+  align-items: center;
+}
+
+.info-button {
+  position: relative;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.info-tooltip {
   visibility: hidden;
+  width: 200px;
+  background-color: #555;
+  color: #fff;
+  text-align: left;
+  border-radius: 5px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%; /* Position the tooltip above the button */
+  left: 50%;
+  margin-left: -100px;
   opacity: 0;
-  transition: opacity 0.2s ease, visibility 0.2s ease;
+  transition: opacity 0.3s;
 }
 
-.info-point:hover::after {
+.info-button:hover .info-tooltip {
   visibility: visible;
   opacity: 1;
 }
