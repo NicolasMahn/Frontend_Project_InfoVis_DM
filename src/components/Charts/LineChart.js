@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import * as d3 from 'd3';
 
-const LineChart = ({ data, tooltipData, legend, colors, onLineClick, onLineRightClick, onLineDoubleClick }) => {
+const LineChart = ({ data, tooltipData, legend, colors, yAxisLabel, valueType, onLineClick, onLineRightClick, onLineDoubleClick }) => {
   const svgRef = useRef();
   const tooltipRef = useRef();
   
@@ -10,7 +10,7 @@ const LineChart = ({ data, tooltipData, legend, colors, onLineClick, onLineRight
     const tooltip = d3.select(tooltipRef.current);
     const width = 1200;
     const height = 600;
-    const margin = { top: 20, right: 30, bottom: 70, left: 60 };
+    const margin = { top: 20, right: 30, bottom: 70, left: 90 };
 
     const maxLabelLineLength = 10;
     const maxTicks = 10;
@@ -71,9 +71,18 @@ const LineChart = ({ data, tooltipData, legend, colors, onLineClick, onLineRight
 
     const yAxis = g => g
       .attr('transform', `translate(${margin.left},0)`)
-      .call(d3.axisLeft(y))
+      .call(d3.axisLeft(y).tickFormat(d => `${d}${valueType}`))
       .selectAll("text")
       .style("font-size", "14px"); 
+
+    svg.append('text')
+      .attr('x', -height / 2)
+      .attr('y', margin.left / 2 - 20)
+      .attr('text-anchor', 'middle')
+      .attr('transform', 'rotate(-90)')
+      .style('font-size', '14px')
+      .style('font-weight', 'bold')
+      .text(yAxisLabel);
 
     svg.append('g').call(xAxis);
     svg.append('g').call(yAxis);

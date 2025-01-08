@@ -293,10 +293,10 @@ const Dashboard = () => {
         <GraphBox GraphComponent={GraphComponent} selectedGraph={selectedGraph} 
                   onFilterChange={handleFilterChange} filterSettings={filterSettings} handleGraphAndFilterChange={handleGraphAndFilterChange} />
         <FilterBox filters={filters} onFilterChange={handleFilterChange} filterSettings={filterSettings} config={config}/>
-        {/*<ExplanationBox selectedGraph={selectedGraph} filterSettings={filterSettings} handleGraphAndFilterChange={handleGraphAndFilterChange} 
+        <ExplanationBox selectedGraph={selectedGraph} filterSettings={filterSettings} handleGraphAndFilterChange={handleGraphAndFilterChange} 
                         cookieData={cookieData} deleteCookie={deleteCookie} saveCookie={saveCookie}
                         setCookieData={setCookieData} 
-                        title={title} setTitle={setTitle}/>*/}
+                        title={title} setTitle={setTitle}/>
       </div>
     </div>
   );

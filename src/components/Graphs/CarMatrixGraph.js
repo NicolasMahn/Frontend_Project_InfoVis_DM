@@ -32,7 +32,7 @@ const CarMatrixGraph = ({filterSettings, onFilterChange}) => {
 
     if (matrixType === 'Absolute') {
       matrixType = 'absolute_matrix';
-      setUnit(' score');
+      setUnit(' similarity score');
     } else if (matrixType === 'Relative to Credit Card') {
       matrixType = 'relative_cc_matrix';
       setUnit('%');

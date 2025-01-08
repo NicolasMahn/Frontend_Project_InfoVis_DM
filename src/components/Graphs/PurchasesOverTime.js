@@ -31,6 +31,9 @@ const PurchasesOverTime = ({filterSettings, onFilterChange}) => {
     const [savedData, setData] = useState(null);
     const [fetchError, setError] = useState(null);
 
+    const [yAxisLabel, setYAxisLabel] = useState('Number of Purchases');
+    const [valueType, setValueType] = useState('');
+
     const { loading, error, data, refetch } = useQuery(PURCHASES_OVER_TIME_QUERY, {
         skip: true, // Skip the initial automatic query execution
         fetchPolicy: 'cache-and-network', // Use cache first, then network
@@ -100,6 +103,14 @@ const PurchasesOverTime = ({filterSettings, onFilterChange}) => {
         if (savedData) {
             const timeFilter = filterSettings.time;
             const type = filterSettings.type;
+
+            if (type === "Number of Purchases") {
+                setYAxisLabel("Number of Purchases");
+                setValueType("");
+            } else if (type === "Expenses over Time") {
+                setYAxisLabel("Expenses");
+                setValueType("€");
+            }
 
             const fsCategories = filterSettings.categories
             let categories = []
@@ -239,7 +250,6 @@ const PurchasesOverTime = ({filterSettings, onFilterChange}) => {
                     if (timeFilter === "Timeline") {
                         let xDate = new Date(i*1000);
                         let dateStringWithDay = xDate.toLocaleDateString('en-EU', {
-                            weekday: 'long', // Options: 'long', 'short', 'narrow'
                             year: 'numeric',
                             month: '2-digit', // Options: 'numeric', '2-digit', 'long', 'short', 'narrow'
                             day: 'numeric',
@@ -252,7 +262,7 @@ const PurchasesOverTime = ({filterSettings, onFilterChange}) => {
                     x = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
                 } else if (timeFilter === "Average Work Day" || timeFilter === "Average Weekend Day" || timeFilter === "Average Day") {
                     for (let l = 0; l < 24; l++) {
-                        x.push(String(l));
+                        x.push(String(l)+':00');
                     }
                 }
 
@@ -333,12 +343,13 @@ const PurchasesOverTime = ({filterSettings, onFilterChange}) => {
     
     if (chartData.length < 1 || legend.length < 1 || colors.length < 1) {
         return <p>No data to display | Loading...</p>
-    }   
+    }  
+
 
     return (
     <div>
         <h2 className="header">{title}</h2>
-        <LineChart data={chartData} legend={legend} colors={colors} tooltipData={tooltipData} onBarClick={handleBarClick} onBarRightClick={handleBarRightClick} onBarDoubleClick={handleBarDoubleClick}/>
+        <LineChart data={chartData} legend={legend} colors={colors} tooltipData={tooltipData} yAxisLabel={yAxisLabel} valueType={valueType}  onBarClick={handleBarClick} onBarRightClick={handleBarRightClick} onBarDoubleClick={handleBarDoubleClick}/>
     </div>
     );
     }

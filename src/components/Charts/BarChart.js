@@ -69,7 +69,7 @@ const BarChart = ({ data, legend, colors, yAxisLabel, valueType, onBarClick, onB
 
     const yAxis = g => g
       .attr('transform', `translate(${margin.left},0)`)
-      .call(d3.axisLeft(y))
+      .call(d3.axisLeft(y).tickFormat(d => `${d}${valueType}`))
       .selectAll("text")
       .style("font-size", "14px"); 
 
