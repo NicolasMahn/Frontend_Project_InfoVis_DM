@@ -18,25 +18,31 @@ const FilterBox = ({ filters, onFilterChange, filterSettings, config, handleGrap
 
   return (
     <div className="filter-box">
-      
-      <b style={{ fontSize: '20px' }}>Preselected Filters:</b>
-      
+      {buttonSettings.filter(child => graph != null && child.parent === graph.id).length > 0 && (
+        <>
+          <b style={{ fontSize: '20px' }}>Preselected Filters:</b>
+        </>
+      )}
 
       {buttonSettings.filter(child => graph != null && child.parent === graph.id).map((child) => (
         <React.Fragment key={child.id}>
           <p>
-          <button onClick={() => loadGraph(child)} className={`graph-button child-button ${child.type === 'custom' ? 'custom' : ''}`}>
-            {child.title}
-          </button>
+            <button onClick={() => loadGraph(child)} className={`graph-button child-button ${child.type === 'custom' ? 'custom' : ''}`}>
+              {child.title}
+            </button>
           </p>
         </React.Fragment>
       ))}
-      <hr/>
+      {buttonSettings.filter(child => graph != null && child.parent === graph.id).length > 0 && (
+        <>
+          <hr/>
+        </>
+      )}
+      
       <br/>
       {filters.map((FilterComponent, index) => (
         <FilterComponent key={index} onFilterChange={onFilterChange} filterSettings={filterSettings} config={config} />
       ))}
-      
     </div>
   );
 };
