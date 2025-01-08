@@ -51,7 +51,10 @@
     "selected": false,
     "title": "Location and Employee Cluster Map",
     "description": "Map with Clusters in Locations and Employee meetings",
-    "graph": "LocationClusterMap"
+    "graph": "LocationClusterMap",
+    "filterSettings": {
+      "ClusterMapFilter": ["filter 3"]
+    }
   },
   {
     "id": "cclc",
