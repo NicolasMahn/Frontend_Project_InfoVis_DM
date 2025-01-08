@@ -39,7 +39,7 @@
 }
 
 .navigation-box { grid-area: navigation; }
-.graph-box { grid-area: graph; }
+.graph-box { grid-area: graph; margin: 0; }
 .explanation-box { grid-area: explanation; }
 .filter-box { grid-area: filter; }
 
@@ -118,4 +118,24 @@
 .image-container img {
   max-width: 100%;
   height: auto;
+}
+.center-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* Adjust as needed */
+}
+
+.center-item {
+  text-align: center;
+  margin: 0; /* Set margin to 0 */
+}
+
+.title {
+  margin-top: 2px; /* Reduce top margin */
+}
+
+.image {
+  margin-bottom: 2px; /* Reduce bottom margin */
 }

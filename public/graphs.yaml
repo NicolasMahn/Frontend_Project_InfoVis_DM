@@ -74,3 +74,8 @@ LandingPage:
   graph_name: LandingPage
   filters: [ImageComponent]
   categories: []
+
+LocationClusterMap:
+  graph_name: LocationClusterMap
+  filters: [ClusterMapFilter]
+  categories: []

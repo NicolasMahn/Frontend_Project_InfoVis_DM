@@ -1,28 +1,33 @@
-import React from 'react';
-import MapChart from '../Charts/MapChart';
-
-// Import JSON data files
-import locations from '../../data/location_parking_cluster.json';
-import employeeClusters from '../../data/employee_cluster.geojson';
-import geojson from '../../data/abila_2.geojson';
-
-const desiredStreetNames = [
-  "Rist Way", "Carnero St", "Barwyn St", "Arkadiou St", "Androutsou St",
-  "Velestinou Blv", "Ermou St", "Egeou Av", "Ipsilantou Ave", "Pilau St",
-  "Parla St", "Spetson St", "Taxiarchon Ave"
-];
+import React, { useState } from 'react';
+import graph1 from '../../data/abila_map.png';
+import graph2 from '../../data/abila_map_location_cluster.png';
+import graph3 from '../../data/abila_map_location_employee_cluster.png';
 
 const LocationClusterMap = () => {
+  const [selectedFilter, setSelectedFilter] = useState('filter3');
+
+  const allGraphs = {
+    filter1: [
+      { src: graph1, title: 'Abila Street Map' },
+    ],
+    filter2: [
+      { src: graph2, title: 'Abila Street Map with identified Locations' },
+    ],
+    filter3: [
+      { src: graph3, title: 'Abila Street Map with identified Locations and Employee Meetingpoints' },
+    ],
+  };
+
   return (
-    <div>
-      <h1>GeoJSON and JSON Graph</h1>
-      <MapChart
-        geojson={geojson}
-        locations={locations}
-        employeeClusters={employeeClusters}
-        desiredStreetNames={desiredStreetNames}
-      />
-    </div>
+      <div className="center-content">
+        {allGraphs[selectedFilter].map((graph, index) => (
+          <div key={index} className="center-item">
+            <h2 className="title">{graph.title}</h2>
+            <img className="image" src={graph.src} alt={graph.title} />
+          </div>
+        ))}
+      </div>
+    
   );
 };
 

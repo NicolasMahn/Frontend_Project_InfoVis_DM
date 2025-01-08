@@ -30,6 +30,7 @@ import CreditCardFilter from './Filters/CreditCardFilter.js';
 import LoyaltyCardFilter from './Filters/LoyaltyCardFilter.js';
 import CarIDFilter from './Filters/CarFilter.js';
 import ImageComponent from './Filters/ImageComponent.js';
+import ClusterMapFilter from './Filters/ClusterMapFilter.js';
 
 import buttonSettingsJSON from './buttonSettings.json';
 import { filter } from 'd3';
@@ -56,7 +57,8 @@ const filterComponents = {
   CreditCard: CreditCardFilter,
   LoyaltyCard: LoyaltyCardFilter,
   CarID: CarIDFilter,
-  ImageComponent: ImageComponent
+  ImageComponent: ImageComponent,
+  ClusterMapFilter: ClusterMapFilter
 };
 
 const Dashboard = () => {
