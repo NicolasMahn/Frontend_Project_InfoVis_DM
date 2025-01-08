@@ -161,10 +161,10 @@ const Dashboard = () => {
     <div className="dashboard-with-Heading">
       <h1 className="header" id="dashboard-header">GASTech Employee Investigation Dashboard</h1>
       <div className="dashboard">
-        <NavigationBox handleGraphAndFilterChange={handleGraphAndFilterChange} cookieData={buttonSettings}/>
+        <NavigationBox handleGraphAndFilterChange={handleGraphAndFilterChange} buttonSettings={buttonSettings}/>
         <GraphBox GraphComponent={GraphComponent} selectedGraph={selectedGraph} 
                   onFilterChange={handleFilterChange} filterSettings={filterSettings} handleGraphAndFilterChange={handleGraphAndFilterChange} />
-        <FilterBox filters={filters} onFilterChange={handleFilterChange} filterSettings={filterSettings} config={config}/>
+        <FilterBox filters={filters} onFilterChange={handleFilterChange} filterSettings={filterSettings} config={config} buttonSettings={buttonSettings}/>
       </div>
     </div>
   );

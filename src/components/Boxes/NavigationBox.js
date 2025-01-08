@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 
-const ExplanationBox = ({cookieData, handleGraphAndFilterChange}) => {
+const ExplanationBox = ({buttonSettings, handleGraphAndFilterChange}) => {
   const [hoveredGraph, setHoveredGraph] = useState(null);
 
 
@@ -20,7 +20,7 @@ const ExplanationBox = ({cookieData, handleGraphAndFilterChange}) => {
   return (
     <div className="navigation-box" style={{ textAlign: 'center' }}>
       <div>
-        {cookieData.filter(graph => graph.type === 'default_generic').map((graph) => (
+        {buttonSettings.filter(graph => graph.type === 'default_generic').map((graph) => (
           <div key={graph.id} className="graph-button-container" onMouseEnter={() => handleMouseEnter(graph)} onMouseLeave={handleMouseLeave}>
             <button
               className={`graph-button ${graph.selected ? 'selected' : ''}`}
@@ -30,7 +30,7 @@ const ExplanationBox = ({cookieData, handleGraphAndFilterChange}) => {
             </button>
             {hoveredGraph === graph.id && (
               <div className="dropdown">
-                {cookieData.filter(child => child.parent === graph.id).map((child) => (
+                {buttonSettings.filter(child => child.parent === graph.id).map((child) => (
                   <button
                     key={child.id}
                     className={`graph-button child-button ${child.type === 'custom' ? 'custom' : ''}`}

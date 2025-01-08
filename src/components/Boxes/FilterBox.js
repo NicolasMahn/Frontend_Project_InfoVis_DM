@@ -1,14 +1,13 @@
 import React from 'react';
-import defaultCookie from './defaultCookie.json'; // Import the defaultCookie.json file
 
-const FilterBox = ({ filters, onFilterChange, filterSettings, config }) => {
+const FilterBox = ({ filters, onFilterChange, filterSettings, config, buttonSettings }) => {
   const handlePreselection = (preselectedFilters) => {
     // Apply the preselection to the filters
     onFilterChange(preselectedFilters);
   };
 
   // Filter the preselections that have the current graph as parent
-  const preselections = defaultCookie.filter(item => item.parent === config.graph);
+  const preselections = buttonSettings.filter(item => item.parent === config.graph);
 
   return (
     <div className="filter-box">
