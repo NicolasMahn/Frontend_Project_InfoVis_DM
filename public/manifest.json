@@ -31,6 +31,7 @@
   "theme_color": "#000000",
   "background_color": "#ffffff",
   "web_accessible_resources": [
-    "graphs.yml"
+    "graphs.yml",
+    "MC2-tourist.jpg"
   ]
 }
