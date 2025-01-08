@@ -3,20 +3,24 @@ import defaultCookie from './defaultCookie.json'; // Import the defaultCookie.js
 
 const FilterBox = ({ filters, onFilterChange, filterSettings, config }) => {
   const handlePreselection = (preselectedFilters) => {
-    // Wenden Sie die Preselection auf die Filter an
+    // Apply the preselection to the filters
     onFilterChange(preselectedFilters);
   };
 
-  // Filtern Sie die Preselections, die den aktuellen Graph als Parent haben
+  // Filter the preselections that have the current graph as parent
   const preselections = defaultCookie.filter(item => item.parent === config.graph);
 
   return (
     <div className="filter-box">
-      {preselections.map(preselection => (
-        <button key={preselection.id} onClick={() => handlePreselection(preselection.filterSettings)}>
-          Load Preselection {preselection.title}
-        </button>
-      ))}
+      {preselections.length > 0 && (
+        <div className="preselection-buttons">
+          {preselections.map(preselection => (
+            <button key={preselection.id} onClick={() => handlePreselection(preselection.filterSettings)}>
+              Load Preselection: {preselection.title}
+            </button>
+          ))}
+        </div>
+      )}
       {filters.map((FilterComponent, index) => (
         <FilterComponent key={index} onFilterChange={onFilterChange} filterSettings={filterSettings} config={config} />
       ))}
