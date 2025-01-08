@@ -70,3 +70,7 @@ CarMatrixGraph:
                         <br>
                         These attributes are useful for assessing whether a <em>Credit Card</em> has primarily been used in conjunction with a specific <em>Car ID</em>, and vice versa.
                        </p>
+LandingPage:
+  graph_name: LandingPage
+  filters: []
+  categories: []

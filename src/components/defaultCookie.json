@@ -2,11 +2,12 @@
   {
     "id": "lp",
     "type": "default_generic",
-    "parent": null,
+    "parent": "None",
     "selected": true,
     "title": "Home",
     "description": "Start page of Sahboard with all the relevent information",
-    "graph": "LandingPage"
+    "graph": "LandingPage",
+    "filterSettings": {}
   },
   {
     "id": "cpdl",

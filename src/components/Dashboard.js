@@ -86,10 +86,30 @@ const Dashboard = () => {
   const [cookieData, setCookieData] = useState([]);
   const [title, setTitle] = useState('');
 
-  const cookieName = 'cookieV0.3';
+  const desiredVersion = 'V0.4';
+  const cookieName = 'cookie'+desiredVersion;
+
+  // Function to get all cookies
+  function getAllCookies() {
+    return document.cookie.split(';').reduce((cookies, cookie) => {
+        const [name, value] = cookie.split('=').map(c => c.trim());
+        cookies[name] = value;
+        return cookies;
+    }, {});
+  }
+  const cookies = getAllCookies();
   
   const getCookie = () => {
     let cookieData = [];
+
+    // Delete cookies with the wrong version
+    Object.keys(cookies).forEach(cookieName_ => {
+      const cookieParts = cookieName_.split('_');
+      if (cookieParts[0] !== `cookie${desiredVersion}`) {
+        document.cookie = cookieName_ + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+      }
+    });
+
     for (let index = 0; ; index++) {
       let cookieString = Cookies.get(`${cookieName}_${index}`);
       if (!cookieString) {
