@@ -114,6 +114,7 @@ const Dashboard = () => {
     }));
   };
 
+  useEffect(() => {
   fetch('/graphs.yaml')
     .then(response => response.text())
     .then(text => {
@@ -121,7 +122,7 @@ const Dashboard = () => {
       setGraphConfig(config);
     })
     .catch(error => console.error('Error fetching the YAML file:', error));
-
+  }, []);
 
   useEffect(() => {
     const handleBackButton = (event) => {
@@ -159,7 +160,7 @@ const Dashboard = () => {
         <NavigationBox handleGraphAndFilterChange={handleGraphAndFilterChange} buttonSettings={buttonSettings}/>
         <GraphBox GraphComponent={GraphComponent} selectedGraph={selectedGraph} 
                   onFilterChange={handleFilterChange} filterSettings={filterSettings} handleGraphAndFilterChange={handleGraphAndFilterChange} />
-        <FilterBox filters={filters} onFilterChange={handleFilterChange} filterSettings={filterSettings} config={config}/>
+        <FilterBox filters={filters} onFilterChange={handleFilterChange} filterSettings={filterSettings} config={config} handleGraphAndFilterChange={handleGraphAndFilterChange} buttonSettings={buttonSettings}/>
       </div>
     </div>
   );

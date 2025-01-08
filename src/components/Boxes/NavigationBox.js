@@ -28,19 +28,6 @@ const ExplanationBox = ({buttonSettings, handleGraphAndFilterChange}) => {
             >
               {graph.title}
             </button>
-            {hoveredGraph === graph.id && (
-              <div className="dropdown">
-                {buttonSettings.filter(child => child.parent === graph.id).map((child) => (
-                  <button
-                    key={child.id}
-                    className={`graph-button child-button ${child.type === 'custom' ? 'custom' : ''}`}
-                    onClick={() => loadGraph(child)}
-                  >
-                    {child.title}
-                  </button>
-                ))}
-              </div>
-            )}
           </div>
         ))}
       </div>
