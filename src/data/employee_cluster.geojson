@@ -1,0 +1,1195 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "cluster_id": 1,
+        "location": "Albert's Fine Clothing",
+        "employees": [
+          {
+            "car_id": "9",
+            "LastName": "Cazar",
+            "FirstName": "Gustav",
+            "CurrentEmploymentType": "Engineering",
+            "CurrentEmploymentTitle": "Drill Technician",
+            "start_time": "2014-01-06 12:17:27",
+            "end_time": "2014-01-06 13:59:01",
+            "duration_of_stop_min": 101.56666666666666,
+            "latitude": 36.07667101,
+            "longitude": 24.85759425
+          },
+          {
+            "car_id": "32",
+            "LastName": "Strum",
+            "FirstName": "Orhan",
+            "CurrentEmploymentType": "Executive",
+            "CurrentEmploymentTitle": "SVP/COO",
+            "start_time": "2014-01-06 12:21:27",
+            "end_time": "2014-01-06 13:01:01",
+            "duration_of_stop_min": 39.56666666666667,
+            "latitude": 36.07666045,
+            "longitude": 24.85761329
+          },
+          {
+            "car_id": "34",
+            "LastName": "Vann",
+            "FirstName": "Edvard",
+            "CurrentEmploymentType": "Security",
+            "CurrentEmploymentTitle": "Perimeter Control",
+            "start_time": "2014-01-06 12:23:27",
+            "end_time": "2014-01-06 13:24:01",
+            "duration_of_stop_min": 60.56666666666667,
+            "latitude": 36.0766721,
+            "longitude": 24.85756627
+          },
+          {
+            "car_id": "1",
+            "LastName": "Calixto",
+            "FirstName": "Nils",
+            "CurrentEmploymentType": "Information Technology",
+            "CurrentEmploymentTitle": "IT Helpdesk",
+            "start_time": "2014-01-06 12:26:27",
+            "end_time": "2014-01-06 13:25:01",
+            "duration_of_stop_min": 58.56666666666667,
+            "latitude": 36.07666279,
+            "longitude": 24.85759134
+          }
+        ]
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [
+                24.85756627,
+                36.07666045
+              ],
+              [
+                24.85756627,
+                36.0766721
+              ],
+              [
+                24.85761329,
+                36.0766721
+              ],
+              [
+                24.85761329,
+                36.07666045
+              ],
+              [
+                24.85756627,
+                36.07666045
+              ]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "cluster_id": 2,
+        "location": "Bean There Done That",
+        "employees": [
+          {
+            "car_id": "19",
+            "LastName": "Frente",
+            "FirstName": "Vira",
+            "CurrentEmploymentType": "Engineering",
+            "CurrentEmploymentTitle": "Hydraulic Technician",
+            "start_time": "2014-01-06 06:57:01",
+            "end_time": "2014-01-06 07:40:01",
+            "duration_of_stop_min": 43.0,
+            "latitude": 36.08172261,
+            "longitude": 24.85087373
+          },
+          {
+            "car_id": "11",
+            "LastName": "Calzas",
+            "FirstName": "Axel",
+            "CurrentEmploymentType": "Engineering",
+            "CurrentEmploymentTitle": "Hydraulic Technician",
+            "start_time": "2014-01-06 07:05:32",
+            "end_time": "2014-01-06 07:50:01",
+            "duration_of_stop_min": 44.483333333333334,
+            "latitude": 36.08174553,
+            "longitude": 24.85095841
+          },
+          {
+            "car_id": "3",
+            "LastName": "Balas",
+            "FirstName": "Felix",
+            "CurrentEmploymentType": "Engineering",
+            "CurrentEmploymentTitle": "Engineer",
+            "start_time": "2014-01-06 07:22:48",
+            "end_time": "2014-01-06 07:47:01",
+            "duration_of_stop_min": 24.216666666666665,
+            "latitude": 36.08181648,
+            "longitude": 24.85094659
+          },
+          {
+            "car_id": "2",
+            "LastName": "Azada",
+            "FirstName": "Lars",
+            "CurrentEmploymentType": "Engineering",
+            "CurrentEmploymentTitle": "Engineer",
+            "start_time": "2014-01-06 07:34:22",
+            "end_time": "2014-01-06 08:11:01",
+            "duration_of_stop_min": 36.65,
+            "latitude": 36.08179517,
+            "longitude": 24.8509318
+          }
+        ]
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [
+                24.85087373,
+                36.08172261
+              ],
+              [
+                24.85087373,
+                36.08181648
+              ],
+              [
+                24.85095841,
+                36.08181648
+              ],
+              [
+                24.85095841,
+                36.08172261
+              ],
+              [
+                24.85087373,
+                36.08172261
+              ]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "cluster_id": 3,
+        "location": "Brew've Been Served",
+        "employees": [
+          {
+            "car_id": "34",
+            "LastName": "Vann",
+            "FirstName": "Edvard",
+            "CurrentEmploymentType": "Security",
+            "CurrentEmploymentTitle": "Perimeter Control",
+            "start_time": "2014-01-06 07:07:48",
+            "end_time": "2014-01-06 07:35:01",
+            "duration_of_stop_min": 27.216666666666665,
+            "latitude": 36.05407865,
+            "longitude": 24.90118424
+          },
+          {
+            "car_id": "17",
+            "LastName": "Flecha",
+            "FirstName": "Sven",
+            "CurrentEmploymentType": "Information Technology",
+            "CurrentEmploymentTitle": "IT Technician",
+            "start_time": "2014-01-06 07:07:53",
+            "end_time": "2014-01-06 07:50:01",
+            "duration_of_stop_min": 42.13333333333333,
+            "latitude": 36.05411139,
+            "longitude": 24.90121759
+          },
+          {
+            "car_id": "16",
+            "LastName": "Vann",
+            "FirstName": "Isia",
+            "CurrentEmploymentType": "Security",
+            "CurrentEmploymentTitle": "Perimeter Control",
+            "start_time": "2014-01-06 07:17:36",
+            "end_time": "2014-01-06 08:01:01",
+            "duration_of_stop_min": 43.416666666666664,
+            "latitude": 36.05404998,
+            "longitude": 24.90118525
+          },
+          {
+            "car_id": "20",
+            "LastName": "Fusil",
+            "FirstName": "Stenig",
+            "CurrentEmploymentType": "Security",
+            "CurrentEmploymentTitle": "Building Control",
+            "start_time": "2014-01-06 07:18:35",
+            "end_time": "2014-01-06 07:39:01",
+            "duration_of_stop_min": 20.433333333333334,
+            "latitude": 36.05408312,
+            "longitude": 24.90122407
+          },
+          {
+            "car_id": "21",
+            "LastName": "Osvaldo",
+            "FirstName": "Hennie",
+            "CurrentEmploymentType": "Security",
+            "CurrentEmploymentTitle": "Perimeter Control",
+            "start_time": "2014-01-06 07:26:36",
+            "end_time": "2014-01-06 07:55:01",
+            "duration_of_stop_min": 28.416666666666668,
+            "latitude": 36.05412583,
+            "longitude": 24.90116992
+          },
+          {
+            "car_id": "13",
+            "LastName": "Ferro",
+            "FirstName": "Inga",
+            "CurrentEmploymentType": "Security",
+            "CurrentEmploymentTitle": "Site Control",
+            "start_time": "2014-01-06 07:29:36",
+            "end_time": "2014-01-06 08:03:01",
+            "duration_of_stop_min": 33.416666666666664,
+            "latitude": 36.05410986,
+            "longitude": 24.9012369
+          },
+          {
+            "car_id": "33",
+            "LastName": "Tempestad",
+            "FirstName": "Brand",
+            "CurrentEmploymentType": "Engineering",
+            "CurrentEmploymentTitle": "Drill Technician",
+            "start_time": "2014-01-06 07:30:53",
+            "end_time": "2014-01-06 07:46:01",
+            "duration_of_stop_min": 15.133333333333333,
+            "latitude": 36.05405739,
+            "longitude": 24.90123022
+          },
+          {
+            "car_id": "24",
+            "LastName": "Mies",
+            "FirstName": "Minke",
+            "CurrentEmploymentType": "Security",
+            "CurrentEmploymentTitle": "Perimeter Control",
+            "start_time": "2014-01-06 07:44:53",
+            "end_time": "2014-01-06 08:07:01",
+            "duration_of_stop_min": 22.133333333333333,
+            "latitude": 36.05405606,
+            "longitude": 24.9011923
+          },
+          {
+            "car_id": "23",
+            "LastName": "Lagos",
+            "FirstName": "Varja",
+            "CurrentEmploymentType": "Security",
+            "CurrentEmploymentTitle": "Badging Office",
+            "start_time": "2014-01-06 07:45:23",
+            "end_time": "2014-01-06 07:56:01",
+            "duration_of_stop_min": 10.633333333333333,
+            "latitude": 36.05404434,
+            "longitude": 24.9012306
+          },
+          {
+            "car_id": "30",
+            "LastName": "Resumir",
+            "FirstName": "Felix",
+            "CurrentEmploymentType": "Security",
+            "CurrentEmploymentTitle": "Security Group Manager",
+            "start_time": "2014-01-06 07:46:23",
+            "end_time": "2014-01-06 08:14:01",
+            "duration_of_stop_min": 27.633333333333333,
+            "latitude": 36.05406564,
+            "longitude": 24.90125059
+          },
+          {
+            "car_id": "15",
+            "LastName": "Bodrogi",
+            "FirstName": "Loreto",
+            "CurrentEmploymentType": "Security",
+            "CurrentEmploymentTitle": "Site Control",
+            "start_time": "2014-01-06 07:48:36",
+            "end_time": "2014-01-06 08:14:01",
+            "duration_of_stop_min": 25.416666666666668,
+            "latitude": 36.0540644,
+            "longitude": 24.90122427
+          },
+          {
+            "car_id": "22",
+            "LastName": "Nubarron",
+            "FirstName": "Adra",
+            "CurrentEmploymentType": "Security",
+            "CurrentEmploymentTitle": "Badging Office",
+            "start_time": "2014-01-06 08:06:23",
+            "end_time": "2014-01-06 08:17:01",
+            "duration_of_stop_min": 10.633333333333333,
+            "latitude": 36.05403527,
+            "longitude": 24.90123671
+          }
+        ]
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [
+                24.90116992,
+                36.05403527
+              ],
+              [
+                24.90116992,
+                36.05412583
+              ],
+              [
+                24.90125059,
+                36.05412583
+              ],
+              [
+                24.90125059,
+                36.05403527
+              ],
+              [
+                24.90116992,
+                36.05403527
+              ]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "cluster_id": 4,
+        "location": "Carly's Coffee",
+        "employees": [
+          {
+            "car_id": "6",
+            "LastName": "Bergen",
+            "FirstName": "Linnea",
+            "CurrentEmploymentType": "Information Technology",
+            "CurrentEmploymentTitle": "IT Group Manager",
+            "start_time": "2014-01-06 12:07:16",
+            "end_time": "2014-01-06 13:25:01",
+            "duration_of_stop_min": 77.75,
+            "latitude": 36.05979491,
+            "longitude": 24.85797594
+          },
+          {
+            "car_id": "13",
+            "LastName": "Ferro",
+            "FirstName": "Inga",
+            "CurrentEmploymentType": "Security",
+            "CurrentEmploymentTitle": "Site Control",
+            "start_time": "2014-01-06 12:15:16",
+            "end_time": "2014-01-06 14:11:01",
+            "duration_of_stop_min": 115.75,
+            "latitude": 36.05979141,
+            "longitude": 24.85803821
+          },
+          {
+            "car_id": "27",
+            "LastName": "Orilla",
+            "FirstName": "Kare",
+            "CurrentEmploymentType": "Engineering",
+            "CurrentEmploymentTitle": "Drill Technician",
+            "start_time": "2014-01-06 12:23:16",
+            "end_time": "2014-01-06 14:02:01",
+            "duration_of_stop_min": 98.75,
+            "latitude": 36.05977523,
+            "longitude": 24.85799825
+          },
+          {
+            "car_id": "8",
+            "LastName": "Alcazar",
+            "FirstName": "Lucas",
+            "CurrentEmploymentType": "Information Technology",
+            "CurrentEmploymentTitle": "IT Technician",
+            "start_time": "2014-01-06 12:24:16",
+            "end_time": "2014-01-06 13:50:01",
+            "duration_of_stop_min": 85.75,
+            "latitude": 36.05970718,
+            "longitude": 24.85801667
+          }
+        ]
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [
+                24.85797594,
+                36.05970718
+              ],
+              [
+                24.85797594,
+                36.05979491
+              ],
+              [
+                24.85803821,
+                36.05979491
+              ],
+              [
+                24.85803821,
+                36.05970718
+              ],
+              [
+                24.85797594,
+                36.05970718
+              ]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "cluster_id": 5,
+        "location": "Chostus Hotel",
+        "employees": [
+          {
+            "car_id": "33",
+            "LastName": "Tempestad",
+            "FirstName": "Brand",
+            "CurrentEmploymentType": "Engineering",
+            "CurrentEmploymentTitle": "Drill Technician",
+            "start_time": "2014-01-08 11:09:07",
+            "end_time": "2014-01-08 13:21:01",
+            "duration_of_stop_min": 131.9,
+            "latitude": 36.07071981,
+            "longitude": 24.89527846
+          },
+          {
+            "car_id": "7",
+            "LastName": "Orilla",
+            "FirstName": "Elsa",
+            "CurrentEmploymentType": "Engineering",
+            "CurrentEmploymentTitle": "Drill Technician",
+            "start_time": "2014-01-08 11:17:07",
+            "end_time": "2014-01-08 13:01:01",
+            "duration_of_stop_min": 103.9,
+            "latitude": 36.07073518,
+            "longitude": 24.89523466
+          }
+        ]
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [
+                24.89523466,
+                36.07071981
+              ],
+              [
+                24.89523466,
+                36.07073518
+              ],
+              [
+                24.89527846,
+                36.07073518
+              ],
+              [
+                24.89527846,
+                36.07071981
+              ],
+              [
+                24.89523466,
+                36.07071981
+              ]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "cluster_id": 6,
+        "location": "Coffee Chameleon",
+        "employees": [
+          {
+            "car_id": "6",
+            "LastName": "Bergen",
+            "FirstName": "Linnea",
+            "CurrentEmploymentType": "Information Technology",
+            "CurrentEmploymentTitle": "IT Group Manager",
+            "start_time": "2014-01-06 07:20:42",
+            "end_time": "2014-01-06 07:51:01",
+            "duration_of_stop_min": 30.316666666666666,
+            "latitude": 36.05468599,
+            "longitude": 24.88982134
+          },
+          {
+            "car_id": "29",
+            "LastName": "Ovan",
+            "FirstName": "Bertrand",
+            "CurrentEmploymentType": "Facilities",
+            "CurrentEmploymentTitle": "Facilities Group Manager",
+            "start_time": "2014-01-06 07:24:29",
+            "end_time": "2014-01-06 07:56:07",
+            "duration_of_stop_min": 31.633333333333333,
+            "latitude": 36.05468548,
+            "longitude": 24.88982376
+          },
+          {
+            "car_id": "25",
+            "LastName": "Herrero",
+            "FirstName": "Kanon",
+            "CurrentEmploymentType": "Engineering",
+            "CurrentEmploymentTitle": "Geologist",
+            "start_time": "2014-01-06 07:45:42",
+            "end_time": "2014-01-06 07:55:01",
+            "duration_of_stop_min": 9.316666666666666,
+            "latitude": 36.05466363,
+            "longitude": 24.88983269
+          }
+        ]
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [
+                24.88982134,
+                36.05466363
+              ],
+              [
+                24.88982134,
+                36.05468599
+              ],
+              [
+                24.88983269,
+                36.05468599
+              ],
+              [
+                24.88983269,
+                36.05466363
+              ],
+              [
+                24.88982134,
+                36.05466363
+              ]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "cluster_id": 7,
+        "location": "Coffee Shack",
+        "employees": [
+          {
+            "car_id": "24",
+            "LastName": "Mies",
+            "FirstName": "Minke",
+            "CurrentEmploymentType": "Security",
+            "CurrentEmploymentTitle": "Perimeter Control",
+            "start_time": "2014-01-06 18:49:03",
+            "end_time": "2014-01-06 21:04:01",
+            "duration_of_stop_min": 134.96666666666667,
+            "latitude": 36.07524082,
+            "longitude": 24.85631656
+          },
+          {
+            "car_id": "1",
+            "LastName": "Calixto",
+            "FirstName": "Nils",
+            "CurrentEmploymentType": "Information Technology",
+            "CurrentEmploymentTitle": "IT Helpdesk",
+            "start_time": "2014-01-06 19:49:01",
+            "end_time": "2014-01-06 20:27:01",
+            "duration_of_stop_min": 38.0,
+            "latitude": 36.07528409,
+            "longitude": 24.85631951
+          }
+        ]
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [
+                24.85631656,
+                36.07524082
+              ],
+              [
+                24.85631656,
+                36.07528409
+              ],
+              [
+                24.85631951,
+                36.07528409
+              ],
+              [
+                24.85631951,
+                36.07524082
+              ],
+              [
+                24.85631656,
+                36.07524082
+              ]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "cluster_id": 8,
+        "location": "Desafio Golf Course",
+        "employees": [
+          {
+            "car_id": "35",
+            "LastName": "Vasco-Pais",
+            "FirstName": "Willem",
+            "CurrentEmploymentType": "Executive",
+            "CurrentEmploymentTitle": "Environmental Safety Advisor",
+            "start_time": "2014-01-12 12:49:17",
+            "end_time": "2014-01-12 16:22:01",
+            "duration_of_stop_min": 212.73333333333332,
+            "latitude": 36.08954006,
+            "longitude": 24.86068035
+          },
+          {
+            "car_id": "10",
+            "LastName": "Campo-Corrente",
+            "FirstName": "Ada",
+            "CurrentEmploymentType": "Executive",
+            "CurrentEmploymentTitle": "SVP/CIO",
+            "start_time": "2014-01-12 13:26:35",
+            "end_time": "2014-01-12 16:12:01",
+            "duration_of_stop_min": 165.43333333333334,
+            "latitude": 36.08960158,
+            "longitude": 24.86069606
+          }
+        ]
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [
+                24.86068035,
+                36.08954006
+              ],
+              [
+                24.86068035,
+                36.08960158
+              ],
+              [
+                24.86069606,
+                36.08960158
+              ],
+              [
+                24.86069606,
+                36.08954006
+              ],
+              [
+                24.86068035,
+                36.08954006
+              ]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "cluster_id": 9,
+        "location": "Frydo's Autosupply n' More",
+        "employees": [
+          {
+            "car_id": "15",
+            "LastName": "Bodrogi",
+            "FirstName": "Loreto",
+            "CurrentEmploymentType": "Security",
+            "CurrentEmploymentTitle": "Site Control",
+            "start_time": "2014-01-06 17:26:46",
+            "end_time": "2014-01-07 03:20:01",
+            "duration_of_stop_min": 593.25,
+            "latitude": 36.06038292,
+            "longitude": 24.90560128
+          },
+          {
+            "car_id": "16",
+            "LastName": "Vann",
+            "FirstName": "Isia",
+            "CurrentEmploymentType": "Security",
+            "CurrentEmploymentTitle": "Perimeter Control",
+            "start_time": "2014-01-06 18:07:01",
+            "end_time": "2014-01-06 19:29:01",
+            "duration_of_stop_min": 82.0,
+            "latitude": 36.06036198,
+            "longitude": 24.90561127
+          },
+          {
+            "car_id": "13",
+            "LastName": "Ferro",
+            "FirstName": "Inga",
+            "CurrentEmploymentType": "Security",
+            "CurrentEmploymentTitle": "Site Control",
+            "start_time": "2014-01-06 20:30:05",
+            "end_time": "2014-01-07 07:37:01",
+            "duration_of_stop_min": 666.9333333333333,
+            "latitude": 36.06035588,
+            "longitude": 24.90561931
+          },
+          {
+            "car_id": "21",
+            "LastName": "Osvaldo",
+            "FirstName": "Hennie",
+            "CurrentEmploymentType": "Security",
+            "CurrentEmploymentTitle": "Perimeter Control",
+            "start_time": "2014-01-06 20:34:45",
+            "end_time": "2014-01-07 07:44:01",
+            "duration_of_stop_min": 669.2666666666667,
+            "latitude": 36.06036892,
+            "longitude": 24.90561205
+          }
+        ]
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [
+                24.90560128,
+                36.06035588
+              ],
+              [
+                24.90560128,
+                36.06038292
+              ],
+              [
+                24.90561931,
+                36.06038292
+              ],
+              [
+                24.90561931,
+                36.06035588
+              ],
+              [
+                24.90560128,
+                36.06035588
+              ]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "cluster_id": 10,
+        "location": "Guy's Gyros",
+        "employees": [
+          {
+            "car_id": "23",
+            "LastName": "Lagos",
+            "FirstName": "Varja",
+            "CurrentEmploymentType": "Security",
+            "CurrentEmploymentTitle": "Badging Office",
+            "start_time": "2014-01-06 17:36:50",
+            "end_time": "2014-01-06 18:45:01",
+            "duration_of_stop_min": 68.18333333333334,
+            "latitude": 36.05844825,
+            "longitude": 24.90099592
+          },
+          {
+            "car_id": "22",
+            "LastName": "Nubarron",
+            "FirstName": "Adra",
+            "CurrentEmploymentType": "Security",
+            "CurrentEmploymentTitle": "Badging Office",
+            "start_time": "2014-01-06 17:57:16",
+            "end_time": "2014-01-07 07:29:01",
+            "duration_of_stop_min": 811.75,
+            "latitude": 36.05842868,
+            "longitude": 24.90100909
+          },
+          {
+            "car_id": "30",
+            "LastName": "Resumir",
+            "FirstName": "Felix",
+            "CurrentEmploymentType": "Security",
+            "CurrentEmploymentTitle": "Security Group Manager",
+            "start_time": "2014-01-06 20:13:01",
+            "end_time": "2014-01-07 07:37:01",
+            "duration_of_stop_min": 684.0,
+            "latitude": 36.05845679,
+            "longitude": 24.90105528
+          },
+          {
+            "car_id": "23",
+            "LastName": "Lagos",
+            "FirstName": "Varja",
+            "CurrentEmploymentType": "Security",
+            "CurrentEmploymentTitle": "Badging Office",
+            "start_time": "2014-01-06 20:21:01",
+            "end_time": "2014-01-07 07:45:01",
+            "duration_of_stop_min": 684.0,
+            "latitude": 36.05853075,
+            "longitude": 24.90098797
+          }
+        ]
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [
+                24.90098797,
+                36.05842868
+              ],
+              [
+                24.90098797,
+                36.05853075
+              ],
+              [
+                24.90105528,
+                36.05853075
+              ],
+              [
+                24.90105528,
+                36.05842868
+              ],
+              [
+                24.90098797,
+                36.05842868
+              ]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "cluster_id": 11,
+        "location": "Hallowed Grounds",
+        "employees": [
+          {
+            "car_id": "12",
+            "LastName": "Cocinaro",
+            "FirstName": "Hideki",
+            "CurrentEmploymentType": "Security",
+            "CurrentEmploymentTitle": "Site Control",
+            "start_time": "2014-01-06 07:11:16",
+            "end_time": "2014-01-06 07:44:01",
+            "duration_of_stop_min": 32.75,
+            "latitude": 36.06363867,
+            "longitude": 24.88592673
+          },
+          {
+            "car_id": "18",
+            "LastName": "Frente",
+            "FirstName": "Birgitta",
+            "CurrentEmploymentType": "Engineering",
+            "CurrentEmploymentTitle": "Geologist",
+            "start_time": "2014-01-06 07:14:46",
+            "end_time": "2014-01-06 07:41:01",
+            "duration_of_stop_min": 26.25,
+            "latitude": 36.06367562,
+            "longitude": 24.88593949
+          },
+          {
+            "car_id": "26",
+            "LastName": "Onda",
+            "FirstName": "Marin",
+            "CurrentEmploymentType": "Engineering",
+            "CurrentEmploymentTitle": "Drill Site Manager",
+            "start_time": "2014-01-06 07:22:40",
+            "end_time": "2014-01-06 07:38:01",
+            "duration_of_stop_min": 15.35,
+            "latitude": 36.0636368,
+            "longitude": 24.88592975
+          },
+          {
+            "car_id": "14",
+            "LastName": "Dedos",
+            "FirstName": "Lidelse",
+            "CurrentEmploymentType": "Engineering",
+            "CurrentEmploymentTitle": "Engineering Group Manager",
+            "start_time": "2014-01-06 07:29:46",
+            "end_time": "2014-01-06 08:06:01",
+            "duration_of_stop_min": 36.25,
+            "latitude": 36.063708,
+            "longitude": 24.8859479
+          },
+          {
+            "car_id": "27",
+            "LastName": "Orilla",
+            "FirstName": "Kare",
+            "CurrentEmploymentType": "Engineering",
+            "CurrentEmploymentTitle": "Drill Technician",
+            "start_time": "2014-01-06 07:36:26",
+            "end_time": "2014-01-06 07:52:01",
+            "duration_of_stop_min": 15.583333333333334,
+            "latitude": 36.06362554,
+            "longitude": 24.88595509
+          },
+          {
+            "car_id": "8",
+            "LastName": "Alcazar",
+            "FirstName": "Lucas",
+            "CurrentEmploymentType": "Information Technology",
+            "CurrentEmploymentTitle": "IT Technician",
+            "start_time": "2014-01-06 07:37:14",
+            "end_time": "2014-01-06 07:59:01",
+            "duration_of_stop_min": 21.783333333333335,
+            "latitude": 36.06371314,
+            "longitude": 24.88594087
+          }
+        ]
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [
+                24.88592673,
+                36.06362554
+              ],
+              [
+                24.88592673,
+                36.06371314
+              ],
+              [
+                24.88595509,
+                36.06371314
+              ],
+              [
+                24.88595509,
+                36.06362554
+              ],
+              [
+                24.88592673,
+                36.06362554
+              ]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "cluster_id": 12,
+        "location": "Ouzeri Elian",
+        "employees": [
+          {
+            "car_id": "7",
+            "LastName": "Orilla",
+            "FirstName": "Elsa",
+            "CurrentEmploymentType": "Engineering",
+            "CurrentEmploymentTitle": "Drill Technician",
+            "start_time": "2014-01-06 11:48:05",
+            "end_time": "2014-01-06 13:30:01",
+            "duration_of_stop_min": 101.93333333333334,
+            "latitude": 36.05194419,
+            "longitude": 24.87078805
+          },
+          {
+            "car_id": "33",
+            "LastName": "Tempestad",
+            "FirstName": "Brand",
+            "CurrentEmploymentType": "Engineering",
+            "CurrentEmploymentTitle": "Drill Technician",
+            "start_time": "2014-01-06 11:49:05",
+            "end_time": "2014-01-06 13:26:01",
+            "duration_of_stop_min": 96.93333333333334,
+            "latitude": 36.05194707,
+            "longitude": 24.87081288
+          },
+          {
+            "car_id": "20",
+            "LastName": "Fusil",
+            "FirstName": "Stenig",
+            "CurrentEmploymentType": "Security",
+            "CurrentEmploymentTitle": "Building Control",
+            "start_time": "2014-01-06 11:55:05",
+            "end_time": "2014-01-06 13:44:01",
+            "duration_of_stop_min": 108.93333333333334,
+            "latitude": 36.05195249,
+            "longitude": 24.87079051
+          },
+          {
+            "car_id": "19",
+            "LastName": "Frente",
+            "FirstName": "Vira",
+            "CurrentEmploymentType": "Engineering",
+            "CurrentEmploymentTitle": "Hydraulic Technician",
+            "start_time": "2014-01-06 12:00:01",
+            "end_time": "2014-01-06 13:53:01",
+            "duration_of_stop_min": 113.0,
+            "latitude": 36.051935,
+            "longitude": 24.87081176
+          },
+          {
+            "car_id": "101",
+            "LastName": null,
+            "FirstName": null,
+            "CurrentEmploymentType": null,
+            "CurrentEmploymentTitle": null,
+            "start_time": "2014-01-06 12:09:07",
+            "end_time": "2014-01-06 13:12:01",
+            "duration_of_stop_min": 62.9,
+            "latitude": 36.05195503,
+            "longitude": 24.87077613
+          },
+          {
+            "car_id": "29",
+            "LastName": "Ovan",
+            "FirstName": "Bertrand",
+            "CurrentEmploymentType": "Facilities",
+            "CurrentEmploymentTitle": "Facilities Group Manager",
+            "start_time": "2014-01-06 12:40:26",
+            "end_time": "2014-01-06 13:51:42",
+            "duration_of_stop_min": 71.26666666666667,
+            "latitude": 36.05195173,
+            "longitude": 24.87077909
+          }
+        ]
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [
+                24.87077613,
+                36.051935
+              ],
+              [
+                24.87077613,
+                36.05195503
+              ],
+              [
+                24.87081288,
+                36.05195503
+              ],
+              [
+                24.87081288,
+                36.051935
+              ],
+              [
+                24.87077613,
+                36.051935
+              ]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "cluster_id": 13,
+        "location": "Roberts and Sons",
+        "employees": [
+          {
+            "car_id": "16",
+            "LastName": "Vann",
+            "FirstName": "Isia",
+            "CurrentEmploymentType": "Security",
+            "CurrentEmploymentTitle": "Perimeter Control",
+            "start_time": "2014-01-06 11:54:17",
+            "end_time": "2014-01-06 13:40:01",
+            "duration_of_stop_min": 105.73333333333333,
+            "latitude": 36.06346453,
+            "longitude": 24.85101132
+          },
+          {
+            "car_id": "22",
+            "LastName": "Nubarron",
+            "FirstName": "Adra",
+            "CurrentEmploymentType": "Security",
+            "CurrentEmploymentTitle": "Badging Office",
+            "start_time": "2014-01-06 12:21:17",
+            "end_time": "2014-01-06 13:28:01",
+            "duration_of_stop_min": 66.73333333333333,
+            "latitude": 36.06346565,
+            "longitude": 24.85101771
+          },
+          {
+            "car_id": "12",
+            "LastName": "Cocinaro",
+            "FirstName": "Hideki",
+            "CurrentEmploymentType": "Security",
+            "CurrentEmploymentTitle": "Site Control",
+            "start_time": "2014-01-06 12:36:17",
+            "end_time": "2014-01-06 14:12:01",
+            "duration_of_stop_min": 95.73333333333333,
+            "latitude": 36.06344216,
+            "longitude": 24.85099869
+          },
+          {
+            "car_id": "4",
+            "LastName": "Barranco",
+            "FirstName": "Ingrid",
+            "CurrentEmploymentType": "Executive",
+            "CurrentEmploymentTitle": "SVP/CFO",
+            "start_time": "2014-01-06 12:42:16",
+            "end_time": "2014-01-06 13:00:01",
+            "duration_of_stop_min": 17.75,
+            "latitude": 36.06338067,
+            "longitude": 24.85103902
+          },
+          {
+            "car_id": "4",
+            "LastName": "Barranco",
+            "FirstName": "Ingrid",
+            "CurrentEmploymentType": "Executive",
+            "CurrentEmploymentTitle": "SVP/CFO",
+            "start_time": "2014-01-06 13:00:01",
+            "end_time": "2014-01-06 13:29:01",
+            "duration_of_stop_min": 29.0,
+            "latitude": 36.06346403,
+            "longitude": 24.85097294
+          }
+        ]
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [
+                24.85097294,
+                36.06338067
+              ],
+              [
+                24.85097294,
+                36.06346565
+              ],
+              [
+                24.85103902,
+                36.06346565
+              ],
+              [
+                24.85103902,
+                36.06338067
+              ],
+              [
+                24.85097294,
+                36.06338067
+              ]
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

@@ -45,6 +45,15 @@
     "graph": "CarMatrixGraph"
   },
   {
+    "id": "lecm",
+    "type": "default_generic",
+    "parent": null,
+    "selected": false,
+    "title": "Location and Employee Cluster Map",
+    "description": "Map with Clusters in Locations and Employee meetings",
+    "graph": "LocationClusterMap"
+  },
+  {
     "id": "cclc",
     "type": "default",
     "parent": "cpdl",

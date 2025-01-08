@@ -16,6 +16,7 @@ import PurchasesOverTime from './Graphs/PurchasesOverTime.js';
 import CardMatrixGraph from './Graphs/CardMatrixGraph.js';
 import CarMatrixGraph from './Graphs/CarMatrixGraph.js';
 import LandingPage from './Graphs/LandingPage.js';
+import LocationClusterMap from './Graphs/LocationClusterMap.js';
 
 
 // Importing the filters
@@ -41,7 +42,8 @@ const graphComponents = {
   PurchasesOverTime,
   CardMatrixGraph,
   CarMatrixGraph,
-  LandingPage
+  LandingPage,
+  LocationClusterMap
 };
 
 const filterComponents = {
