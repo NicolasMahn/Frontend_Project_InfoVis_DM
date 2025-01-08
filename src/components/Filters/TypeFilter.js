@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const TypeFilter = ({ onFilterChange, config }) => {
+const TypeFilter = ({ onFilterChange, config, filterSettings }) => {
     const [hasRunOnce, setHasRunOnce] = useState(false);
     const [types, setTypes] = useState([]);
     const [selectedType, setSelectedType] = useState('');
@@ -28,6 +28,11 @@ const TypeFilter = ({ onFilterChange, config }) => {
         }
     }, [hasRunOnce, types, config, onFilterChange]);
         
+    useEffect(() => {
+        if (filterSettings && filterSettings.type !== selectedType) {
+            setSelectedType(filterSettings.type);
+        }
+    }, [filterSettings, selectedType]);
 
     const handleCheckboxChange = (event) => {
         const { name } = event.target;
@@ -69,7 +74,7 @@ const TypeFilter = ({ onFilterChange, config }) => {
                     <input
                         type="radio"
                         name={type}
-                        checked={type === selectedType}
+                        checked={selectedType === type}
                         onChange={handleCheckboxChange}
                     />
                     {type} <br/>
